@@ -124,3 +124,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# E-Mail Configuration
+
+EMAIL_HOST = os.environ['DJANGO_SMTP_HOST']
+EMAIL_PORT = os.environ['DJANGO_SMTP_PORT']
+EMAIL_HOST_USER = os.environ['DJANGO_SMTP_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['DJANGO_SMTP_HOST_PASSWORD']
+EMAIL_USE_TLS = bool(int(os.environ['DJANGO_SMTP_USE_TLS']))

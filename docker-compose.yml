@@ -21,3 +21,9 @@ services:
      - ./config.env
     volumes:
       - /var/lib/mysql
+
+  mailhog:
+    image: mailhog/mailhog
+    ports: 
+      - 1025:1025
+      - 8025:8025
