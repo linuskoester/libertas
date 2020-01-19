@@ -1,0 +1,20 @@
+{% extends 'libertas/base.html' %}
+
+{% block title %}Login | Libertas{% endblock %}
+
+{% block main %}
+
+{% if user.is_authenticated %}
+<p>Bereits angemeldet!</p>
+{% else %}
+
+<h1>Login</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+
+{% endif %}
+
+{% endblock %}

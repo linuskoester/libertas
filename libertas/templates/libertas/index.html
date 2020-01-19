@@ -4,17 +4,21 @@
 
 {% block main %}
 
-<h1>Überschrift 1</h1>
-<p>Lorem ipsum <a href="">test test tet</a> dolor sit amet consectetur adipisicing elit. Quia eligendi, id dolor labore quis, repudiandae quos adipisci veritatis ab, perferendis odit dolorum vel earum eveniet amet iure quidem odio praesentium.</p>
-<h2>Überschrift 2</h2>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores quo cupiditate aut necessitatibus esse harum consequuntur commodi obcaecati? Debitis hic quas dolore dignissimos et voluptatem consequatur vitae asperiores unde dolorem.</p>
-<h3>Überschrift 3</h3>
-<!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus delectus hic ea placeat ducimus? Esse earum quo quisquam, labore fugit ipsa incidunt nihil soluta ea exercitationem iste corrupti ipsam natus.</p>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus delectus hic ea placeat ducimus? Esse earum quo quisquam, labore fugit ipsa incidunt nihil soluta ea exercitationem iste corrupti ipsam natus.</p>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus delectus hic ea placeat ducimus? Esse earum quo quisquam, labore fugit ipsa incidunt nihil soluta ea exercitationem iste corrupti ipsam natus.</p>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus delectus hic ea placeat ducimus? Esse earum quo quisquam, labore fugit ipsa incidunt nihil soluta ea exercitationem iste corrupti ipsam natus.</p>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus delectus hic ea placeat ducimus? Esse earum quo quisquam, labore fugit ipsa incidunt nihil soluta ea exercitationem iste corrupti ipsam natus.</p>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus delectus hic ea placeat ducimus? Esse earum quo quisquam, labore fugit ipsa incidunt nihil soluta ea exercitationem iste corrupti ipsam natus.</p> -->
+{% if user.is_authenticated %}
+<h1>Hallo {{ user.username }}!</h1>
+{% else %}
 
+
+
+<h1>Überschrift 1</h1>
+<p>Lorem ipsum <a href="">test test tet</a> dolor sit amet consectetur adipisicing elit. Quia eligendi, id dolor labore
+    quis, repudiandae quos adipisci veritatis ab, perferendis odit dolorum vel earum eveniet amet iure quidem odio
+    praesentium.</p>
+<h2>Überschrift 2</h2>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores quo cupiditate aut necessitatibus esse harum
+    consequuntur commodi obcaecati? Debitis hic quas dolore dignissimos et voluptatem consequatur vitae asperiores unde
+    dolorem.</p>
+<h3>Überschrift 3</h3>
+{% endif %}
 
 {% endblock %}
