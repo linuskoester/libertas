@@ -8,12 +8,15 @@
 <p>Bereits angemeldet!</p>
 {% else %}
 
-<h1>Login</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-</form>
+<div class="login">
+    <h1>Login</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+        <button onclick="window.location=''">Passwort vergessen?</button>
+    </form>
+</div>
 
 {% endif %}
 

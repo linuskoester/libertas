@@ -1,5 +1,6 @@
 :root {
     --main-accent-color: rgb(46, 77, 214);
+    --main-accent-hover-color: rgb(63, 98, 253);
     --main-accent-gradient-color: rgb(48, 82, 235);
 }
 
@@ -131,8 +132,88 @@ footer a:hover {
     transition: color .15s;
 }
 
+.login {
+    margin: auto;
+    max-width: 300px;
+    padding: 10px;
+}
+
+.login input[type="text"], .login input[type="password"] {
+    background-color: lightgray;
+    border: none;
+    border-radius: 5px;
+    height: 35px;
+    box-sizing: border-box;
+    width: 300px;
+    display: block;
+    margin-top: 3px;
+    outline: none;
+    padding: 10px;
+    font-family: 'Roboto Regular';
+    font-size: 1em;
+}
+
+.login button {
+    background-color: lightgray;
+    cursor: pointer;
+    border: none;
+    height: 35px;
+    padding: 8px;
+    border-radius: 5px;
+    color: black;
+    font-family: 'Roboto Regular';
+    font-size: 15px;
+    transition: background-color .2s;
+}
+
+.login button:hover {
+    background-color: rgb(231, 231, 231);
+    transition: background-color .2s;
+}
+
+.login button[type="submit"] {
+    background-color: var(--main-accent-color);
+    color: white;
+}
+
+.login button[type="submit"]:hover {
+    background-color: var(--main-accent-hover-color);
+}
+
+.errorlist {
+    padding: 0;
+}
+
+.errorlist li {
+    background-color: rgb(255, 194, 80);
+    font-family: 'Roboto Regular';
+    font-size: 15px;
+    list-style-type: none;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
 /* ################## */
 
-/* @media (max-width:850px) and (min-width: 680px) {}
+/* @media (max-width:850px) and (min-width: 680px) {} */
 
-@media (max-width: 680px) {} */
+@media (max-width: 420px) {
+    .login {
+        width: auto;
+        margin: 0;
+        max-width: unset;
+    }
+    .login input[type="text"], .login input[type="password"]  {
+        width: 100%;
+    }
+    main {
+        padding: 10px;
+    }
+    .login button {
+        width: 100%;
+        display: block;
+        margin-bottom: 8px;
+    }
+}
