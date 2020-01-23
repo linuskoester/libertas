@@ -78,13 +78,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.environ['MYSQL_DATABASE'],
-        'USER': os.environ['MYSQL_USER'],
-        'PASSWORD': os.environ['MYSQL_PASSWORD'],
+        'USER': 'root',
+        'PASSWORD': os.environ['MYSQL_ROOT_PASSWORD'],
         'HOST': 'db',
         'PORT': os.environ['MYSQL_PORT'],
     }
 }
-
 
 
 # Password validation
