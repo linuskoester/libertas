@@ -17,18 +17,33 @@ def index(request):
 
 def signin(request):
     if request.method == 'POST':
-        print("hi")
         form = SignInForm(request.POST)
         if form.is_valid():
             username = request.POST['username']
             password = request.POST['password']
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                login(request, user)
-                return redirect('index')
+                if not user.profile.email_confirmed:
+                    form.add_error(
+                        'username',
+                        """Du musst deine E-Mail-Adresse zuerst bestätigen, um dich anzumelden.
+                           Solltest du keine Bestätigungs-Mail erhalten haben, klicke unten auf
+                           "Passwort vergessen" und setze dein Passwort zurück. Dadurch wird
+                           dein Account aktiviert."""
+                    )
+                elif not user.is_active:
+                    form.add_error(
+                        None,
+                        'Dein Account wurde manuell deaktiviert.'
+                    )
+                else:
+                    login(request, user)
+                    return redirect('index')
             else:
                 form.add_error(
-                    None, "Der Account existiert nicht oder das Passwort ist falsch!")
+                    None,
+                    'Der Account existiert nicht oder das Passwort ist falsch!'
+                )
     else:
         form = SignInForm()
     return render(request, 'libertas/login.html', {'form': form})

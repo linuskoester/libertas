@@ -1,9 +1,10 @@
 from django import forms
 from django.core.validators import RegexValidator
 from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth.models import User
 
 correct_username = RegexValidator(
-    r'^[0-9a-z.]+$',
+    r'^[a-z.]+$',
     'Deine E-Mail-Adresse kann nur aus Kleinbuchstaben und Punkten bestehen, und keine Umlaute enthalten.')
 
 
@@ -44,5 +45,8 @@ class SignUpForm(forms.Form):
         cd = self.cleaned_data
         if cd.get('password') != cd.get('password_confirm'):
             self.add_error('password_confirm',
-                           "Die Passwörter stimmen nicht überein!")
+                           'Die Passwörter stimmen nicht überein!')
+        if User.objects.filter(username=cd.get('username')).exists():
+            self.add_error('username',
+                           'Für diese E-Mail-Adresse existiert bereits ein Account.')
         return cd
