@@ -124,10 +124,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Login URL
-
-LOGIN_REDIRECT_URL = 'index'
-
 # E-Mail Configuration
 
 EMAIL_HOST = os.environ['DJANGO_SMTP_HOST']

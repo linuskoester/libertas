@@ -4,8 +4,8 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('login/', auth_views.LoginView.as_view(template_name='libertas/login.html')),
-    path('logout/', auth_views.LogoutView.as_view(next_page='/?info=logout')),
+    path('signin/', views.signin, name='signin'),
+    path('signout/', auth_views.LogoutView.as_view(next_page='/?info=signout')),
     re_path(r'^signup/$', views.signup, name='signup'),
     re_path(r'^account_activation_sent/$', views.account_activation_sent,
             name='account_activation_sent'),

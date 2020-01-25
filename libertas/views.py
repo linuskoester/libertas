@@ -1,11 +1,11 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, redirect
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
-from .forms import SignUpForm
+from .forms import SignUpForm, SignInForm
 from .tokens import account_activation_token
 
 # Create your views here.
@@ -15,13 +15,36 @@ def index(request):
     return render(request, 'libertas/index.html')
 
 
+def signin(request):
+    if request.method == 'POST':
+        print("hi")
+        form = SignInForm(request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('index')
+            else:
+                form.add_error(
+                    None, "Der Account existiert nicht oder das Passwort ist falsch!")
+    else:
+        form = SignInForm()
+    return render(request, 'libertas/login.html', {'form': form})
+
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            email = form.cleaned_data['username'] + '@halepaghen.de'
+            user = User.objects.create_user(username, email, password)
             user.is_active = False
             user.save()
+
             current_site = get_current_site(request)
             subject = 'Activate Your MySite Account'
             message = render_to_string('libertas/account_activation_email.html', {
