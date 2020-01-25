@@ -1,6 +1,6 @@
 {% extends 'libertas/base.html' %}
 
-{% block title %}Libertas{% endblock %}
+{% block title %}Account erstellen | Libertas{% endblock %}
 
 {% block main %}
 
@@ -38,4 +38,15 @@
         <button type="submit">Account erstellen!</button>
     </form>
 </div>
+
+<script>
+    // Disable @-Symbol
+    $(function () {
+        $('.email').keypress(function (e) {
+            if (e.which == 64) {
+                return false;
+            }
+        });
+    });
+</script>
 {% endblock %}

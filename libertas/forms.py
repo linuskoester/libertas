@@ -24,7 +24,7 @@ class SignUpForm(forms.Form):
         label='E-Mail-Adresse',
         help_text='Um einen Account zu erstellen, benötigst du Zugriff auf eine gültige IServ-Email-Adresse der HPS.',
         widget=forms.TextInput(
-            attrs={'id': 'email', 'style': 'text-transform:lowercase;'}),
+            attrs={'class': 'email', 'style': 'text-transform:lowercase;'}),
         max_length=32,
         validators=[correct_username])
     password = forms.CharField(
