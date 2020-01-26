@@ -16,6 +16,8 @@ def index(request):
 
 
 def signin(request):
+    if request.user.is_authenticated:
+        return redirect('index')
     if request.method == 'POST':
         form = SignInForm(request.POST)
         if form.is_valid():
@@ -50,6 +52,8 @@ def signin(request):
 
 
 def signup(request):
+    if request.user.is_authenticated:
+        return redirect('index')
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -76,6 +80,8 @@ def signup(request):
 
 
 def account_activation_sent(request):
+    if request.user.is_authenticated:
+        return redirect('index')
     return render(request, 'libertas/account_activation_sent.html')
 
 
