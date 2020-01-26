@@ -4,7 +4,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.models import User
 
 correct_username = RegexValidator(
-    r'^[a-z.]+$',
+    r'^[a-zA-Z.]+$',
     'Deine E-Mail-Adresse kann nur aus Kleinbuchstaben und Punkten bestehen, und keine Umlaute enthalten.')
 
 
