@@ -40,8 +40,9 @@ nav {
     background-image: linear-gradient(to bottom right, var(--main-accent-color), var(--main-accent-gradient-color));
     box-shadow: 0px -8px 15px 8px #727272;
     width: 100%;
-    height: 40px;
+    height: 39px;
     padding: 5px;
+    padding-top: 4px;
     display: flex;
     align-items: center;
     vertical-align: middle;
@@ -66,6 +67,57 @@ nav .logo:hover {
     background-color: rgba(255, 255, 255, 0.2);
     transition: background-color .2s;
     cursor: pointer;
+}
+
+nav .right {
+    margin-left: auto;
+    height: inherit;
+    margin-right: 8px;
+    align-items: center;
+    vertical-align: center;
+    display: flex;
+    overflow: hidden;
+}
+
+nav .button {
+    font-family: 'Roboto Regular';
+    color: white;
+    width: auto;
+    font-size: 1em;
+    padding: 8px;
+    margin: 2px;
+    border-radius: 5px;
+    border-color: white;
+    border: 1px;
+    border-style: solid;
+    transition: background-color .2s;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+nav .button.white {
+    background-color: white;
+    color: var(--main-accent-color);
+}
+
+nav .button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: background-color .2s;
+}
+
+nav .button.white:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+nav .username {
+    font-family: 'Roboto Regular';
+    font-size: 1em;
+    color: white;
+    margin: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
 }
 
 main {
@@ -242,6 +294,13 @@ footer a:hover {
 /* @media (max-width:850px) and (min-width: 680px) {} */
 
 @media (max-width: 420px) {
+    nav .button {
+        font-size: 0.85em;
+    }
+    nav .username {
+        font-size: 0.8em;
+        margin: 5px;
+    }
     .login {
         width: auto;
         margin: 0;

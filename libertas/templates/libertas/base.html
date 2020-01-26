@@ -16,8 +16,15 @@
 <body>
     <nav>
         <div class="logo" onclick="window.location='{% url 'index' %}'">Libertas</div>
-        <!-- <div class="login">Anmelden</div>
-        <div class="register">Account erstellen</div> -->
+        <div class="right">
+            {% if user.is_authenticated %}
+            <div class="username">{{ user.username }}</div>
+            <div class="button" onclick="window.location='{% url 'signout' %}'">Abmelden</div>
+            {% else %}
+            <div class="button" onclick="window.location='{% url 'signin' %}'">Anmelden</div>
+            <div class="button white" onclick="window.location='{% url 'signup' %}'">Account erstellen</div>
+            {% endif %}
+        </div>
     </nav>
 
     <main>

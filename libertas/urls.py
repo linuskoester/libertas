@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('signin/', views.signin, name='signin'),
-    path('signout/', auth_views.LogoutView.as_view(next_page='/?info=signout')),
+    path('signout/', auth_views.LogoutView.as_view(next_page='/?info=signout'), name='signout'),
     re_path(r'^signup/$', views.signup, name='signup'),
     re_path(r'^account_activation_sent/$', views.account_activation_sent,
             name='account_activation_sent'),
