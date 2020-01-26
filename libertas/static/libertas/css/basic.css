@@ -87,6 +87,9 @@ nav .button {
     padding: 8px;
     margin: 2px;
     border-radius: 5px;
+    border-color: white;
+    border: 1px;
+    border-style: solid;
     transition: background-color .2s;
     cursor: pointer;
     white-space: nowrap;
@@ -94,6 +97,7 @@ nav .button {
 
 nav .button.white {
     background-color: white;
+    border-color: rgba(255, 255, 255, 0);
     color: var(--main-accent-color);
 }
 
