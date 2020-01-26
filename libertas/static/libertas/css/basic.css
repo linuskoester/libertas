@@ -87,9 +87,6 @@ nav .button {
     padding: 8px;
     margin: 2px;
     border-radius: 5px;
-    border-color: white !important;
-    border: 1px;
-    border-style: solid;
     transition: background-color .2s;
     cursor: pointer;
     white-space: nowrap;
