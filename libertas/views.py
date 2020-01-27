@@ -25,18 +25,18 @@ def signin(request):
             password = request.POST['password']
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                if not user.profile.email_confirmed:
+                if not user.is_active:
+                    form.add_error(
+                        None,
+                        'Dein Account wurde manuell deaktiviert.'
+                    )
+                elif not user.profile.email_confirmed:
                     form.add_error(
                         'username',
                         """Du musst deine E-Mail-Adresse zuerst bestätigen, um dich anzumelden.
                            Solltest du keine Bestätigungs-Mail erhalten haben, klicke unten auf
                            "Passwort vergessen" und setze dein Passwort zurück. Dadurch wird
                            dein Account aktiviert."""
-                    )
-                elif not user.is_active:
-                    form.add_error(
-                        None,
-                        'Dein Account wurde manuell deaktiviert.'
                     )
                 else:
                     login(request, user)
@@ -61,7 +61,6 @@ def signup(request):
             password = form.cleaned_data['password']
             email = form.cleaned_data['username'] + '@halepaghen.de'
             user = User.objects.create_user(username, email, password)
-            user.is_active = False
             user.save()
 
             current_site = get_current_site(request)
@@ -93,7 +92,6 @@ def activate(request, uidb64, token):
         user = None
 
     if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
         user.profile.email_confirmed = True
         user.save()
         login(request, user)
