@@ -143,6 +143,7 @@ def reset_confirm(request, uidb64, token):
             form = ResetSetPasswordForm(request.POST)
             if form.is_valid():
                 user.set_password(form.cleaned_data['password'])
+                user.profile.email_confirmed = True
                 user.save()
                 return redirect('reset_success')
         else:
