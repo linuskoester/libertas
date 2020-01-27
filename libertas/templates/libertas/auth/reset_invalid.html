@@ -1,0 +1,15 @@
+{% extends 'libertas/base.html' %}
+
+{% block title %}Passwort zurücksetzen | Libertas{% endblock %}
+
+{% block main %}
+
+<div class="login">
+    <h1>Passwort zurücksetzen</h1>
+    <div class="error">
+        Dieser Bestätigungslink ist ungültig oder wurde bereits verwendet.
+    </div>
+    <br>
+    <button onclick="window.location='{% url 'signin' %}'">Zur Anmeldung</button>
+</div>
+{% endblock %}

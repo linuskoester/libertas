@@ -11,3 +11,4 @@ class SignupTokenGenerator(PasswordResetTokenGenerator):
 
 
 signup_token = SignupTokenGenerator()
+reset_token = PasswordResetTokenGenerator()

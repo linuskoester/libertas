@@ -1,0 +1,14 @@
+{% autoescape off %}
+Hallo!
+
+Bitte klicke auf folgenden Link, um dein Passwort zurückzusetzen:
+
+http://{{ domain }}{% url 'reset_confirm' uidb64=uid token=token %}
+
+
+Solltest du das Zurücksetzen deines Passworts nicht veranlasst
+haben, klicke nicht auf den Link und ignoriere diese E-Mail.
+
+--
+Diese E-Mail wurde automatisch generiert, bitte nicht antworten.
+{% endautoescape %}

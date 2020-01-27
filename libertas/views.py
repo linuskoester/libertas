@@ -5,8 +5,8 @@ from django.shortcuts import render, redirect
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
-from .forms import SignUpForm, SignInForm
-from .tokens import signup_token
+from .forms import SignUpForm, SignInForm, ResetForm, ResetSetPasswordForm
+from .tokens import signup_token, reset_token
 
 # Create your views here.
 
@@ -101,3 +101,59 @@ def signup_activate(request, uidb64, token):
             return redirect('index')
         else:
             return render(request, 'libertas/auth/signup_invalid.html')
+
+
+def reset(request):
+    if request.method == 'POST':
+        form = ResetForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            if User.objects.filter(username=username).exists():
+                user = User.objects.get(username=username)
+                current_site = get_current_site(request)
+                subject = 'Setzte das Passwort von deinem Libertas-Account zurück'
+                message = render_to_string('libertas/auth/reset_email.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': reset_token.make_token(user),
+                })
+                user.email_user(subject, message)
+            return redirect('reset_sent')
+    else:
+        if request.user.is_authenticated:
+            return redirect('index')
+        form = ResetForm()
+    return render(request, 'libertas/auth/reset.html', {'form': form})
+
+
+def reset_sent(request):
+    return render(request, 'libertas/auth/reset_sent.html')
+
+
+def reset_confirm(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and reset_token.check_token(user, token):
+        if request.method == 'POST':
+            form = ResetSetPasswordForm(request.POST)
+            if form.is_valid():
+                user.set_password(form.cleaned_data['password'])
+                user.save()
+                return redirect('reset_success')
+        else:
+            form = ResetSetPasswordForm()
+        return render(request, 'libertas/auth/reset_set_password.html', {'form': form})
+    else:
+        if request.user.is_authenticated:
+            return redirect('index')
+        else:
+            return render(request, 'libertas/auth/reset_invalid.html')
+
+
+def reset_success(request):
+    return render(request, 'libertas/auth/reset_success.html')
