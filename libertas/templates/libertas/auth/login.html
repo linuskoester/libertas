@@ -4,10 +4,6 @@
 
 {% block main %}
 
-{% if user.is_authenticated %}
-<p>Bereits angemeldet!</p>
-{% else %}
-
 <div class="login">
     <h1>Anmelden</h1>
     <form method="post">
@@ -32,7 +28,7 @@
             {% endif %}
         </div>
         <button type="submit">Anmelden</button>
-        <button onclick="window.location=''">Passwort vergessen?</button>
+        <button onclick="window.location='{% url 'reset' %}'">Passwort vergessen?</button>
     </form>
 </div>
 
@@ -46,7 +42,5 @@
         });
     });
 </script>
-
-{% endif %}
 
 {% endblock %}
