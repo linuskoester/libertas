@@ -1,7 +1,12 @@
 {% autoescape off %}
-Hi {{ user.username }},
+Hallo!
 
-Please click on the link below to confirm your registration:
+Bitte klicke auf folgenden Link, um deinen Libertas-Account zu aktivieren:
 
 http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+
+
+--
+Diese E-Mail wurde automatisch generiert, bitte nicht antworten.
 {% endautoescape %}

@@ -1,9 +1,16 @@
 {% extends 'libertas/base.html' %}
 
-{% block title %}Libertas{% endblock %}
+{% block title %}Account erstellen | Libertas{% endblock %}
 
 {% block main %}
 
-<p>Mail gesendet</p>
-
+<div class="login">
+    <h1>Account erstellen</h1>
+    <div class="success">
+        Wir haben dir eine E-Mail mit einem Bestätigungslink gesendet.<br>
+        Gehe jetzt auf IServ und klicke auf den Link, um deinen Account zu aktivieren!
+    </div>
+    <br>
+    <button onclick="window.location='https:\/\/halepaghen.de/iserv/login'">Weiter zu IServ</button>
+</div>
 {% endblock %}

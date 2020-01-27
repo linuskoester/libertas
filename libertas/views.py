@@ -65,7 +65,7 @@ def signup(request):
             user.save()
 
             current_site = get_current_site(request)
-            subject = 'Activate Your MySite Account'
+            subject = 'Aktiviere deinen Libertas-Account'
             message = render_to_string('libertas/account_activation_email.html', {
                 'user': user,
                 'domain': current_site.domain,
@@ -99,4 +99,7 @@ def activate(request, uidb64, token):
         login(request, user)
         return redirect('index')
     else:
-        return render(request, 'libertas/account_activation_invalid.html')
+        if request.user.is_authenticated:
+            return redirect('index')
+        else:
+            return render(request, 'libertas/account_activation_invalid.html')

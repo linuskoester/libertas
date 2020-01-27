@@ -290,6 +290,26 @@ footer a:hover {
     /* border-radius: 5px; */
 }
 
+.error {
+    background-color: rgb(247, 72, 72);
+    font-family: 'Roboto Regular';
+    font-size: 0.9em;
+    color: black;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.success {
+    background-color: rgb(5, 160, 0);
+    font-family: 'Roboto Regular';
+    font-size: 0.9em;
+    color: white;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 /* ################## */
 
 /* @media (max-width:850px) and (min-width: 680px) {} */

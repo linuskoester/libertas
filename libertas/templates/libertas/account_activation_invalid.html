@@ -1,9 +1,15 @@
 {% extends 'libertas/base.html' %}
 
-{% block title %}Libertas{% endblock %}
+{% block title %}Account erstellen | Libertas{% endblock %}
 
 {% block main %}
 
-<p>Falscher Confirmation Link</p>
-
+<div class="login">
+    <h1>Account erstellen</h1>
+    <div class="error">
+        Dieser Bestätigungslink ist ungültig oder wurde bereits verwendet. Versuche dich anzumelden.
+    </div>
+    <br>
+    <button onclick="window.location='{% url 'signin' %}'">Zur Anmeldung</button>
+</div>
 {% endblock %}
