@@ -4,29 +4,10 @@
 
 {% block main %}
 
-<div class="login">
+<div class="form centered">
     <h1>Anmelden</h1>
     <form method="post">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        <div class="field-wrapper">
-            {{ form.username.label_tag }}
-            <div class="email-wrapper">
-                {{ form.username }} <span class="email-text">@halepaghen.de</span>
-            </div>
-            {{ form.username.errors }}
-            {% if form.username.help_text %}
-            <div class="help">{{ form.username.help_text|safe }}</div>
-            {% endif %}
-        </div>
-        <div class="field-wrapper">
-            {{ form.password.label_tag }}
-            {{ form.password }}
-            {{ form.password.errors }}
-            {% if form.password.help_text %}
-            <div class="help">{{ form.password.help_text|safe }}</div>
-            {% endif %}
-        </div>
+        {% include "libertas/form.html" %}
         <button type="submit">Anmelden</button>
         <button onclick="window.location='{% url 'reset' %}'">Passwort vergessen?</button>
     </form>

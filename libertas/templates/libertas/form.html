@@ -1,0 +1,25 @@
+{% csrf_token %}
+{{ form.non_field_errors }}
+{% for field in form %}
+    {% if field == form.username %}
+    <div class="field-wrapper">
+        {{ field.label_tag }}
+        <div class="email-wrapper">
+            {{ field }} <span class="email-text">@halepaghen.de</span>
+        </div>
+        {{ field.errors }}
+        {% if field.help_text %}
+        <div class="help">{{ field.help_text|safe }}</div>
+        {% endif %}
+    </div>
+    {% else %}
+    <div class="field-wrapper">
+        {{ field.label_tag }}
+        {{ field }}
+        {{ field.errors }}
+        {% if field.help_text %}
+        <div class="help">{{ field.help_text|safe }}</div>
+        {% endif %}
+    </div>
+    {% endif %}
+{% endfor %}

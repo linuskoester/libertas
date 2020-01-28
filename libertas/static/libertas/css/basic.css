@@ -190,13 +190,13 @@ footer a:hover {
     transition: color .15s;
 }
 
-.login {
+.form.centered {
     margin: auto;
     max-width: 300px;
     padding: 10px;
 }
 
-.login input[type="text"], .login input[type="password"] {
+.form input[type="text"], .form input[type="password"] {
     background-color: lightgray;
     border: none;
     border-radius: 5px;
@@ -211,7 +211,7 @@ footer a:hover {
     font-size: 1em;
 }
 
-.login button {
+.form button {
     background-color: lightgray;
     cursor: pointer;
     border: none;
@@ -224,17 +224,17 @@ footer a:hover {
     transition: background-color .2s;
 }
 
-.login button:hover {
+.form button:hover {
     background-color: rgb(231, 231, 231);
     transition: background-color .2s;
 }
 
-.login button[type="submit"] {
+.form button[type="submit"] {
     background-color: var(--main-accent-color);
     color: white;
 }
 
-.login button[type="submit"]:hover {
+.form button[type="submit"]:hover {
     background-color: var(--main-accent-hover-color);
 }
 

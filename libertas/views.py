@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
-from .forms import SignUpForm, SignInForm, ResetForm, ResetSetPasswordForm
+from .forms import SignUpForm, SignInForm, ResetForm, SetPasswordForm
 from .tokens import signup_token, reset_token
 from django.contrib.admin.models import LogEntry, CHANGE, ADDITION
 from django.contrib.contenttypes.models import ContentType
@@ -155,7 +155,7 @@ def reset_confirm(request, uidb64, token):
 
     if user is not None and reset_token.check_token(user, token):
         if request.method == 'POST':
-            form = ResetSetPasswordForm(request.POST)
+            form = SetPasswordForm(request.POST)
             if form.is_valid():
                 user.set_password(form.cleaned_data['password'])
                 if not user.profile.email_confirmed:
@@ -166,7 +166,7 @@ def reset_confirm(request, uidb64, token):
                 log(user, CHANGE, 'Passwort zurückgesetzt.')
                 return redirect('reset_success')
         else:
-            form = ResetSetPasswordForm()
+            form = SetPasswordForm()
         return render(request, 'libertas/auth/reset_set_password.html', {'form': form})
     else:
         if request.user.is_authenticated:

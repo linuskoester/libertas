@@ -72,7 +72,7 @@ class ResetForm(forms.Form):
                               da dein Account manuell deaktiviert wurde.""")
 
 
-class ResetSetPasswordForm(forms.Form):
+class SetPasswordForm(forms.Form):
     password = forms.CharField(
         label='Neues Passwort',
         help_text="""Dein Passwort...<ul>
