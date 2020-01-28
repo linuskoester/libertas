@@ -18,7 +18,7 @@
         <div class="logo" onclick="window.location='{% url 'index' %}'">Libertas</div>
         <div class="right">
             {% if user.is_authenticated %}
-            <div class="username">{{ user.username }}</div>
+            <div class="username" onclick="window.location='{% url 'account' %}'">{{ user.username }}</div>
             <div class="button" onclick="window.location='{% url 'signout' %}'">Abmelden</div>
             {% if user.is_staff %}
             <div class="button white" onclick="window.location='{% url 'admin:index' %}'">Administration</div>

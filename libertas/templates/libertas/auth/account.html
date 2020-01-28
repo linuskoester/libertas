@@ -1,0 +1,17 @@
+{% extends 'libertas/base.html' %}
+
+{% block title %}Account | Libertas{% endblock %}
+
+{% block main %}
+
+<h1>Dein Account</h1>
+
+<h3>Accountinformationen</h3>
+<p>
+    <strong>Benutzername:</strong> {{ user.username }}<br>
+    <strong>E-Mail-Adresse:</strong> {{ user.email }}<br>
+    <strong>Registriert am:</strong> {{ user.date_joined|date:"SHORT_DATE_FORMAT" }}
+</p>
+<!-- <h3>Passwort zurücksetzen</h3> -->
+
+{% endblock %}

@@ -119,10 +119,15 @@ nav .username {
     text-overflow: ellipsis;
     overflow: hidden;
     display: block;
+    cursor: pointer;
+}
+
+nav .username:hover {
+    text-decoration: underline;
 }
 
 main {
-    padding: 15px 30px 15px 30px;
+    padding: 15px 50px 15px 50px;
     flex: 1 0 auto;
 }
 

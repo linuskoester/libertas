@@ -177,3 +177,10 @@ def reset_confirm(request, uidb64, token):
 
 def reset_success(request):
     return render(request, 'libertas/auth/reset_success.html')
+
+
+def account(request):
+    if request.user.is_authenticated:
+        return render(request, 'libertas/auth/account.html')
+    else:
+        return redirect('signin')
