@@ -7,8 +7,21 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .forms import SignUpForm, SignInForm, ResetForm, ResetSetPasswordForm
 from .tokens import signup_token, reset_token
+from django.contrib.admin.models import LogEntry, CHANGE, ADDITION
+from django.contrib.contenttypes.models import ContentType
 
 # Create your views here.
+
+
+def log(user, flag, message):
+    LogEntry.objects.log_action(
+        user_id=user.id,
+        content_type_id=ContentType.objects.get_for_model(
+            user).pk,
+        object_id=user.id,
+        object_repr=user.username,
+        action_flag=flag,
+        change_message=message)
 
 
 def index(request):
@@ -61,6 +74,7 @@ def signup(request):
             password = form.cleaned_data['password']
             email = form.cleaned_data['username'] + '@halepaghen.de'
             user = User.objects.create_user(username, email, password)
+            log(user, ADDITION, 'Account erstellt.')
             user.save()
 
             current_site = get_current_site(request)
@@ -94,6 +108,7 @@ def signup_activate(request, uidb64, token):
     if user is not None and signup_token.check_token(user, token):
         user.profile.email_confirmed = True
         user.save()
+        log(user, CHANGE, 'Account bestätigt.')
         login(request, user)
         return redirect('index')
     else:
@@ -145,6 +160,7 @@ def reset_confirm(request, uidb64, token):
                 user.set_password(form.cleaned_data['password'])
                 user.profile.email_confirmed = True
                 user.save()
+                log(user, CHANGE, 'Passwort zurückgesetzt.')
                 return redirect('reset_success')
         else:
             form = ResetSetPasswordForm()
