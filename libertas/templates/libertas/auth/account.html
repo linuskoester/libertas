@@ -8,10 +8,16 @@
 
 <h3>Accountinformationen</h3>
 <p>
-    <strong>Benutzername:</strong> {{ user.username }}<br>
     <strong>E-Mail-Adresse:</strong> {{ user.email }}<br>
+    <strong>Anmeldename:</strong> {{ user.username }}<br>
     <strong>Registriert am:</strong> {{ user.date_joined|date:"SHORT_DATE_FORMAT" }}
 </p>
-<!-- <h3>Passwort zurücksetzen</h3> -->
+<h3>Passwort ändern</h3>
+<div class="form">
+    <form method="post">
+        {% include "libertas/form.html" %}
+        <button type="submit">Passwort ändern</button>
+    </form>
+</div>
 
 {% endblock %}

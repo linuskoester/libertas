@@ -5,10 +5,11 @@ from django.shortcuts import render, redirect
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
-from .forms import SignUpForm, SignInForm, ResetForm, SetPasswordForm
+from .forms import SignUpForm, SignInForm, ResetForm, SetPasswordForm, ChangePasswordForm
 from .tokens import signup_token, reset_token
 from django.contrib.admin.models import LogEntry, CHANGE, ADDITION
 from django.contrib.contenttypes.models import ContentType
+from django.contrib import messages
 
 # Create your views here.
 
@@ -181,6 +182,21 @@ def reset_success(request):
 
 def account(request):
     if request.user.is_authenticated:
-        return render(request, 'libertas/auth/account.html')
+        if request.method == 'POST':
+            form = ChangePasswordForm(request.POST)
+            if form.is_valid():
+                user = authenticate(request, username=request.user.username, password=form.cleaned_data['password_old'])
+                if user is not None:
+                    user.set_password(form.cleaned_data['password'])
+                    user.save()
+                    log(user, CHANGE, 'Passwort vom Benutzer geändert.')
+                    messages.success(request, 'Dein Passwort wurde erfolgreich geändert.')
+                    login(request, user)
+                else:
+                    form.add_error('password_old', 'Das Passwort ist falsch.')
+        else:
+            form = ChangePasswordForm()
+
+        return render(request, 'libertas/auth/account.html', {'form': form})
     else:
         return redirect('signin')

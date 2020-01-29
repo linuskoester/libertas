@@ -295,29 +295,44 @@ footer a:hover {
     /* border-radius: 5px; */
 }
 
-.error {
-    background-color: rgb(247, 72, 72);
+.message {
     font-family: 'Roboto Regular';
-    font-size: 0.9em;
-    color: black;
+    font-size: 1em;
+    margin-top: 5px;
     margin-bottom: 5px;
     padding: 10px;
     border-radius: 5px;
+    background-color: rgb(214, 214, 214);
+    color: black;
 }
 
 .success {
-    background-color: rgb(5, 160, 0);
-    font-family: 'Roboto Regular';
-    font-size: 0.9em;
+    background-color: rgb(10, 172, 4);
     color: white;
-    margin-bottom: 5px;
-    padding: 10px;
-    border-radius: 5px;
+}
+
+.error {
+    background-color: rgb(218, 42, 42);
+    color: white;
+}
+
+.warning {
+    background-color: rgb(248, 140, 52);
+    color: black;
+}
+
+.info {
+    background-color: rgb(255, 209, 123);
+    color: black;
 }
 
 /* ################## */
 
-/* @media (max-width:850px) and (min-width: 680px) {} */
+@media (max-width:700px) and (min-width: 420px) {
+    main {
+        padding: 30px;
+    }
+}
 
 @media (max-width: 420px) {
     nav .button {

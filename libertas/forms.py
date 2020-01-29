@@ -94,3 +94,31 @@ class SetPasswordForm(forms.Form):
             self.add_error('password_confirm',
                            'Die Passwörter stimmen nicht überein.')
         return cd
+
+
+class ChangePasswordForm(forms.Form):
+    password_old = forms.CharField(
+        label='Aktuelles Passwort',
+        help_text='Gib dein aktuelles Passwort ein, um ungewollte Passwortänderungen zu vermeiden.',
+        widget=forms.PasswordInput())
+    password = forms.CharField(
+        label='Neues Passwort',
+        help_text="""Dein neues Passwort...<ul>
+                     <li>muss 8 Zeichen oder mehr haben</li>
+                     <li>darf nicht nur aus Zahlen bestehen</li>
+                     <li>darf nicht deiner E-Mail-Adresse ähneln</li>
+                     <li>darf kein häufig verwendetes sein</li></ul>""",
+        widget=forms.PasswordInput(),
+        validators=[validate_password])
+    password_confirm = forms.CharField(
+        label='Neues Passwort bestätigen',
+        widget=forms.PasswordInput())
+
+    def clean(self):
+        cd = self.cleaned_data
+        if cd.get('password') != cd.get('password_confirm') and cd.get('password') is not None:
+            print(cd.get('password'))
+            print(cd.get('password_confirm'))
+            self.add_error('password_confirm',
+                           'Die Passwörter stimmen nicht überein.')
+        return cd
