@@ -127,7 +127,7 @@ nav .username:hover {
 }
 
 main {
-    padding: 15px 50px 15px 50px;
+    padding: 30px 80px 30px 80px;
     flex: 1 0 auto;
 }
 
@@ -327,18 +327,18 @@ footer a:hover {
         font-size: 0.8em;
         margin: 5px;
     }
-    .login {
+    .form {
         width: auto;
         margin: 0;
         max-width: unset;
     }
-    .login input[type="text"], .login input[type="password"] {
+    .form input[type="text"], .form input[type="password"] {
         width: 100%;
     }
     main {
         padding: 10px;
     }
-    .login button {
+    .form button {
         width: 100%;
         display: block;
         margin-bottom: 8px;
