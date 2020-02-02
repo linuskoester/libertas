@@ -1,0 +1,16 @@
+{% extends 'libertas/base.html' %}
+
+{% block title %}Account | Libertas{% endblock %}
+
+{% block main %}
+
+<h1>Dein Account</h1>
+
+<h3>Account löschen</h3>
+<div class="form">
+    <form method="post">
+        {% include "libertas/form.html" %}
+    <button type="submit" class="red">Account löschen</button>
+    </form>
+</div>
+{% endblock %}

@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
-from .forms import SignUpForm, SignInForm, ResetForm, SetPasswordForm, ChangePasswordForm
+from .forms import SignUpForm, SignInForm, ResetForm, SetPasswordForm, ChangePasswordForm, DeleteAccountForm
 from .tokens import signup_token, reset_token
 from django.contrib.admin.models import LogEntry, CHANGE, ADDITION
 from django.contrib.contenttypes.models import ContentType
@@ -31,6 +31,8 @@ def index(request):
         messages.info(request, 'Du wurdest erfolgreich abgemeldet.')
     elif message == 'signin':
         messages.success(request, 'Du wurdest erfolgreich angemeldet.')
+    elif message == 'deleted':
+        messages.info(request, 'Dein Account wurde erfolgreich gelöscht.')
     return render(request, 'libertas/index.html')
 
 
@@ -205,5 +207,25 @@ def account(request):
             form = ChangePasswordForm()
 
         return render(request, 'libertas/auth/account.html', {'form': form})
+    else:
+        return redirect('signin')
+
+
+def account_delete(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = DeleteAccountForm(request.POST)
+            if form.is_valid():
+                user = authenticate(
+                    request, username=request.user.username, password=form.cleaned_data['password'])
+                if user is not None:
+                    user.delete()
+                    return redirect('/?message=deleted')
+                else:
+                    form.add_error('password', 'Das Passwort ist falsch.')
+        else:
+            form = DeleteAccountForm()
+
+        return render(request, 'libertas/auth/account_delete.html', {'form': form})
     else:
         return redirect('signin')

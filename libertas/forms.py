@@ -122,3 +122,12 @@ class ChangePasswordForm(forms.Form):
             self.add_error('password_confirm',
                            'Die Passwörter stimmen nicht überein.')
         return cd
+
+
+class DeleteAccountForm(forms.Form):
+    password = forms.CharField(
+        label='Dein Passwort',
+        help_text='Gib dein aktuelles Passwort ein, um zu bestätigen, dass du deinen Account löschen möchtest.',
+        widget=forms.PasswordInput())
+    confirm = forms.BooleanField(
+        label='Ich bestätige, dass ich meinen Libertas-Account permanent löschen möchte.')

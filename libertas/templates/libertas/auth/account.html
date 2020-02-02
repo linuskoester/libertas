@@ -19,5 +19,8 @@
         <button type="submit">Passwort ändern</button>
     </form>
 </div>
-
+<h3>Account löschen</h3>
+<div class="form">
+    <button type="submit" class="red" onclick="window.location='{% url 'account_delete' %}'">Account löschen</button>
+</div>
 {% endblock %}

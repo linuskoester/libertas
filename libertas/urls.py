@@ -21,4 +21,5 @@ urlpatterns = [
     path('reset/success', views.reset_success, name='reset_success'),
     # - Account Page
     path('account/', views.account, name='account'),
+    path('account/delete', views.account_delete, name='account_delete'),
 ]
