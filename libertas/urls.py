@@ -7,7 +7,7 @@ urlpatterns = [
 
     # Authentication
     path('signin/', views.signin, name='signin'),
-    path('signout/', auth_views.LogoutView.as_view(next_page='/?info=signout'), name='signout'),
+    path('signout/', auth_views.LogoutView.as_view(next_page='/?message=signout'), name='signout'),
     # - Signup
     path('signup/', views.signup, name='signup'),
     path('signup/sent', views.signup_sent, name='signup_sent'),

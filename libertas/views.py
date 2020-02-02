@@ -26,6 +26,11 @@ def log(user, flag, message):
 
 
 def index(request):
+    message = request.GET.get('message')
+    if message == 'signout':
+        messages.info(request, 'Du wurdest erfolgreich abgemeldet.')
+    elif message == 'signin':
+        messages.success(request, 'Du wurdest erfolgreich angemeldet.')
     return render(request, 'libertas/index.html')
 
 
@@ -54,7 +59,7 @@ def signin(request):
                     )
                 else:
                     login(request, user)
-                    return redirect('index')
+                    return redirect('/?message=signin')
             else:
                 form.add_error(
                     None,
@@ -185,12 +190,14 @@ def account(request):
         if request.method == 'POST':
             form = ChangePasswordForm(request.POST)
             if form.is_valid():
-                user = authenticate(request, username=request.user.username, password=form.cleaned_data['password_old'])
+                user = authenticate(
+                    request, username=request.user.username, password=form.cleaned_data['password_old'])
                 if user is not None:
                     user.set_password(form.cleaned_data['password'])
                     user.save()
                     log(user, CHANGE, 'Passwort vom Benutzer geändert.')
-                    messages.success(request, 'Dein Passwort wurde erfolgreich geändert.')
+                    messages.success(
+                        request, 'Dein Passwort wurde erfolgreich geändert.')
                     login(request, user)
                 else:
                     form.add_error('password_old', 'Das Passwort ist falsch.')
