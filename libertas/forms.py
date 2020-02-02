@@ -7,27 +7,28 @@ correct_username = RegexValidator(
     r'^[a-zA-Z.]+$',
     'Deine E-Mail-Adresse kann nur aus Kleinbuchstaben und Punkten bestehen, und keine Umlaute enthalten.')
 
+username_form = forms.CharField(
+    label='E-Mail-Adresse',
+    widget=forms.TextInput(
+        attrs={'class': 'email',
+               'style': 'text-transform:lowercase;',
+               'placeholder': 'vorname.nachname',
+               'autofocus': True
+               }),
+    max_length=32,
+    validators=[correct_username]
+)
+
 
 class SignInForm(forms.Form):
-    username = forms.CharField(
-        label='E-Mail-Adresse',
-        widget=forms.TextInput(
-            attrs={'class': 'email', 'style': 'text-transform:lowercase;'}),
-        max_length=32,
-        validators=[correct_username])
+    username = username_form
     password = forms.CharField(
         label='Passwort',
         widget=forms.PasswordInput())
 
 
 class SignUpForm(forms.Form):
-    username = forms.CharField(
-        label='E-Mail-Adresse',
-        help_text='Um einen Account zu erstellen, benötigst du Zugriff auf eine gültige IServ-Email-Adresse der HPS.',
-        widget=forms.TextInput(
-            attrs={'class': 'email', 'style': 'text-transform:lowercase;'}),
-        max_length=32,
-        validators=[correct_username])
+    username = username_form
     password = forms.CharField(
         label='Passwort',
         help_text="""Dein Passwort...<ul>
@@ -55,15 +56,7 @@ class SignUpForm(forms.Form):
 
 
 class ResetForm(forms.Form):
-    username = forms.CharField(
-        label='E-Mail-Adresse',
-        help_text="""Gib deine IServ-Email-Adresse an. Wir werden dir anschließend
-                     eine E-Mail mit einem Bestätigungslink senden, um ein neues
-                     Passwort festzulegen.""",
-        widget=forms.TextInput(
-            attrs={'class': 'email', 'style': 'text-transform:lowercase;'}),
-        max_length=32,
-        validators=[correct_username])
+    username = username_form
 
     def clean(self):
         cd = self.cleaned_data
@@ -81,7 +74,7 @@ class SetPasswordForm(forms.Form):
                      <li>darf nicht nur aus Zahlen bestehen</li>
                      <li>darf nicht deiner E-Mail-Adresse ähneln</li>
                      <li>darf kein häufig verwendetes sein</li></ul>""",
-        widget=forms.PasswordInput(),
+        widget=forms.PasswordInput(attrs={'autofocus': True}),
         validators=[validate_password])
     password_confirm = forms.CharField(
         label='Neues Passwort bestätigen',
@@ -129,6 +122,6 @@ class DeleteAccountForm(forms.Form):
     password = forms.CharField(
         label='Dein Passwort',
         help_text='Gib dein aktuelles Passwort ein, um zu bestätigen, dass du deinen Account löschen möchtest.',
-        widget=forms.PasswordInput())
+        widget=forms.PasswordInput(attrs={'autofocus': True}))
     confirm = forms.BooleanField(
         label='Ich bestätige, dass ich meinen Libertas-Account permanent löschen möchte.')
