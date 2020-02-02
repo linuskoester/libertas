@@ -47,9 +47,10 @@ class SignUpForm(forms.Form):
             self.add_error('password_confirm',
                            'Die Passwörter stimmen nicht überein.')
         if User.objects.filter(username=cd.get('username')).exists():
-            self.add_error('username',
-                           """Für diese E-Mail-Adresse existiert bereits ein Account.
-                              Versuche dich anzumelden.""")
+            if User.objects.get(username=cd.get('username')).profile.email_confirmed:
+                self.add_error('username',
+                               """Für diese E-Mail-Adresse existiert bereits ein Account.
+                               Versuche dich anzumelden.""")
         return cd
 
 

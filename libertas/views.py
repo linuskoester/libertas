@@ -83,9 +83,16 @@ def signup(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             email = form.cleaned_data['username'] + '@halepaghen.de'
-            user = User.objects.create_user(username, email, password)
-            log(user, ADDITION, 'Account erstellt.')
-            user.save()
+            if User.objects.filter(username=username).exists():
+                user = User.objects.get(username=username)
+                user.set_password(password)
+                user.save()
+                log(user, CHANGE, 'Registriert und Aktivierungs-Email gesendet.')
+            else:
+                user = User.objects.create_user(username, email, password)
+                log(user, ADDITION, 'Account erstellt.')
+                log(user, CHANGE, 'Registriert und Aktivierungs-Email gesendet.')
+                user.save()
 
             current_site = get_current_site(request)
             subject = 'Aktiviere deinen Libertas-Account'
