@@ -33,6 +33,8 @@ def index(request):
         messages.success(request, 'Du wurdest erfolgreich angemeldet.')
     elif message == 'deleted':
         messages.info(request, 'Dein Account wurde erfolgreich gelöscht.')
+    elif message == 'activated':
+        messages.success(request, 'Du hast deine E-Mail-Adresse bestätigt, dein Account wurde erfolgreich aktiviert.')
     return render(request, 'libertas/index.html')
 
 
@@ -118,7 +120,7 @@ def signup_activate(request, uidb64, token):
         user.save()
         log(user, CHANGE, 'Account bestätigt.')
         login(request, user)
-        return redirect('index')
+        return redirect('/?message=activated')
     else:
         if request.user.is_authenticated:
             return redirect('index')
