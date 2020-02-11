@@ -2,3 +2,4 @@ Django
 mysqlclient
 django-mysql
 six
+gunicorn

@@ -129,6 +129,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = '/code/static/'
+
 # E-Mail Configuration
 
 EMAIL_HOST = os.environ['DJANGO_SMTP_HOST']
