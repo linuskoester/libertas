@@ -1,5 +1,5 @@
 ---
-name: Verbesserung
+name: Allgemeine Verbesserung
 about: Teile uns einen Verbesserungsvorschlag mit.
 title: ''
 labels: enhancement
