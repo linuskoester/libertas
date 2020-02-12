@@ -65,4 +65,6 @@ Die Konfiguration lässt sich in der `config.env` und in der `docker-compose.yml
   - Hier werden alle Änderungen zusammengeführt, bevor sie in die anderen Branches gemerged werden.
   - Es ist der Default-Branch.
 
-Wenn du Mitglied des Repositories bist, musst du Änderungen immer in einem eigenen Branch machen. Sobald du mit deinen Änderungen fertig bist, kannst du eine Pull-Request aufmachen, um deinen Branch in den Development-Branch zu mergen.
+**Wenn du Mitglied des Repositories bist**, musst du Änderungen immer in einem eigenen Branch machen. Sobald du mit deinen Änderungen fertig bist, kannst du eine Pull-Request aufmachen, um deinen Branch in den Development-Branch zu mergen.
+
+**Wenn du kein Mitglied des Repositories bist**, erstelle dir einfach ein eigenen Fork von diesem Repository (Knopf oben Rechts), du hast dann eine vollständige Kopie in deinem Profil, mit der du alles machen kannst! Sobald du etwas fertig entwickelt hast, kannst du eine Pull-Request von deinem Fork auf den Development Branch in diesem Repository erstellen.
