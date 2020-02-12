@@ -15,7 +15,7 @@ Jede*r darf sich an der Entwicklung der App beteiligen! Libertas wurde mit Djang
 
 ### Wie setze ich den Container Stack auf?
 
-Clone dir als erstes das Git-Repository:
+Clone als erstes das Git-Repository:
 ```
 git clone https://github.com/the-haps/libertas.git
 cd libertas
