@@ -10,6 +10,7 @@ Jede*r darf sich an der Entwicklung der App beteiligen! Libertas wurde mit Djang
 ## Aufsetzen einer lokalen Instanz
 
 ### Vorraussetzungen
+- Git
 - [Docker](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
