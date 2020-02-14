@@ -27,7 +27,7 @@ DEBUG = bool(int(os.environ['DJANGO_DEBUG']))
 
 ALLOWED_HOSTS = os.environ['DJANGO_ALLOWED_HOSTS']
 
-DEFAULT_FROM_EMAIL = 'Libertas <noreply@libertas.de>'
+DEFAULT_FROM_EMAIL = os.environ['LIBERTAS_EMAIL_FROM']
 
 # Application definition
 
