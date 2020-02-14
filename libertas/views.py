@@ -10,6 +10,7 @@ from .tokens import signup_token, reset_token
 from django.contrib.admin.models import LogEntry, CHANGE, ADDITION
 from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
+import os
 
 # Create your views here.
 
@@ -98,7 +99,8 @@ def signup(request):
             subject = 'Aktiviere deinen Libertas-Account'
             message = render_to_string('libertas/auth/signup_email.html', {
                 'user': user,
-                'domain': current_site.domain,
+                'domain': os.environ['LIBERTAS_DOMAIN'],
+                'beta': bool(int(os.environ['LIBERTAS_BETA'])),
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': signup_token.make_token(user),
             })
@@ -146,7 +148,8 @@ def reset(request):
                 subject = 'Setzte das Passwort von deinem Libertas-Account zurück'
                 message = render_to_string('libertas/auth/reset_email.html', {
                     'user': user,
-                    'domain': current_site.domain,
+                    'domain': os.environ['LIBERTAS_DOMAIN'],
+                    'beta': bool(int(os.environ['LIBERTAS_BETA'])),
                     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                     'token': reset_token.make_token(user),
                 })

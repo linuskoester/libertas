@@ -3,7 +3,7 @@ Hallo!
 
 Bitte klicke auf folgenden Link, um dein Passwort zurückzusetzen:
 
-http://{{ domain }}{% url 'reset_confirm' uidb64=uid token=token %}
+{{ domain }}{% url 'reset_confirm' uidb64=uid token=token %}
 
 
 Solltest du das Zurücksetzen deines Passworts nicht veranlasst
