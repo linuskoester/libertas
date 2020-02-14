@@ -154,6 +154,7 @@ def reset(request):
                     'token': reset_token.make_token(user),
                 })
                 user.email_user(subject, message)
+                log(user, CHANGE, 'Zurücksetzen des Passworts angefordert, Link gesendet.')
             return redirect('reset_sent')
     else:
         if request.user.is_authenticated:
