@@ -147,7 +147,7 @@ if bool(int(os.environ['LIBERTAS_BETA'])):
         'disable_existing_loggers': False,
         'handlers': {
             'file': {
-                'level': 'DEBUG',
+                'level': 'INFO',
                 'class': 'logging.FileHandler',
                 'filename': '/code/logs/debug.log',
             },
@@ -155,7 +155,7 @@ if bool(int(os.environ['LIBERTAS_BETA'])):
         'loggers': {
             'django': {
                 'handlers': ['file'],
-                'level': 'DEBUG',
+                'level': 'INFO',
                 'propagate': True,
             },
         },
