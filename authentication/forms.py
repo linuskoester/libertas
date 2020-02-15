@@ -60,10 +60,11 @@ class ResetForm(forms.Form):
 
     def clean(self):
         cd = self.cleaned_data
-        if not User.objects.get(username=cd.get('username')).is_active:
-            self.add_error(None,
-                           """Du kannst dein Passwort nicht zurücksetzen,
-                              da dein Account manuell deaktiviert wurde.""")
+        if User.objects.filter(username=cd.get('username')).exists():
+            if not User.objects.get(username=cd.get('username')).is_active:
+                self.add_error(None,
+                               """Du kannst dein Passwort nicht zurücksetzen,
+                                    da dein Account manuell deaktiviert wurde.""")
 
 
 class SetPasswordForm(forms.Form):
