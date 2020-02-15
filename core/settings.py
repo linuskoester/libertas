@@ -139,3 +139,24 @@ EMAIL_PORT = os.environ['DJANGO_SMTP_PORT']
 EMAIL_HOST_USER = os.environ['DJANGO_SMTP_HOST_USER']
 EMAIL_HOST_PASSWORD = os.environ['DJANGO_SMTP_HOST_PASSWORD']
 EMAIL_USE_TLS = bool(int(os.environ['DJANGO_SMTP_USE_TLS']))
+
+# Logging
+if bool(int(os.environ['LIBERTAS_BETA'])):
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'file': {
+                'level': 'DEBUG',
+                'class': 'logging.FileHandler',
+                'filename': '/code/logs/debug.log',
+            },
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['file'],
+                'level': 'DEBUG',
+                'propagate': True,
+            },
+        },
+    }
