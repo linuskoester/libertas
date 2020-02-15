@@ -56,4 +56,4 @@ Die Konfiguration lässt sich in der `config.env` und in der `docker-compose.yml
 
 ## Libertas mitentwickeln
 
-Libertas ist bewusst open source und kann von jedem mitentwickelt werden! Du findest alle Informationen dazu unter [CONTRIBUTING](https://github.com/the-haps/libertas/blob/development/CONTRIBUTING.md).
+Libertas ist bewusst open source und kann von jedem mitentwickelt werden! Du findest alle Informationen dazu in der [CONTRIBUTING.md](https://github.com/the-haps/libertas/blob/development/CONTRIBUTING.md).
