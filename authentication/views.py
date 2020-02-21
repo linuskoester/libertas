@@ -106,7 +106,7 @@ def signup_activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
-    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+    except (TypeError, ValueError, OverflowError):
         user = None
 
     if user is not None and signup_token.check_token(user, token):
@@ -155,7 +155,7 @@ def reset_confirm(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
-    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+    except (TypeError, ValueError, OverflowError):
         user = None
 
     if user is not None and reset_token.check_token(user, token):
