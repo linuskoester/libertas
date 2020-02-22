@@ -1,4 +1,4 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.utils.encoding import force_bytes, force_text
@@ -50,7 +50,9 @@ def signin(request):
                     )
                 else:
                     login(request, user)
-                    return redirect('/?message=signin')
+                    messages.success(
+                        request, 'Du wurdest erfolgreich angemeldet.')
+                    return redirect('index')
             else:
                 form.add_error(
                     None,
@@ -59,6 +61,12 @@ def signin(request):
     else:
         form = SignInForm()
     return render(request, 'authentication/login.html', {'form': form})
+
+
+def signout(request):
+    logout(request)
+    messages.info(request, 'Du wurdest erfolgreich abgemeldet.')
+    return redirect('index')
 
 
 def signup(request):
@@ -114,7 +122,9 @@ def signup_activate(request, uidb64, token):
         user.save()
         log(user, CHANGE, 'Account bestätigt.')
         login(request, user)
-        return redirect('/?message=activated')
+        messages.success(
+            request, 'Du hast deine E-Mail-Adresse bestätigt, dein Account wurde erfolgreich aktiviert.')
+        return redirect('index')
     else:
         if request.user.is_authenticated:
             return redirect('index')
@@ -217,7 +227,9 @@ def account_delete(request):
                     request, username=request.user.username, password=form.cleaned_data['password'])
                 if user is not None:
                     user.delete()
-                    return redirect('/?message=deleted')
+                    messages.info(
+                        request, 'Dein Account wurde erfolgreich gelöscht.')
+                    return redirect('index')
                 else:
                     form.add_error('password', 'Das Passwort ist falsch.')
         else:
