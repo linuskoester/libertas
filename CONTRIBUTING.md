@@ -1,5 +1,5 @@
 # Libertas mitentwickeln
-Jede*r darf sich an der Entwicklung der App beteiligen! Im Folgenden findest du eine Informationen, die du bei der Mitentwicklung beachten solltest.
+Jede*r darf sich an der Entwicklung der App beteiligen! Im Folgenden findest du einige Informationen, die du bei der Mitentwicklung beachten solltest.
 
 Informationen, wie du eine lokale Instanz von Libertas erstellst, findest du in der [README.md](https://github.com/the-haps/libertas/blob/development/README.md).
 
