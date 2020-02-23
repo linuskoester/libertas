@@ -17,5 +17,5 @@ def log(user, flag, message):
 
 
 def index(request):
-    message = request.GET.get('message')
+    # Startseite
     return render(request, 'libertas/index.html')

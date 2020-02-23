@@ -3,10 +3,12 @@ from django.core.validators import RegexValidator
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.models import User
 
+# Ein Benutzername kann nur aus Klein-, Großbuchstaben und Punkten bestehen
 correct_username = RegexValidator(
     r'^[a-zA-Z.]+$',
     'Deine E-Mail-Adresse kann nur aus Kleinbuchstaben und Punkten bestehen, und keine Umlaute enthalten.')
 
+# Vordefiniertes Feld für den Benutzernamen
 username_form = forms.CharField(
     label='E-Mail-Adresse',
     widget=forms.TextInput(
@@ -44,9 +46,11 @@ class SignUpForm(forms.Form):
 
     def clean(self):
         cd = self.cleaned_data
+        # Überprüfe ob Passwörter übereinstimmen
         if cd.get('password') != cd.get('password_confirm') and cd.get('password') is not None:
             self.add_error('password_confirm',
                            'Die Passwörter stimmen nicht überein.')
+        # Überprüfe ob ein Account existiert, dessen E-Mail BESTÄTIGT ist
         if User.objects.filter(username=cd.get('username')).exists():
             if User.objects.get(username=cd.get('username')).profile.email_confirmed:
                 self.add_error('username',
@@ -60,6 +64,7 @@ class ResetForm(forms.Form):
 
     def clean(self):
         cd = self.cleaned_data
+        # Überprüfe, ob der Account deaktiviert ist
         if User.objects.filter(username=cd.get('username')).exists():
             if not User.objects.get(username=cd.get('username')).is_active:
                 self.add_error(None,
@@ -83,6 +88,7 @@ class SetPasswordForm(forms.Form):
 
     def clean(self):
         cd = self.cleaned_data
+        # Überprüfe, ob Passwörter übereinstimmen
         if cd.get('password') != cd.get('password_confirm') and cd.get('password') is not None:
             print(cd.get('password'))
             print(cd.get('password_confirm'))
@@ -111,6 +117,7 @@ class ChangePasswordForm(forms.Form):
 
     def clean(self):
         cd = self.cleaned_data
+        # Überprüfe, ob Passwörter übereinstimmen
         if cd.get('password') != cd.get('password_confirm') and cd.get('password') is not None:
             print(cd.get('password'))
             print(cd.get('password_confirm'))
