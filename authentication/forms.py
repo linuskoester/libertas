@@ -24,14 +24,15 @@ username_form = forms.CharField(
 )
 
 
-def checkbetaaccess(cd, self):
+def checkbetaaccess(username, self):
     # Überprüfe ob Beta-Server
-    if bool(int(os.environ['LIBERTAS_BETA'])):
+    if bool(int(os.environ['LIBERTAS_BETA'])) and username:
         gist = "https://gist.githubusercontent.com/CrazyEasy/23319d88bd9d921eb67b530eb633281a/raw/libertas-beta-tester.txt"  # noqa
         tester = []
-        for username in urllib.request.urlopen(gist):
-            tester.append(username.decode('utf-8').replace("\n", ""))
-        if cd.get('username') not in tester:
+        for u in urllib.request.urlopen(gist):
+            tester.append(u.decode('utf-8').replace("\n", ""))
+        if username not in tester:
+            print(username, tester)
             self.add_error('username',
                            "Für diese E-Mail-Adresse ist kein Beta-Zugang freigeschaltet.")
 
@@ -71,7 +72,8 @@ class SignUpForm(forms.Form):
                                """Für diese E-Mail-Adresse existiert bereits ein Account.
                                Versuche dich anzumelden.""")
         # Überprüfe auf Beta-Zugang, nur beim Beta-Server
-        checkbetaaccess(cd, self)
+        # if bool(int(os.environ['LIBERTAS_BETA'])) and cd.get('username'):
+        checkbetaaccess(cd.get('username'), self)
         return cd
 
 
