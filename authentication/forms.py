@@ -2,6 +2,8 @@ from django import forms
 from django.core.validators import RegexValidator
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.models import User
+import os
+import urllib.request
 
 # Ein Benutzername kann nur aus Klein-, Großbuchstaben und Punkten bestehen
 correct_username = RegexValidator(
@@ -20,6 +22,18 @@ username_form = forms.CharField(
     max_length=32,
     validators=[correct_username]
 )
+
+
+def checkbetaaccess(cd, self):
+    # Überprüfe ob Beta-Server
+    if bool(int(os.environ['LIBERTAS_BETA'])):
+        gist = "https://gist.githubusercontent.com/CrazyEasy/23319d88bd9d921eb67b530eb633281a/raw/3d62831e60a7d987ac1387871d554e03e2a3f9eb/libertas-beta-tester.txt"  # noqa
+        tester = []
+        for username in urllib.request.urlopen(gist):
+            tester.append(username.decode('utf-8').replace("\n", ""))
+        if cd.get('username') not in tester:
+            self.add_error('username',
+                           "Für diese E-Mail-Adresse ist kein Beta-Zugang freigeschaltet.")
 
 
 class SignInForm(forms.Form):
@@ -56,6 +70,8 @@ class SignUpForm(forms.Form):
                 self.add_error('username',
                                """Für diese E-Mail-Adresse existiert bereits ein Account.
                                Versuche dich anzumelden.""")
+        # Überprüfe auf Beta-Zugang, nur beim Beta-Server
+        checkbetaaccess(cd, self)
         return cd
 
 
@@ -70,6 +86,9 @@ class ResetForm(forms.Form):
                 self.add_error(None,
                                """Du kannst dein Passwort nicht zurücksetzen,
                                     da dein Account manuell deaktiviert wurde.""")
+        # Überprüfe auf Beta-Zugang, nur beim Beta-Server
+        checkbetaaccess(cd.get('username'), self)
+        return cd
 
 
 class SetPasswordForm(forms.Form):
