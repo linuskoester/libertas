@@ -27,7 +27,7 @@ username_form = forms.CharField(
 def checkbetaaccess(cd, self):
     # Überprüfe ob Beta-Server
     if bool(int(os.environ['LIBERTAS_BETA'])):
-        gist = "https://gist.githubusercontent.com/CrazyEasy/23319d88bd9d921eb67b530eb633281a/raw/3d62831e60a7d987ac1387871d554e03e2a3f9eb/libertas-beta-tester.txt"  # noqa
+        gist = "https://gist.githubusercontent.com/CrazyEasy/23319d88bd9d921eb67b530eb633281a/raw/libertas-beta-tester.txt"  # noqa
         tester = []
         for username in urllib.request.urlopen(gist):
             tester.append(username.decode('utf-8').replace("\n", ""))
