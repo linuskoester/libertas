@@ -4,6 +4,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.models import User
 import os
 import urllib.request
+from django.contrib.auth import authenticate
 
 # Ein Benutzername kann nur aus Klein-, Großbuchstaben und Punkten bestehen
 correct_username = RegexValidator(
@@ -42,6 +43,32 @@ class SignInForm(forms.Form):
     password = forms.CharField(
         label='Passwort',
         widget=forms.PasswordInput())
+
+    def clean(self):
+        cd = self.cleaned_data
+        user = authenticate(username=cd.get('username'),
+                            password=cd.get('password'))
+        # Fehlermeldung wenn Authentifizierung fehlgeschlagen
+        if user is None:
+            self.add_error(
+                None,
+                'Der Account existiert nicht oder das Passwort ist falsch!'
+            )
+        # Fehlermeldung wenn Account deaktiviert
+        elif not user.is_active:
+            self.add_error(
+                None,
+                'Dein Account wurde manuell deaktiviert.'
+            )
+        # Fehlermeldung wenn E-Mail-Adresse nicht bestätigt
+        elif not user.profile.email_confirmed:
+            self.add_error(
+                'username',
+                """Du musst deine E-Mail-Adresse zuerst bestätigen, um dich anzumelden.
+                    Solltest du keine Bestätigungs-Mail erhalten haben, klicke unten auf
+                    "Passwort vergessen" und setze dein Passwort zurück. Dadurch wird
+                    dein Account aktiviert."""
+            )
 
 
 class SignUpForm(forms.Form):
