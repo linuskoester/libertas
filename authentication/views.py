@@ -31,37 +31,15 @@ def signin(request):
     if request.method == 'POST':
         form = SignInForm(request.POST)
         if form.is_valid():
-            # Authentifiziere mit username und password vom Formular
+            # Melde den Benutzer an
             username = request.POST['username']
             password = request.POST['password']
             user = authenticate(request, username=username, password=password)
-            # Fehlermeldung wenn Authentifizierung fehlgeschlagen
-            if user is None:
-                form.add_error(
-                    None,
-                    'Der Account existiert nicht oder das Passwort ist falsch!'
-                )
-            # Fehlermeldung wenn Account deaktiviert
-            elif not user.is_active:
-                form.add_error(
-                    None,
-                    'Dein Account wurde manuell deaktiviert.'
-                )
-            # Fehlermeldung wenn E-Mail-Adresse nicht bestätigt
-            elif not user.profile.email_confirmed:
-                form.add_error(
-                    'username',
-                    """Du musst deine E-Mail-Adresse zuerst bestätigen, um dich anzumelden.
-                        Solltest du keine Bestätigungs-Mail erhalten haben, klicke unten auf
-                        "Passwort vergessen" und setze dein Passwort zurück. Dadurch wird
-                        dein Account aktiviert."""
-                )
-            # Sonst Anmelden und zur Startseite weiterleiten
-            else:
-                login(request, user)
-                messages.success(
-                    request, 'Du wurdest erfolgreich angemeldet.')
-                return redirect('index')
+            login(request, user)
+            # Bestätigungsnachricht und leite zur Startseite weiter
+            messages.success(
+                request, 'Du wurdest erfolgreich angemeldet.')
+            return redirect('index')
     else:
         # Wenn Formular noch nicht ausgefüllt, lade Formular in den Kontext
         form = SignInForm()
@@ -285,7 +263,7 @@ def account_delete(request):
             if form.is_valid():
                 # Authentifiziere Benutzer
                 user = authenticate(
-                    request, username=request.user.username, password=form.cleaned_data['password'])
+                    username=request.user.username, password=form.cleaned_data['password'])
                 # Wenn Authentifizierung erfolgreich
                 if user is not None:
                     # Lösche Benutzer
@@ -298,6 +276,9 @@ def account_delete(request):
                 else:
                     # Zeige Fehlermeldung
                     form.add_error('password', 'Das Passwort ist falsch.')
+                    # Lässt sich nicht in als Validation in forms.py schreiben,
+                    # da die clean()-Funktion kein Zugriff auf request hat, und
+                    # somit den Benutzernamen nicht kennt.
         else:
             # Wenn Formular noch nicht ausgefüllt, lade Formular in den Kontext
             form = DeleteAccountForm()

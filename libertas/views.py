@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.contrib.admin.models import LogEntry
 from django.contrib.contenttypes.models import ContentType
-from django.contrib import messages
+from .models import Ausgabe
+# from django.contrib import messages
 
 
 def log(user, flag, message):
@@ -18,4 +19,6 @@ def log(user, flag, message):
 
 def index(request):
     # Startseite
-    return render(request, 'libertas/index.html')
+    ausgaben = Ausgabe.objects
+
+    return render(request, 'libertas/index.html', {'ausgaben': ausgaben})
