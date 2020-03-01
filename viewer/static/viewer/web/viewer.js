@@ -1811,7 +1811,7 @@ function webViewerInitialized() {
   var params = (0, _ui_utils.parseQueryString)(queryString);
   // file = 'file' in params ? params.file : _app_options.AppOptions.get('defaultUrl');
   // file = 'compressed.tracemonkey-pldi-09.pdf'
-  file = pdf_file_name
+  file = '/viewer/file/'+error;
   validateFileURL(file);
   var fileInput = document.createElement('input');
   fileInput.id = appConfig.openFileInputName;
