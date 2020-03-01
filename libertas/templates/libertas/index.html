@@ -6,19 +6,28 @@
 
 {% if user.is_authenticated %}
 <h1>Hallo {{ user.username }}!</h1>
+<p>Du bist angemeldet und solltest in diesem Beta-Test Zugriff auf alle Ausgaben haben.</p>
 {% else %}
-
-
-
-<h1>Überschrift 1</h1>
-<p>Lorem ipsum <a href="">test test tet</a> dolor sit amet consectetur adipisicing elit. Quia eligendi, id dolor labore
-    quis, repudiandae quos adipisci veritatis ab, perferendis odit dolorum vel earum eveniet amet iure quidem odio
-    praesentium.</p>
-<h2>Überschrift 2</h2>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores quo cupiditate aut necessitatibus esse harum
-    consequuntur commodi obcaecati? Debitis hic quas dolore dignissimos et voluptatem consequatur vitae asperiores unde
-    dolorem.</p>
-<h3>Überschrift 3</h3>
+<h1>Hallo!</h1>
+<p>Du bist NICHT angemeldet und solltest in diesem Beta-Test NUR Zugriff auf die Leseproben haben.</p>
 {% endif %}
+
+<h2>Ausgaben</h2>
+
+{% for ausgabe in ausgaben.all %}
+
+
+<ul>
+    <li><strong>{{ ausgabe.name }}</strong> (Nr. {{ ausgabe.number }})</li>
+    <ul>
+        <li><a href="{% url 'viewer' ausgabe.number 'read' %}">Ausgabe lesen</a></li>
+        {% if ausgabe.leseprobe %}
+        <li><a href="{% url 'viewer' ausgabe.number 'leseprobe' %}">Leseprobe</a></li>
+        {% endif %}
+    </ul>
+</ul>
+
+{% endfor %}
+
 
 {% endblock %}

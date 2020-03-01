@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'libertas',
-    'authentication'
+    'authentication',
+    'viewer'
 ]
 
 MIDDLEWARE = [
@@ -131,6 +132,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = '/code/static/'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = '/code/media/'
+
 
 # E-Mail Configuration
 
