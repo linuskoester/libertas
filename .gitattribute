@@ -1,1 +1,2 @@
-*.js linguist-vendored
+viewer/static/viewer/build/* linguist-vendored
+viewer/static/viewer/web/* linguist-vendored
