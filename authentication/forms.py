@@ -148,7 +148,6 @@ class SetPasswordForm(forms.Form):
 class ChangePasswordForm(forms.Form):
     password_old = forms.CharField(
         label='Aktuelles Passwort',
-        help_text='Gib dein aktuelles Passwort ein, um ungewollte Passwortänderungen zu vermeiden.',
         widget=forms.PasswordInput())
     password = forms.CharField(
         label='Neues Passwort',

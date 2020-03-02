@@ -9,8 +9,8 @@
     <meta name="viewport" content="initial-scale=1, user-scalable=no">
     <link rel="stylesheet" href="{% static 'libertas/css/basic.css' %}">
     <script src="{% static 'libertas/js/jquery.js' %}"></script>
-
     <title>{% block title %}Libertas{% endblock %}</title>
+    {% block header %}{% endblock %}
 </head>
 
 <body>
@@ -30,6 +30,7 @@
         </div>
     </nav>
 
+    {% block body %}
     <main>
         {% if messages %}
             {% for message in messages %}
@@ -39,6 +40,7 @@
         {% block main %}
         {% endblock %}
     </main>
+    {% endblock %}
 
     {% block no_footer %}
     <footer>
