@@ -770,7 +770,7 @@
           return;
         }
     
-        document.title = title;
+        // document.title = title;
       },
     
       async close() {

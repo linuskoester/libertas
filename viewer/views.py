@@ -24,7 +24,7 @@ def viewer(request, number, view_type):
     else:
         raise Http404()
 
-    return render(request, 'viewer/viewer.html', {'pdf_data': pdf_data})
+    return render(request, 'viewer/viewer.html', {'pdf_data': pdf_data, 'pdf_name': document.name})
 
 
 def protected_file(request, identifier, view_type):
