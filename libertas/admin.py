@@ -21,12 +21,12 @@ class AusgabeAdmin(admin.ModelAdmin):
 class TokenAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,       {'fields': ['token', 'creation', 'ausgabe']}),
-        ('Benutzer', {'fields': ['user', 'redeemed']})
+        ('Einlösung', {'fields': ['user', 'redeemed']})
     ]
 
     search_fields = ['token', 'user__username']
     autocomplete_fields = ('ausgabe', 'user')
-    list_display = ('censored_token', 'ausgabe', 'user', 'redeemed')
+    list_display = ('censored_token', 'ausgabe', 'creation', 'user', 'redeemed')
     readonly_fields = ['token', 'creation']
 
     def censored_token(self, obj):

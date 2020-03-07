@@ -33,13 +33,19 @@ class Ausgabe(models.Model):
 
 class Token(models.Model):
     token = models.CharField(
-        max_length=12, primary_key=True, default=generate_token)
+        max_length=12, primary_key=True)
     creation = models.DateTimeField('Erstellung', auto_now=True)
     ausgabe = models.ForeignKey(
         Ausgabe, on_delete=models.SET_NULL, default=None, blank=True, null=True, )
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None,
-                             blank=True, null=True, verbose_name='Eingelöst von')
-    redeemed = models.DateTimeField('Zeitpunkt', default=None, blank=True, null=True)
+                             blank=True, null=True, verbose_name='Benutzer')
+    redeemed = models.DateTimeField(
+        'Zeitpunkt', default=None, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.token:
+            self.token = generate_token()
+        super(Token, self).save(*args, **kwargs)
 
     def __str__(self):
         return "%s****" % (self.token[:-4])
