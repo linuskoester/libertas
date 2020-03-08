@@ -1,0 +1,26 @@
+{% extends 'libertas/base.html' %}
+
+{% block title %}Token einlösen | Libertas{% endblock %}
+
+{% block main %}
+
+<div class="form centered">
+    <h1>Token einlösen</h1>
+    <form method="post">
+        {% include "libertas/form.html" %}
+        <button type="submit">Einlösen</button>
+    </form>
+</div>
+
+<script>
+    // Disable Space
+    $(function () {
+        $('.token').keypress(function (e) {
+            if (e.which == 32) {
+                return false;
+            }
+        });
+    });
+</script>
+
+{% endblock %}
