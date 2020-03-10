@@ -128,4 +128,4 @@ dmypy.json
 
 # Libertas
 media/*
-static/CACHE
+# static/CACHE
