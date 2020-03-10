@@ -32,15 +32,15 @@
     <header>
         <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-gradient-primary p-md-2"
             style="box-shadow: 0px -8px 15px 8px #727272;">
-            <a class="navbar-brand" href="#">TheHaps</a>
+            <a class="navbar-brand" href="{% url 'index' %}">TheHaps</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Ausgaben <span class="sr-only">(current)</span></a>
+                    <li class="nav-item active font-weight-bold">
+                        <a class="nav-link" href="{% url 'index' %}">Ausgaben <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Team</a>
@@ -61,7 +61,7 @@
                             <a class="dropdown-item" href="{% url 'admin:index' %}">Administration</a>
                             <div class="dropdown-divider"></div>
                             {% endif %}
-                            <a class="dropdown-item" href="{% url 'account' %}">Einstellungen</a>
+                            <a class="dropdown-item" href="{% url 'account' %}">Dein Acccount</a>
                             <a class="dropdown-item" href="{% url 'signout' %}">Abmelden</a>
                         </div>
                     </li>
@@ -84,7 +84,7 @@
     </header>
 
     {% block body %}
-    <main role="main" class="flex-shrink-0 px-4 pb-5" style="padding-top: 80px;">
+    <main role="main" class="flex-shrink-0 px-4 pb-5 mb-4" style="padding-top: 80px;">
         {% if messages %}
             {% for message in messages %}
                 {% if message.tags == 'info' %}
@@ -111,8 +111,10 @@
     </main>
 
     <footer class="footer mt-auto py-3 bg-secondary">
-        <div class="container">
-            <span class="text-muted">Place sticky footer content here.</span>
+        <div class="container text-center">
+            <a class="text-muted m-2" href="#">Impressum</a>
+            <a class="text-muted m-2" href="#">Datenschutz</a>
+            <a class="text-muted m-2" href="#">Kontakt</a>
         </div>
     </footer>
     {% endblock %}
