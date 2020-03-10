@@ -91,8 +91,13 @@ def signup(request):
                 'token': signup_token.make_token(user),
             })
             user.email_user(subject, message)
-            # Leite zur Bestätigungs-Seite weiter
-            return redirect('signup_sent')
+            # Zeige Bestätigungsnachricht
+            messages.success(request,
+                             """Wir haben dir eine E-Mail mit einem Bestätigungslink gesendet.
+                                Gehe jetzt auf IServ und klicke auf den Link, um deinen Account
+                                zu aktivieren!"""
+                             )
+            return redirect('signup')
     else:
         # Wenn Formular noch nicht ausgefüllt, lade Formular in den Kontext
         form = SignUpForm()
