@@ -563,6 +563,7 @@
             transition-duration: 200ms;
     -webkit-transition-timing-function: ease;
             transition-timing-function: ease;
+    box-sizing: content-box !important;
   }
   html[dir='ltr'] #sidebarContainer {
     -webkit-transition-property: left;
@@ -620,6 +621,7 @@
     position: absolute;
     width: 100%;
     background-color: hsla(0,0%,0%,.1);
+    box-sizing: content-box !important;
   }
   html[dir='ltr'] #sidebarContent {
     left: 0;
@@ -1627,6 +1629,7 @@
     padding: 10px 30px 0;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+    box-sizing: content-box !important;
   }
 
   #thumbnailView > a:active,
@@ -1668,6 +1671,7 @@
 
   .thumbnailSelectionRing {
     border-radius: 2px;
+    box-sizing: content-box !important;
     padding: 7px;
   }
 
