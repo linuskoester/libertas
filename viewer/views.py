@@ -1,7 +1,7 @@
 from django.http.response import FileResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from libertas.models import Ausgabe
-# from django.contrib import messages
+from django.contrib import messages
 from django.http import Http404
 from libertas.models import Token, User
 
@@ -14,7 +14,10 @@ def viewer(request, number, view_type):
         if Token.objects.filter(user=user, ausgabe=ausgabe).exists():
             pdf_data = "%s/0" % ausgabe.file_identifier
         else:
-            return redirect('redeem', number=number)
+            messages.error(request, """<strong>Du bist nicht im Besitz dieser Ausgabe.</strong>
+                                    Wenn du im Besitz eines Tokens bist, löse ihn ein,
+                                    um Zugriff auf die Ausgabe zu bekommen.""")
+            return redirect('redeem')
     elif view_type == "leseprobe":
         if ausgabe.leseprobe:
             pdf_data = "%s/1" % ausgabe.file_identifier
