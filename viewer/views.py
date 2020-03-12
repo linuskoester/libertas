@@ -13,6 +13,7 @@ def viewer(request, number, view_type):
         user = User.objects.get(username=request.user)
         if Token.objects.filter(user=user, ausgabe=ausgabe).exists():
             pdf_data = "%s/0" % ausgabe.file_identifier
+            pdf_name = ausgabe.name
         else:
             messages.error(request, """<strong>Du bist nicht im Besitz dieser Ausgabe.</strong>
                                     Wenn du im Besitz eines Tokens bist, löse ihn ein,
@@ -21,12 +22,13 @@ def viewer(request, number, view_type):
     elif view_type == "leseprobe":
         if ausgabe.leseprobe:
             pdf_data = "%s/1" % ausgabe.file_identifier
+            pdf_name = "%s (Leseprobe)" % ausgabe.name
         else:
             raise Http404()
     else:
         raise Http404()
 
-    return render(request, 'viewer/viewer.html', {'pdf_data': pdf_data, 'pdf_name': ausgabe.name})
+    return render(request, 'viewer/viewer.html', {'pdf_data': pdf_data, 'pdf_name': pdf_name})
 
 
 def protected_file(request, identifier, view_type):
