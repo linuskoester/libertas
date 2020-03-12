@@ -7,8 +7,7 @@ class RedeemForm(forms.Form):
                             max_length=12,
                             min_length=12,
                             widget=forms.TextInput(
-                                attrs={'class': 'token',
-                                       'style': 'text-transform:uppercase;',
+                                attrs={'style': 'text-transform:uppercase;',
                                        'autofocus': True
                                        }
                             ))
@@ -17,11 +16,11 @@ class RedeemForm(forms.Form):
         cd = self.cleaned_data
 
         if not Token.objects.filter(token=cd.get('token')).exists():
-            self.add_error(None, 'Dieser Token ist ungültig.')
+            self.add_error('token', 'Dieser Token ist ungültig.')
 
         else:
             token = Token.objects.get(token=cd.get('token'))
             if token.user:
-                self.add_error(None, 'Dieser Token wurde bereits verwendet.')
+                self.add_error('token', 'Dieser Token wurde bereits verwendet.')
 
         return cd

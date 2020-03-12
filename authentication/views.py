@@ -95,21 +95,14 @@ def signup(request):
             messages.success(request,
                              """Wir haben dir eine E-Mail mit einem Bestätigungslink gesendet.
                                 Gehe jetzt auf IServ und klicke auf den Link, um deinen Account
-                                zu aktivieren!"""
-                             )
-            return redirect('signup')
+                                zu aktivieren!<br>
+                                <a class="btn btn-outline-success mt-2" href="https://halepaghen.de/">
+                                Weiter zu IServ</a>""")
+            return redirect('index')
     else:
         # Wenn Formular noch nicht ausgefüllt, lade Formular in den Kontext
         form = SignUpForm()
     return render(request, 'authentication/signup.html', {'form': form})
-
-
-def signup_sent(request):
-    # Wenn angemeldet, leite zur Startseite weiter
-    if request.user.is_authenticated:
-        return redirect('index')
-    # Zeige Bestätigungs-Seite
-    return render(request, 'authentication/signup_sent.html')
 
 
 def signup_activate(request, uidb64, token):
@@ -140,7 +133,10 @@ def signup_activate(request, uidb64, token):
             return redirect('index')
         # Wenn nicht angemeldet, zeige Fehlermeldung
         else:
-            return render(request, 'authentication/signup_invalid.html')
+            # Zeige Fehlermeldung
+            messages.error(request,
+                           'Dieser Bestätigungslink ist ungültig oder wurde bereits verwendet.')
+            return redirect('index')
 
 
 def reset(request):
@@ -167,17 +163,19 @@ def reset(request):
                 user.email_user(subject, message)
                 # Logeintrag
                 log(user, CHANGE, 'Zurücksetzen des Passworts angefordert, Link gesendet.')
-            # Zeige Bestätigungsseite
-            return redirect('reset_sent')
+            # Zeige Bestätigungsnachricht
+            messages.success(request,
+                             """Sofern ein Account mit dieser E-Mail-Adresse existiert,
+                                haben wir dir eine E-Mail mit einem Bestätigungslink gesendet.<br>
+                                Gehe jetzt auf IServ und klicke auf den Link, um dein
+                                Passwort zurückzusetzen.<br>
+                                <a class="btn btn-outline-success mt-2" href="https://halepaghen.de/">
+                                Weiter zu IServ</a>""")
+            return redirect('index')
     else:
         # Wenn Formular noch nicht ausgefüllt, lade Formular in den Kontext
         form = ResetForm()
     return render(request, 'authentication/reset.html', {'form': form})
-
-
-def reset_sent(request):
-    # Zeige Bestätigungsseite wenn Zurücksetz-Link versendet
-    return render(request, 'authentication/reset_sent.html')
 
 
 def reset_confirm(request, uidb64, token):
@@ -205,24 +203,25 @@ def reset_confirm(request, uidb64, token):
                         'E-Mail durch Zurücksetzen des Passworts bestätigt.')
                 # Speichere Benutzer
                 user.save()
-                # Leite zur Bestätigungsseite weiter
-                return redirect('reset_success')
+                # Leite zum Login weiter
+                messages.success(request,
+                                 """Dein Passwort wurde erfolgreich zurückgesetzt. Du kannst dich jetzt mit
+                                 deinem neuen Passwort anmelden!""")
+                return redirect('signin')
         else:
             # Wenn Formular noch nicht ausgefüllt, lade Formular in den Kontext
             form = SetPasswordForm()
         return render(request, 'authentication/reset_set_password.html', {'form': form})
     else:
-        # Falls Benutzer angemeldet, lade zur Startseite weiter und ignoriere den falschen Link
+        # Wenn Link falschund  Benutzer angemeldet, lade zur Startseite weiter und ignoriere den falschen Link
         if request.user.is_authenticated:
             return redirect('index')
-        # Wenn nicht angemeldet, zeige Fehlermeldung
+        # Wenn Link falsch und nicht angemeldet, zeige Fehlermeldung
         else:
-            return render(request, 'authentication/reset_invalid.html')
-
-
-def reset_success(request):
-    # Zeige Bestätigungs-Seite nach Passwort-Reset
-    return render(request, 'authentication/reset_success.html')
+            # Zeige Fehlermeldung
+            messages.error(request,
+                           'Dieser Bestätigungslink ist ungültig oder wurde bereits verwendet.')
+            return redirect('index')
 
 
 def account(request):
