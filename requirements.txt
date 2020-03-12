@@ -3,3 +3,5 @@ mysqlclient
 django-mysql
 six
 gunicorn
+django_compressor
+django-libsass

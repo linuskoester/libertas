@@ -1,14 +1,14 @@
 {% extends 'libertas/base.html' %}
 
-{% block title %}Account erstellen | Libertas{% endblock %}
+{% block title %}Account erstellen{% endblock %}
 
 {% block main %}
 
-<div class="form centered">
-    <h1>Account erstellen</h1>
-    <form method="post">
+<div class="mx-auto mt-4" style="width: 340px;">
+    <form method="post" class="needs-validation" novalidate>
+        <h1 class="h2 mb-4 text-center">Account erstellen</h1>
         {% include "libertas/form.html" %}
-        <button type="submit">Account erstellen</button>
+        <button class="btn btn-primary btn-block mt-2" type="submit">Account erstellen</button>
     </form>
 </div>
 

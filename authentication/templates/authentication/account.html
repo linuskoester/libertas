@@ -1,6 +1,6 @@
 {% extends 'libertas/base.html' %}
 
-{% block title %}Account | Libertas{% endblock %}
+{% block title %}Account{% endblock %}
 
 {% block main %}
 
@@ -8,19 +8,16 @@
 
 <h3>Accountinformationen</h3>
 <p>
-    <strong>E-Mail-Adresse:</strong> {{ user.email }}<br>
+    {% if user.email %}<strong>E-Mail-Adresse:</strong> {{ user.email }}<br>{% endif %}
     <strong>Anmeldename:</strong> {{ user.username }}<br>
     <strong>Registriert am:</strong> {{ user.date_joined|date:"SHORT_DATE_FORMAT" }}
 </p>
 <h3>Passwort ändern</h3>
-<div class="form">
-    <form method="post">
-        {% include "libertas/form.html" %}
-        <button type="submit">Passwort ändern</button>
-    </form>
-</div>
+<form method="post" class="needs-validation mb-4" novalidate>
+    {% include "libertas/form.html" %}
+    <button class="btn btn-primary" type="submit">Passwort ändern</button>
+</form>
 <h3>Account löschen</h3>
-<div class="form">
-    <button type="submit" class="red" onclick="window.location='{% url 'account_delete' %}'">Account löschen</button>
-</div>
+<p>Du kannst deinen Account löschen, da du noch keine Ausgaben besitzt.</p>
+<a class="btn btn-danger" href="{% url 'account_delete' %}">Account löschen</a>
 {% endblock %}

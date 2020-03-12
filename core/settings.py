@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'compressor',
     'libertas',
     'authentication',
     'viewer'
@@ -133,10 +134,20 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = '/code/static/'
 
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder'
+]
+
+
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = '/code/media/'
 
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
 
 # E-Mail Configuration
 

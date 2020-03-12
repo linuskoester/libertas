@@ -1,33 +1,132 @@
 {% csrf_token %}
-{{ form.non_field_errors }}
-{% for field in form %}
-{% if field == form.username %}
-<div class="field-wrapper">
-    {{ field.label_tag }}
-    <div class="email-wrapper">
-        {{ field }} <span class="email-text">@halepaghen.de</span>
-    </div>
-    {{ field.errors }}
-    {% if field.help_text %}
-    <div class="help">{{ field.help_text|safe }}</div>
-    {% endif %}
+{% for error in form.non_field_errors %}
+<div class="text-danger mb-2">
+    {{ error }}
 </div>
-{% elif field.field.widget.input_type == "checkbox" %}
-<div class="field-wrapper">
-    {{ field }} {{ field.label_tag }}
-    {{ field.errors }}
-    {% if field.help_text %}
-    <div class="help">{{ field.help_text|safe }}</div>
-    {% endif %}
+{% endfor %}
+{% for field in form %}
+{% if field.field.widget.input_type == "checkbox" %}
+<div class="form-group">
+    <div class="custom-control custom-checkbox mb-3">
+        <input
+            type="checkbox"
+            class="custom-control-input {% if field.errors %}is-invalid{% endif %}
+                {% for name, value in field.field.widget.attrs.items %}
+                    {% if name == "class" %}
+                        {{ value|stringformat:'s' }}
+                    {% endif %}
+                {% endfor %}"
+            style="max-width: 340px;
+                {% for name, value in field.field.widget.attrs.items %}
+                    {% if name == "style" %}
+                        {{ value|stringformat:'s' }}
+                    {% endif %}
+                {% endfor %}"
+            name="{{ field.name }}"
+            id="{{ field.id_for_label }}"
+            {% if field.value != None and field.field.widget.input_type != 'password' %}
+                value="{{ field.value|stringformat:'s' }}"
+            {% endif %}
+            maxlength="{{ field.field.max_length }}"
+                {% if field.field.required %}required{% endif %}
+                {% for name, value in field.field.widget.attrs.items %}
+                    {% if value is not False and name != "style" and name != "class" %}
+                        {{ name }}
+                        {% if value is not True %}
+                            ="{{ value|stringformat:'s' }}"
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}>
+        <label class="custom-control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% if not field.errors %}
+        <div class="invalid-feedback mt-0">
+            Dieses Feld ist zwingend erforderlich.
+        </div>
+        {% endif %}
+        {% for error in field.errors %}
+        <div class="invalid-feedback mt-0">
+            {{ error }}
+        </div>
+        {% endfor %}
+        {% if field.help_text %}
+        <small class="form-text text-muted">{{ field.help_text|safe }}</small>
+        {% endif %}
+    </div>
 </div>
 {% else %}
-<div class="field-wrapper">
+<div class="form-group">
     {{ field.label_tag }}
-    {{ field }}
-    {{ field.errors }}
+    {% if field == form.username %}
+    <div class="input-group">
+    {% endif %}
+        <input
+            type="{{ field.field.widget.input_type }}"
+            class="form-control {% if field.errors %}is-invalid{% endif %}
+                {% for name, value in field.field.widget.attrs.items %}
+                    {% if name == "class" %}
+                        {{ value|stringformat:'s' }}
+                    {% endif %}
+                {% endfor %}"
+            style="max-width: 340px;
+                {% for name, value in field.field.widget.attrs.items %}
+                    {% if name == "style" %}
+                        {{ value|stringformat:'s' }}
+                    {% endif %}
+                {% endfor %}"
+            name="{{ field.name }}"
+            id="{{ field.id_for_label }}"
+            {% if field.value != None and field.field.widget.input_type != 'password' %}
+                value="{{ field.value|stringformat:'s' }}"
+            {% endif %}
+            maxlength="{{ field.field.max_length }}"
+                {% if field.field.required %}required{% endif %}
+                {% for name, value in field.field.widget.attrs.items %}
+                    {% if value is not False and name != "style" and name != "class" %}
+                        {{ name }}
+                        {% if value is not True %}
+                            ="{{ value|stringformat:'s' }}"
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}>
+        {% if field == form.username %}
+        <div class="input-group-append">
+            <span class="input-group-text rounded-right">@halepaghen.de</span>
+        </div>
+        {% endif %}
+        {% if not field.errors %}
+        <div class="invalid-feedback">
+            Dieses Feld ist zwingend erforderlich.
+        </div>
+        {% endif %}
+        {% for error in field.errors %}
+        <div class="invalid-feedback">
+            {{ error }}
+        </div>
+        {% endfor %}
+    {% if field == form.username %}
+    </div>
+    {% endif %}
     {% if field.help_text %}
-    <div class="help">{{ field.help_text|safe }}</div>
+    <small class="form-text text-muted">{{ field.help_text|safe }}</small>
     {% endif %}
 </div>
 {% endif %}
 {% endfor %}
+
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>

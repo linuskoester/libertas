@@ -36,7 +36,7 @@ class Token(models.Model):
         max_length=12, primary_key=True)
     creation = models.DateTimeField('Erstellung', auto_now=True)
     ausgabe = models.ForeignKey(
-        Ausgabe, on_delete=models.SET_NULL, default=None, blank=True, null=True, )
+        Ausgabe, on_delete=models.PROTECT)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None,
                              blank=True, null=True, verbose_name='Benutzer')
     redeemed = models.DateTimeField(
