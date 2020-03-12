@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.admin.models import LogEntry
 from django.contrib.contenttypes.models import ContentType
-from .models import Ausgabe
+from .models import Ausgabe, Token, User
+from .forms import RedeemForm
+from datetime import datetime
+from django.contrib import messages
 # from django.contrib import messages
 
 
@@ -21,4 +24,21 @@ def index(request):
     # Startseite
     ausgaben = Ausgabe.objects
 
-    return render(request, 'libertas/index.html', {'ausgaben': ausgaben})
+    return render(request, 'libertas/index.html', {'menu': 'ausgaben', 'ausgaben': ausgaben})
+
+
+def redeem(request):
+    if request.method == 'POST':
+        form = RedeemForm(request.POST)
+        if form.is_valid():
+            token = form.cleaned_data['token'].upper()
+            token = Token.objects.get(token=token)
+            token.user = User.objects.get(username=request.user)
+            token.redeemed = datetime.now()
+            token.save()
+            messages.success(request, 'Du hast jetzt Zugriff auf die Ausgabe <pre>%s</pre>.' % token.ausgabe.name)
+            return redirect('index')
+    else:
+        form = RedeemForm()
+
+    return render(request, 'libertas/redeem.html', {'menu': 'user-redeem', 'form': form})

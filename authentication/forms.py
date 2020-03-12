@@ -15,8 +15,7 @@ correct_username = RegexValidator(
 username_form = forms.CharField(
     label='E-Mail-Adresse',
     widget=forms.TextInput(
-        attrs={'class': 'email',
-               'style': 'text-transform:lowercase;',
+        attrs={'style': 'text-transform:lowercase;',
                'placeholder': 'vorname.nachname',
                'autofocus': True
                }),
@@ -42,7 +41,9 @@ class SignInForm(forms.Form):
     username = username_form
     password = forms.CharField(
         label='Passwort',
-        widget=forms.PasswordInput())
+        widget=forms.PasswordInput(
+            attrs={'class': 'form-control'}
+        ))
 
     def clean(self):
         cd = self.cleaned_data
@@ -51,7 +52,7 @@ class SignInForm(forms.Form):
         # Fehlermeldung wenn Authentifizierung fehlgeschlagen
         if user is None:
             self.add_error(
-                None,
+                'username',
                 'Der Account existiert nicht oder das Passwort ist falsch!'
             )
         # Fehlermeldung wenn Account deaktiviert

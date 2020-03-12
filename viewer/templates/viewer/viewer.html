@@ -1,6 +1,7 @@
 {% extends 'libertas/base.html' %}
 
 {% load static %}
+{% load compress %}
 
 {% block title %}{{ pdf_name }} | Libertas{% endblock %}
 
@@ -8,7 +9,9 @@
 
 {% block header %}
 
-<link rel="stylesheet" href="{% static 'viewer/web/viewer.css' %}">
+{% compress css %}
+<link type="text/x-scss" href="{% static 'viewer/web/viewer.scss' %}" rel="stylesheet" media="screen">
+{% endcompress %}
 
 <style type="text/css" media="print">
   body {
@@ -22,7 +25,8 @@
   }
 
   body {
-    height: calc(100% - 50px) !important;
+    height: calc(100% - 56px) !important;
+    padding-top: 56px !important;
   }
 </style>
 
@@ -87,6 +91,24 @@
 {% endblock %}
 
 {% block body %}
+<header>
+  <nav class="navbar navbar-expand fixed-top navbar-dark bg-gradient-primary px-2"
+    style="box-shadow: 0px -8px 15px 8px #727272;">
+    <a class="navbar-brand p-0 mr-2">
+      <img src="{% static 'libertas/img/logo.png' %}" height="38" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <span class="navbar-text mx-auto text-light text-truncate">
+      {{ pdf_name }}
+    </span>
+    <a class="btn btn-outline-light ml-2" href="{% url 'index' %}" role="button">Schließen</a>
+  </nav>
+</header>
+
+
 
 <div id="outerContainer">
 
@@ -494,5 +516,4 @@
 
 </div> <!-- outerContainer -->
 <div id="printContainer"></div>
-
 {% endblock %}

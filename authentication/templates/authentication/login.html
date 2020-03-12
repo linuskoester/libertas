@@ -1,15 +1,15 @@
 {% extends 'libertas/base.html' %}
 
-{% block title %}Anmelden | Libertas{% endblock %}
+{% block title %}Anmelden{% endblock %}
 
 {% block main %}
 
-<div class="form centered">
-    <h1>Anmelden</h1>
-    <form method="post">
+<div class="mx-auto mt-4" style="width: 340px;">
+    <form method="post" class="needs-validation" novalidate>
+        <h1 class="h2 mb-4 text-center">Anmelden</h1>
         {% include "libertas/form.html" %}
-        <button type="submit">Anmelden</button>
-        <button onclick="window.location='{% url 'reset' %}'">Passwort vergessen?</button>
+        <a class="btn btn-secondary btn-block mt-4" href="{% url 'reset' %}">Passwort vergessen?</a>
+        <button class="btn btn-primary btn-block mt-2" type="submit">Anmelden</button>
     </form>
 </div>
 

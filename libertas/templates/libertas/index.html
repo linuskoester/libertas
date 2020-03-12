@@ -1,15 +1,16 @@
 {% extends 'libertas/base.html' %}
 
-{% block title %}Libertas{% endblock %}
+{% block title %}Ausgaben{% endblock %}
 
 {% block main %}
 
 {% if user.is_authenticated %}
 <h1>Hallo {{ user.username }}!</h1>
-<p>Du bist angemeldet und solltest in diesem Beta-Test Zugriff auf alle Ausgaben haben.</p>
+{% lorem 1 p random %}
 {% else %}
 <h1>Hallo!</h1>
-<p>Du bist NICHT angemeldet und solltest in diesem Beta-Test NUR Zugriff auf die Leseproben haben.</p>
+<p>Du bist NICHT angemeldet und solltest NUR Zugriff auf die Leseproben haben.</p>
+{% lorem 1 p random %}
 {% endif %}
 
 <h2>Ausgaben</h2>
