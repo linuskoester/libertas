@@ -5,9 +5,9 @@ from .models import Token
 class RedeemForm(forms.Form):
     token = forms.CharField(label='Token',
                             max_length=12,
-                            min_length=12,
                             widget=forms.TextInput(
-                                attrs={'style': 'text-transform:uppercase;',
+                                attrs={'class': 'token',
+                                       'style': 'text-transform:uppercase;',
                                        'autofocus': True
                                        }
                             ))
