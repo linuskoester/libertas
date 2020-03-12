@@ -24,7 +24,7 @@ def index(request):
     # Startseite
     ausgaben = Ausgabe.objects
 
-    return render(request, 'libertas/index.html', {'ausgaben': ausgaben})
+    return render(request, 'libertas/index.html', {'menu': 'ausgaben', 'ausgaben': ausgaben})
 
 
 def redeem(request):
@@ -41,4 +41,4 @@ def redeem(request):
     else:
         form = RedeemForm()
 
-    return render(request, 'libertas/redeem.html', {'form': form})
+    return render(request, 'libertas/redeem.html', {'menu': 'user-redeem', 'form': form})

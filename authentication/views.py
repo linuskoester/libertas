@@ -252,7 +252,7 @@ def account(request):
         else:
             # Wenn Formular noch nicht ausgefüllt, lade Formular in den Kontext
             form = ChangePasswordForm()
-        return render(request, 'authentication/account.html', {'form': form})
+        return render(request, 'authentication/account.html', {'menu': 'user-account', 'form': form})
     # Wenn Benutzer nicht angemeldet
     else:
         # Leite zur Anmeldeseite weiter
@@ -286,7 +286,7 @@ def account_delete(request):
         else:
             # Wenn Formular noch nicht ausgefüllt, lade Formular in den Kontext
             form = DeleteAccountForm()
-        return render(request, 'authentication/account_delete.html', {'form': form})
+        return render(request, 'authentication/account_delete.html', {'menu': 'user-account', 'form': form})
     # Wenn nicht angemeldet
     else:
         # Leite zur Anmelde-Seite weiter
