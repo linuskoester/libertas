@@ -8,7 +8,7 @@ class AusgabeAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Generell',               {
          'fields': ['name', 'number', 'publish_date']}),
-        ('Dateien', {'fields': ['file', 'leseprobe']}),
+        ('Dateien', {'fields': ['file', 'leseprobe', 'thumbnail']}),
     ]
 
     search_fields = ['name', 'number']

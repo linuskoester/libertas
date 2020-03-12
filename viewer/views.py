@@ -25,6 +25,11 @@ def viewer(request, number, view_type):
             pdf_name = "%s (Leseprobe)" % ausgabe.name
         else:
             raise Http404()
+    elif view_type == "thumbnail":
+        if ausgabe.thumbnail:
+            return FileResponse(ausgabe.thumbnail)
+        else:
+            raise Http404()
     else:
         raise Http404()
 
@@ -39,7 +44,7 @@ def protected_file(request, identifier, view_type):
             return FileResponse(ausgabe.file)
         else:
             raise Http404()
-    if view_type == "1":
+    elif view_type == "1":
         return FileResponse(ausgabe.leseprobe)
     else:
         raise Http404()

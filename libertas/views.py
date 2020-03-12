@@ -24,7 +24,14 @@ def index(request):
     # Startseite
     ausgaben = Ausgabe.objects
 
-    return render(request, 'libertas/index.html', {'menu': 'ausgaben', 'ausgaben': ausgaben})
+    inventory = []
+    if request.user.is_authenticated:
+        user = User.objects.get(username=request.user)
+        for ausgabe in Ausgabe.objects.all():
+            if Token.objects.filter(user=user, ausgabe=ausgabe).exists():
+                inventory.append(ausgabe)
+
+    return render(request, 'libertas/index.html', {'menu': 'ausgaben', 'ausgaben': ausgaben, 'inventory': inventory})
 
 
 def redeem(request):
@@ -36,7 +43,8 @@ def redeem(request):
             token.user = User.objects.get(username=request.user)
             token.redeemed = datetime.now()
             token.save()
-            messages.success(request, 'Du hast jetzt Zugriff auf die Ausgabe <pre>%s</pre>.' % token.ausgabe.name)
+            messages.success(
+                request, 'Du hast jetzt Zugriff auf die Ausgabe <pre>%s</pre>.' % token.ausgabe.name)
             return redirect('index')
     else:
         form = RedeemForm()
