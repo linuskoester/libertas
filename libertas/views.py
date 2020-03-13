@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.admin.models import LogEntry
 from django.contrib.contenttypes.models import ContentType
-from .models import Ausgabe, Token, User
+from .models import Ausgabe, Code, User
 from .forms import RedeemForm
 from datetime import datetime
 from django.contrib import messages
@@ -24,19 +24,27 @@ def index(request):
     # Startseite
     ausgaben = Ausgabe.objects
 
-    return render(request, 'libertas/index.html', {'menu': 'ausgaben', 'ausgaben': ausgaben})
+    inventory = []
+    if request.user.is_authenticated:
+        user = User.objects.get(username=request.user)
+        for ausgabe in Ausgabe.objects.all():
+            if Code.objects.filter(user=user, ausgabe=ausgabe).exists():
+                inventory.append(ausgabe)
+
+    return render(request, 'libertas/index.html', {'menu': 'ausgaben', 'ausgaben': ausgaben, 'inventory': inventory})
 
 
 def redeem(request):
     if request.method == 'POST':
         form = RedeemForm(request.POST)
         if form.is_valid():
-            token = form.cleaned_data['token'].upper()
-            token = Token.objects.get(token=token)
-            token.user = User.objects.get(username=request.user)
-            token.redeemed = datetime.now()
-            token.save()
-            messages.success(request, 'Du hast jetzt Zugriff auf die Ausgabe <pre>%s</pre>.' % token.ausgabe.name)
+            code = form.cleaned_data['code'].upper()
+            code = Code.objects.get(code=code)
+            code.user = User.objects.get(username=request.user)
+            code.redeemed = datetime.now()
+            code.save()
+            messages.success(
+                request, 'Du hast jetzt Zugriff auf die Ausgabe <code>%s</code>.' % code.ausgabe.name)
             return redirect('index')
     else:
         form = RedeemForm()

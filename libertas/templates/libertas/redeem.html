@@ -1,12 +1,12 @@
 {% extends 'libertas/base.html' %}
 
-{% block title %}Token einlösen{% endblock %}
+{% block title %}Code einlösen{% endblock %}
 
 {% block main %}
 
 <div class="mx-auto mt-4" style="width: 340px;">
     <form method="post" class="needs-validation" novalidate>
-        <h1 class="h2 mb-4 text-center">Token einlösen</h1>
+        <h1 class="h2 mb-4 text-center">Code einlösen</h1>
         {% include "libertas/form.html" %}
         <button class="btn btn-primary btn-block mt-2" type="submit">Einlösen</button>
     </form>
@@ -15,7 +15,7 @@
 <script>
     // Disable Space
     $(function () {
-        $('.token').keypress(function (e) {
+        $('.code').keypress(function (e) {
             if (e.which == 32) {
                 return false;
             }

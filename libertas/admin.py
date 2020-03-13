@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ausgabe, Token
+from .models import Ausgabe, Code
 
 # Register your models here.
 
@@ -8,7 +8,7 @@ class AusgabeAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Generell',               {
          'fields': ['name', 'number', 'publish_date']}),
-        ('Dateien', {'fields': ['file', 'leseprobe']}),
+        ('Dateien', {'fields': ['file', 'leseprobe', 'thumbnail']}),
     ]
 
     search_fields = ['name', 'number']
@@ -18,21 +18,21 @@ class AusgabeAdmin(admin.ModelAdmin):
     ordering = ['-number']
 
 
-class TokenAdmin(admin.ModelAdmin):
+class CodeAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,       {'fields': ['token', 'creation', 'ausgabe']}),
+        (None,       {'fields': ['code', 'creation', 'ausgabe']}),
         ('Einlösung', {'fields': ['user', 'redeemed']})
     ]
 
-    search_fields = ['token', 'user__username']
+    search_fields = ['code', 'user__username']
     autocomplete_fields = ('ausgabe', 'user')
-    list_display = ('censored_token', 'ausgabe', 'creation', 'user', 'redeemed')
-    readonly_fields = ['token', 'creation']
+    list_display = ('censored_code', 'ausgabe', 'creation', 'user', 'redeemed')
+    readonly_fields = ['code', 'creation']
 
-    def censored_token(self, obj):
-        return "%s****" % (obj.token[:-4])
-    censored_token.short_description = 'Token'
+    def censored_code(self, obj):
+        return "%s****" % (obj.code[:-4])
+    censored_code.short_description = 'Code'
 
 
 admin.site.register(Ausgabe, AusgabeAdmin)
-admin.site.register(Token, TokenAdmin)
+admin.site.register(Code, CodeAdmin)
