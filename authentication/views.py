@@ -282,7 +282,7 @@ def account_delete(request):
                     # Lösche Benutzer
                     user.delete()
                     # Zeige Bestätigungsnachricht und leite zur Startseite weiter
-                    messages.info(
+                    messages.warning(
                         request, 'Dein Account wurde erfolgreich gelöscht.')
                     return redirect('index')
                 # Wenn Authentifizierung fehlgeschlagen
