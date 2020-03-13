@@ -15,7 +15,8 @@ correct_username = RegexValidator(
 username_form = forms.CharField(
     label='E-Mail-Adresse',
     widget=forms.TextInput(
-        attrs={'style': 'text-transform:lowercase;',
+        attrs={'class': 'email',
+               'style': 'text-transform:lowercase;',
                'placeholder': 'vorname.nachname',
                'autofocus': True
                }),
@@ -73,7 +74,20 @@ class SignInForm(forms.Form):
 
 
 class SignUpForm(forms.Form):
-    username = username_form
+    username = forms.CharField(
+        label='E-Mail-Adresse',
+        help_text="""Die digitale Version von TheHaps ist zurzeit ausschließlich für
+                     Schülerinnen und Schüler, sowie Lehrkräfte der Halepaghen-Schule
+                     verfügbar. Deswegen wird eine gültige IServ-E-Mail-Adresse benötigt.""",
+        widget=forms.TextInput(
+            attrs={'class': 'email',
+                   'style': 'text-transform:lowercase;',
+                   'placeholder': 'vorname.nachname',
+                   'autofocus': True
+                   }),
+        max_length=32,
+        validators=[correct_username]
+    )
     password = forms.CharField(
         label='Passwort',
         help_text="""Dein Passwort...<ul>
@@ -149,7 +163,7 @@ class SetPasswordForm(forms.Form):
 class ChangePasswordForm(forms.Form):
     password_old = forms.CharField(
         label='Aktuelles Passwort',
-        widget=forms.PasswordInput())
+        widget=forms.PasswordInput(attrs={'autofocus': True}))
     password = forms.CharField(
         label='Neues Passwort',
         help_text="""Dein neues Passwort...<ul>
@@ -180,4 +194,9 @@ class DeleteAccountForm(forms.Form):
         help_text='Gib dein aktuelles Passwort ein, um zu bestätigen, dass du deinen Account löschen möchtest.',
         widget=forms.PasswordInput(attrs={'autofocus': True}))
     confirm = forms.BooleanField(
-        label='Ich bestätige, dass ich meinen Libertas-Account permanent löschen möchte.')
+        label="""Ich bin damit einverstanden, dass ich permanent den Zugriff
+                 auf alle von mir erworbenen und bezahlten Ausgaben verliere.""",
+        help_text='Du hast <b>keinen</b> Anspruch auf Ersatz, solltest du deinen Account aus Versehen löschen.')
+    confirm2 = forms.BooleanField(
+        label="""Ich möchte meinen Account permanent löschen. Diese Aktion kann
+                 nicht rückgängig gemacht werden.""")

@@ -24,6 +24,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/02dbeb23db.js" crossorigin="anonymous"></script>
 
     {% block header %}{% endblock %}
 </head>
@@ -66,7 +67,7 @@
                             <a class="dropdown-item" href="{% url 'admin:index' %}">Administration</a>
                             <div class="dropdown-divider"></div>
                             {% endif %}
-                            <a class="dropdown-item {% if menu == "user-account" %}active{% endif %}"
+                            <a class="dropdown-item {% if "user-account-" in menu %}active{% endif %}"
                                 href="{% url 'account' %}">Dein Acccount</a>
                             <a class="dropdown-item" href="{% url 'signout' %}">Abmelden</a>
                         </div>
@@ -110,11 +111,21 @@
         </div>
     </main>
 
-    <footer class="footer mt-auto py-3 bg-secondary p-3">
-        <div class="container text-center">
-            <a class="text-muted m-2" href="#">Impressum</a>
-            <a class="text-muted m-2" href="#">Datenschutz</a>
-            <a class="text-muted m-2" href="#">Kontakt</a>
+    <footer class="footer mt-auto pt-4 bg-secondary row mx-0 justify-content-sm-center pl-3 pl-sm-0"
+        style="box-shadow: inset 0px 10px 15px -10px #afafaf;">
+        <div class="col-sm-3 col-xl-2">
+            <ul class="list-unstyled">
+                <li><a href="#" class="text-muted">Impressum</a></li>
+                <li><a href="#" class="text-muted">Datenschutz</a></li>
+                <li><a href="#" class="text-muted">Kontakt</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-3 col-xl-2">
+            <ul class="list-unstyled">
+                <li class="text-muted"><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/thehaps.de/" class="text-muted">Instagram</a></li>
+                <li class="text-muted"><i class="fab fa-snapchat-ghost"></i> <a href="https://www.snapchat.com/add/thehaps.de" class="text-muted">Snapchat</a></li>
+                <li class="text-muted"><i class="fab fa-github"></i> <a href="https://github.com/the-haps" class="text-muted">GitHub</a></li>
+            </ul>
         </div>
     </footer>
     {% endblock %}

@@ -7,12 +7,12 @@
 <style>
     .card .thumbnail-gray {
         filter: grayscale(100%);
-        transition: filter .3s;
+        transition: filter .2s;
     }
 
     .card:hover .thumbnail-gray {
         filter: grayscale(0%);
-        transition: filter .3s;
+        transition: filter .2s;
     }
 </style>
 
@@ -32,11 +32,11 @@
                 <a href="{% url 'viewer' ausgabe.number 'read' %}"
                     class="btn btn-primary btn-block">Lesen</a>
                 {% else %}
+                <a href="{% url 'redeem' %}" class="btn btn-primary btn-block">Code einlösen</a>
                 {% if ausgabe.leseprobe %}
                 <a href="{% url 'viewer' ausgabe.number 'leseprobe' %}"
-                    class="btn btn-primary btn-block">Leseprobe</a>
+                    class="btn btn-secondary btn-block">Leseprobe</a>
                 {% endif %}
-                <a href="{% url 'redeem' %}" class="btn btn-secondary btn-block">Code einlösen</a>
                 {% endif %}
                 <p class="card-text text-center text-muted mt-3">{{ ausgabe.name }}</p>
             </div>
