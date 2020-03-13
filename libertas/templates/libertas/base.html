@@ -60,7 +60,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item {% if menu == "user-redeem" %}active{% endif %}"
-                                href="{% url 'redeem' %}">Token einlösen...</a>
+                                href="{% url 'redeem' %}">Code einlösen...</a>
                             <div class="dropdown-divider"></div>
                             {% if user.is_staff %}
                             <a class="dropdown-item" href="{% url 'admin:index' %}">Administration</a>
