@@ -44,7 +44,7 @@ def redeem(request):
             token.redeemed = datetime.now()
             token.save()
             messages.success(
-                request, 'Du hast jetzt Zugriff auf die Ausgabe <pre>%s</pre>.' % token.ausgabe.name)
+                request, 'Du hast jetzt Zugriff auf die Ausgabe <code>%s</code>.' % token.ausgabe.name)
             return redirect('index')
     else:
         form = RedeemForm()

@@ -4,23 +4,37 @@
 
 {% block main %}
 
+<style>
+    .card .thumbnail-gray {
+        filter: grayscale(100%);
+        transition: filter .3s;
+    }
+
+    .card:hover .thumbnail-gray {
+        filter: grayscale(0%);
+        transition: filter .3s;
+    }
+</style>
+
 <h1>Ausgaben</h1>
 
 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 mt-4">
     {% for ausgabe in ausgaben.all %}
     <div class="col mb-4">
         <div class="card">
-            <img src="{% url 'viewer' ausgabe.number 'thumbnail' %}" class="card-img-top"
-                {% if user.is_authenticated and ausgabe not in inventory %}style="filter: grayscale(100%);" {% endif %}>
+            <img src="{% url 'viewer' ausgabe.number 'thumbnail' %}"
+                class="card-img-top {% if user.is_authenticated and ausgabe not in inventory %}thumbnail-gray{% endif %}">
             <div class="card-footer">
                 {% if not user.is_authenticated %}
                 <a href="{% url 'signin' %}" class="btn btn-primary btn-block" data-toggle="tooltip"
                     data-placement="bottom" title="Du musst dich zuerst anmelden, um diese Ausgabe zu lesen.">Lesen</a>
                 {% elif ausgabe in inventory %}
-                <a href="{% url 'viewer' ausgabe.number 'read' %}" class="btn btn-primary btn-block">Lesen</a>
+                <a href="{% url 'viewer' ausgabe.number 'read' %}"
+                    class="btn btn-primary btn-block">Lesen</a>
                 {% else %}
                 {% if ausgabe.leseprobe %}
-                <a href="{% url 'viewer' ausgabe.number 'leseprobe' %}" class="btn btn-primary btn-block">Leseprobe</a>
+                <a href="{% url 'viewer' ausgabe.number 'leseprobe' %}"
+                    class="btn btn-primary btn-block">Leseprobe</a>
                 {% endif %}
                 <a href="{% url 'redeem' %}" class="btn btn-secondary btn-block">Code einlösen</a>
                 {% endif %}
