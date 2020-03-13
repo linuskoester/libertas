@@ -149,7 +149,7 @@ class SetPasswordForm(forms.Form):
 class ChangePasswordForm(forms.Form):
     password_old = forms.CharField(
         label='Aktuelles Passwort',
-        widget=forms.PasswordInput())
+        widget=forms.PasswordInput(attrs={'autofocus': True}))
     password = forms.CharField(
         label='Neues Passwort',
         help_text="""Dein neues Passwort...<ul>
@@ -180,4 +180,9 @@ class DeleteAccountForm(forms.Form):
         help_text='Gib dein aktuelles Passwort ein, um zu bestätigen, dass du deinen Account löschen möchtest.',
         widget=forms.PasswordInput(attrs={'autofocus': True}))
     confirm = forms.BooleanField(
-        label='Ich bestätige, dass ich meinen Libertas-Account permanent löschen möchte.')
+        label="""Ich bin damit einverstanden, dass ich permanent den Zugriff
+                 auf alle von mir erworbenen und bezahlten Ausgaben verliere.""",
+        help_text='Du hast <b>keinen</b> Anspruch auf Ersatz, solltest du deinen Account aus Versehen löschen.')
+    confirm2 = forms.BooleanField(
+        label="""Ich möchte meinen Account permanent löschen. Diese Aktion kann
+                 nicht rückgängig gemacht werden.""")

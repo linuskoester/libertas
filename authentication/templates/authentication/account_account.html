@@ -1,0 +1,10 @@
+{% extends 'authentication/account.html' %}
+
+{% block account %}
+<h2>Allgemeine Informationen</h2>
+<p>
+    {% if user.email %}<strong>E-Mail-Adresse:</strong> {{ user.email }}<br>{% endif %}
+    <strong>Anmeldename:</strong> {{ user.username }}<br>
+    <strong>Registriert am:</strong> {{ user.date_joined|date:"SHORT_DATE_FORMAT" }}
+</p>
+{% endblock %}

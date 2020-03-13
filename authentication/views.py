@@ -224,7 +224,16 @@ def reset_confirm(request, uidb64, token):
             return redirect('index')
 
 
-def account(request):
+def account_info(request):
+    # Falls Benutzer angemeldet
+    if request.user.is_authenticated:
+        return render(request, 'authentication/account_account.html', {'menu': 'user-account-account'})
+    else:
+        # Leite zur Anmeldeseite weiter
+        return redirect('signin')
+
+
+def account_password(request):
     # Falls Benutzer angemeldet
     if request.user.is_authenticated:
         # Wenn Passwort-Zurücksetz-Formular ausgefüllt
@@ -252,7 +261,7 @@ def account(request):
         else:
             # Wenn Formular noch nicht ausgefüllt, lade Formular in den Kontext
             form = ChangePasswordForm()
-        return render(request, 'authentication/account.html', {'menu': 'user-account', 'form': form})
+        return render(request, 'authentication/account_password.html', {'menu': 'user-account-password', 'form': form})
     # Wenn Benutzer nicht angemeldet
     else:
         # Leite zur Anmeldeseite weiter
@@ -286,7 +295,7 @@ def account_delete(request):
         else:
             # Wenn Formular noch nicht ausgefüllt, lade Formular in den Kontext
             form = DeleteAccountForm()
-        return render(request, 'authentication/account_delete.html', {'menu': 'user-account', 'form': form})
+        return render(request, 'authentication/account_delete.html', {'menu': 'user-account-delete', 'form': form})
     # Wenn nicht angemeldet
     else:
         # Leite zur Anmelde-Seite weiter

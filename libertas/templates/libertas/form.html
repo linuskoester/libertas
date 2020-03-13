@@ -6,17 +6,17 @@
 {% endfor %}
 {% for field in form %}
 {% if field.field.widget.input_type == "checkbox" %}
-<div class="form-group">
+<div class="form-group" style="max-width: 510px;">
     <div class="custom-control custom-checkbox mb-3">
         <input
             type="checkbox"
-            class="custom-control-input {% if field.errors %}is-invalid{% endif %}
+            class="custom-control-input d-flex {% if field.errors %}is-invalid{% endif %}
                 {% for name, value in field.field.widget.attrs.items %}
                     {% if name == "class" %}
                         {{ value|stringformat:'s' }}
                     {% endif %}
                 {% endfor %}"
-            style="max-width: 340px;
+            style="
                 {% for name, value in field.field.widget.attrs.items %}
                     {% if name == "style" %}
                         {{ value|stringformat:'s' }}
@@ -54,20 +54,20 @@
     </div>
 </div>
 {% else %}
-<div class="form-group">
+<div class="form-group" style="max-width: 510px;">
     {{ field.label_tag }}
     {% if field == form.username %}
     <div class="input-group">
     {% endif %}
         <input
             type="{{ field.field.widget.input_type }}"
-            class="form-control {% if field.errors %}is-invalid{% endif %}
+            class="form-control d-flex {% if field.errors %}is-invalid{% endif %}
                 {% for name, value in field.field.widget.attrs.items %}
                     {% if name == "class" %}
                         {{ value|stringformat:'s' }}
                     {% endif %}
                 {% endfor %}"
-            style="max-width: 340px;
+            style="
                 {% for name, value in field.field.widget.attrs.items %}
                     {% if name == "style" %}
                         {{ value|stringformat:'s' }}
