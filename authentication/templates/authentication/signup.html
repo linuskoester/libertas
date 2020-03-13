@@ -12,14 +12,4 @@
     </form>
 </div>
 
-<script>
-    // Disable @-Symbol
-    $(function () {
-        $('.email').keypress(function (e) {
-            if (e.which == 64) {
-                return false;
-            }
-        });
-    });
-</script>
 {% endblock %}

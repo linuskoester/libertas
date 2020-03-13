@@ -130,3 +130,23 @@
         }, false);
     })();
 </script>
+<script>
+    // Disable @-Symbol
+    $(function () {
+        $('.email').keypress(function (e) {
+            if (e.which == 64) {
+                return false;
+            }
+        });
+    });
+</script>
+<script>
+    // Disable Space
+    $(function () {
+        $('.code').keypress(function (e) {
+            if (e.which == 32) {
+                return false;
+            }
+        });
+    });
+</script>

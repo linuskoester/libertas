@@ -15,7 +15,8 @@ correct_username = RegexValidator(
 username_form = forms.CharField(
     label='E-Mail-Adresse',
     widget=forms.TextInput(
-        attrs={'style': 'text-transform:lowercase;',
+        attrs={'class': 'email',
+               'style': 'text-transform:lowercase;',
                'placeholder': 'vorname.nachname',
                'autofocus': True
                }),
@@ -73,7 +74,20 @@ class SignInForm(forms.Form):
 
 
 class SignUpForm(forms.Form):
-    username = username_form
+    username = forms.CharField(
+        label='E-Mail-Adresse',
+        help_text="""Die digitale Version von TheHaps ist zurzeit ausschließlich für
+                     Schülerinnen und Schüler, sowie Lehrkräfte der Halepaghen-Schule
+                     verfügbar. Deswegen wird eine gültige IServ-E-Mail-Adresse benötigt.""",
+        widget=forms.TextInput(
+            attrs={'class': 'email',
+                   'style': 'text-transform:lowercase;',
+                   'placeholder': 'vorname.nachname',
+                   'autofocus': True
+                   }),
+        max_length=32,
+        validators=[correct_username]
+    )
     password = forms.CharField(
         label='Passwort',
         help_text="""Dein Passwort...<ul>
