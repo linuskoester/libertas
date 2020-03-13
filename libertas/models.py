@@ -9,7 +9,7 @@ def generate_id(length=16):
     return ''.join(random.choice(pool) for i in range(length))
 
 
-def generate_token(length=12):
+def generate_code(length=12):
     pool = string.ascii_uppercase + string.digits + string.digits
     return ''.join(random.choice(pool) for i in range(length))
 
@@ -32,8 +32,8 @@ class Ausgabe(models.Model):
         verbose_name_plural = "Ausgaben"
 
 
-class Token(models.Model):
-    token = models.CharField(
+class Code(models.Model):
+    code = models.CharField(
         max_length=12, primary_key=True)
     creation = models.DateTimeField('Erstellung', auto_now=True)
     ausgabe = models.ForeignKey(
@@ -44,13 +44,13 @@ class Token(models.Model):
         'Zeitpunkt', default=None, blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        if not self.token:
-            self.token = generate_token()
-        super(Token, self).save(*args, **kwargs)
+        if not self.code:
+            self.code = generate_code()
+        super(Code, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "%s****" % (self.token[:-4])
+        return "%s****" % (self.code[:-4])
 
     class Meta:
-        verbose_name = "Token"
-        verbose_name_plural = "Tokens"
+        verbose_name = "Code"
+        verbose_name_plural = "Codes"

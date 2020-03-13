@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),  # Startseite
-    path('redeem', views.redeem, name='redeem'),  # Token einlösen
+    path('redeem', views.redeem, name='redeem'),  # Code einlösen
 ]

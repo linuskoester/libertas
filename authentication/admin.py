@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import Profile
-from libertas.models import Token
+from libertas.models import Code
 from django.contrib.auth.models import User
 
 
@@ -13,8 +13,8 @@ email_confirmed.boolean = True
 email_confirmed.short_description = 'Bestätigt'
 
 
-class TokenInline(admin.TabularInline):
-    model = Token
+class CodeInLine(admin.TabularInline):
+    model = Code
     show_change_link = True
     verbose_name_plural = 'Inventar'
     can_delete = False
@@ -33,7 +33,7 @@ class UserProfileInline(admin.StackedInline):
 
 
 class AccountsUserAdmin(UserAdmin):
-    inlines = [UserProfileInline, TokenInline]
+    inlines = [UserProfileInline, CodeInLine]
     list_display = ('username', 'email', 'is_active', email_confirmed)
 
 
