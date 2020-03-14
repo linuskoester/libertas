@@ -20,8 +20,7 @@ def log(user, flag, message):
         change_message=message)
 
 
-def index(request):
-    # Startseite
+def ausgaben(request):
     ausgaben = Ausgabe.objects
 
     inventory = []
@@ -31,7 +30,7 @@ def index(request):
             if Code.objects.filter(user=user, ausgabe=ausgabe).exists():
                 inventory.append(ausgabe)
 
-    return render(request, 'libertas/index.html', {'menu': 'ausgaben', 'ausgaben': ausgaben, 'inventory': inventory})
+    return render(request, 'libertas/ausgaben.html', {'menu': 'ausgaben', 'ausgaben': ausgaben, 'inventory': inventory})
 
 
 def redeem(request):
