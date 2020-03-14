@@ -19,6 +19,15 @@
 <h1>Ausgaben</h1>
 
 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 mt-4">
+    <div class="col mb-4">
+        <div class="card">
+            <img src="/static/libertas/img/werbung/Werbung-1.png" class="card-img-top">
+            <div class="card-footer">
+                <a href="#" class="btn btn-secondary btn-block">Mehr Erfahren</a>
+                <p class="card-text text-center text-muted mt-3">Werbung</p>
+            </div>
+        </div>
+    </div>
     {% for ausgabe in ausgaben.all %}
     <div class="col mb-4">
         <div class="card">
@@ -29,8 +38,7 @@
                 <a href="{% url 'signin' %}" class="btn btn-primary btn-block" data-toggle="tooltip"
                     data-placement="bottom" title="Du musst dich zuerst anmelden, um diese Ausgabe zu lesen.">Lesen</a>
                 {% elif ausgabe in inventory %}
-                <a href="{% url 'viewer' ausgabe.number 'read' %}"
-                    class="btn btn-primary btn-block">Lesen</a>
+                <a href="{% url 'viewer' ausgabe.number 'read' %}" class="btn btn-primary btn-block">Lesen</a>
                 {% else %}
                 <a href="{% url 'redeem' %}" class="btn btn-primary btn-block">Code einlösen</a>
                 {% if ausgabe.leseprobe %}
