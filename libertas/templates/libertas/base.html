@@ -83,7 +83,7 @@
         </nav>
     </header>
 
-    <main role="main" class="flex-shrink-0 pb-5 mb-4" style="padding-top: 80px;">
+    <main role="main" class="flex-shrink-0 pb-5 mb-2" style="padding-top: 80px;">
         <div class="container mt-3">
             {% if messages %}
             {% for message in messages %}
@@ -111,7 +111,16 @@
         </div>
     </main>
 
-    <footer class="footer mt-auto pt-4 bg-secondary mx-0 d-sm-flex justify-content-center pl-4 pl-sm-0"
+    <div class="mt-auto mb-3 mx-auto">
+        <p class="text-muted mb-1">Werbung</p>
+        <div class="d-flex flex-column flex-md-row">
+            <img src="/static/libertas/img/werbung/Werbung-2.png" style="max-width: 300px;"
+                class="d-block rounded img-fluid mx-auto mx-md-0 mr-md-2">
+            <img src="/static/libertas/img/werbung/Werbung-3.png" style="max-width: 300px;"
+                class="d-block rounded img-fluid mx-auto mx-md-0 mt-2 mt-md-0">
+        </div>
+    </div>
+    <footer class="footer pt-4 bg-secondary mx-0 d-sm-flex justify-content-center pl-4 pl-sm-0"
         style="box-shadow: inset 0px 10px 15px -10px #afafaf;">
         <div class="d-sm-inline-flex flex-column flex-sm-row mr-5">
             <ul class="list-unstyled">
@@ -122,9 +131,12 @@
         </div>
         <div class="d-sm-inline-flex flex-column flex-sm-row">
             <ul class="list-unstyled">
-                <li class="text-muted"><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/thehaps.de/" class="text-muted">Instagram</a></li>
-                <li class="text-muted"><i class="fab fa-snapchat-ghost"></i> <a href="https://www.snapchat.com/add/thehaps.de" class="text-muted">Snapchat</a></li>
-                <li class="text-muted"><i class="fab fa-github"></i> <a href="https://github.com/the-haps" class="text-muted">GitHub</a></li>
+                <li class="text-muted"><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/thehaps.de/"
+                        class="text-muted">Instagram</a></li>
+                <li class="text-muted"><i class="fab fa-snapchat-ghost"></i> <a
+                        href="https://www.snapchat.com/add/thehaps.de" class="text-muted">Snapchat</a></li>
+                <li class="text-muted"><i class="fab fa-github"></i> <a href="https://github.com/the-haps"
+                        class="text-muted">GitHub</a></li>
             </ul>
         </div>
     </footer>
