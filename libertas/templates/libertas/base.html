@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 
-<html class="h-100">
+<html class="h-100" lang="de">
 
 <head>
     <meta charset="utf-8">
@@ -14,6 +14,25 @@
     {% endcompress %}
 
     <title>{% block title %}{% endblock %} | TheHaps</title>
+
+    <!-- Social Media Meta Stuff -->
+    <meta name="description" content="Bissig, Witzig, Modern: Das ist die Schülerzeitung der Halepaghen-Schule (HPS).">
+    <meta name="twitter:title" content="TheHaps">
+    <meta name="twitter:image" content="{% static 'libertas/img/meta.png' %}">
+    <meta name="twitter:description" content="Bissig, Witzig, Modern: Die Schülerzeitung der HPS.">
+    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="{% static 'libertas/img/meta.png' %}">
+    <meta property="og:title" content="TheHaps">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Bissig, Witzig, Modern: Die Schülerzeitung der HPS.">
+
+    <meta name="theme-color" content="#1284FF">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'libertas/favicon/small.png' %}">
+    <link rel="apple-touch-icon" type="image/png" sizes="192x192" href="{% static 'libertas/favicon/small.png' %}">
+    <link rel="icon" type="image/png" sizes="360x360" href="{% static 'libertas/favicon/medium.png' %}">
+    <link rel="apple-touch-icon" type="image/png" sizes="360x360" href="{% static 'libertas/favicon/medium.png' %}">
+    <link rel="icon" type="image/png" sizes="2000x2000" href="{% static 'libertas/favicon/large.png' %}">
+    <link rel="apple-touch-icon" type="image/png" sizes="2000x2000" href="{% static 'libertas/favicon/large.png' %}">
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -35,7 +54,7 @@
         <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-gradient-primary p-md-2"
             style="box-shadow: 0px -8px 15px 8px #727272;">
             <a class="navbar-brand p-0 mr-2">
-                <img src="{% static 'libertas/img/logo.png' %}" height="38" alt="">
+                <img src="{% static 'libertas/img/logo.png' %}" height="34" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,9 +133,9 @@
     <div class="mt-auto mb-3 mx-auto">
         <p class="text-muted mb-1">Werbung</p>
         <div class="d-flex flex-column flex-md-row">
-            <img src="/static/libertas/img/werbung/Werbung-2.png" style="max-width: 300px;"
+            <img src="/static/libertas/img/werbung/Werbebanner.png" style="max-width: 300px;"
                 class="d-block rounded img-fluid mx-auto mx-md-0 mr-md-2">
-            <img src="/static/libertas/img/werbung/Werbung-3.png" style="max-width: 300px;"
+            <img src="/static/libertas/img/werbung/Werbebanner.png" style="max-width: 300px;"
                 class="d-block rounded img-fluid mx-auto mx-md-0 mt-2 mt-md-0">
         </div>
     </div>
