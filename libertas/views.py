@@ -1,10 +1,13 @@
-from django.shortcuts import redirect, render
-from django.contrib.admin.models import LogEntry
-from django.contrib.contenttypes.models import ContentType
-from .models import Ausgabe, Code, User
-from .forms import RedeemForm
 from datetime import datetime
+
 from django.contrib import messages
+from django.contrib.admin.models import CHANGE, LogEntry
+from django.contrib.contenttypes.models import ContentType
+from django.shortcuts import redirect, render
+
+from .forms import RedeemForm
+from .models import Ausgabe, Code, User
+
 # from django.contrib import messages
 
 
@@ -34,12 +37,16 @@ def ausgaben(request):
 
 
 def redeem(request):
+    if not request.user.is_authenticated:
+        return redirect('signin')
     if request.method == 'POST':
         form = RedeemForm(request.POST)
         if form.is_valid():
             code = form.cleaned_data['code'].upper()
             code = Code.objects.get(code=code)
             code.user = User.objects.get(username=request.user)
+            log(request.user, CHANGE, 'Benutzer hat Code %s (%s) eingelöst.' %
+                (code.code, code.ausgabe.name))
             code.redeemed = datetime.now()
             code.save()
             messages.success(

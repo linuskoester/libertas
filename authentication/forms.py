@@ -11,19 +11,6 @@ correct_username = RegexValidator(
     r'^[a-zA-Z.]+$',
     'Deine E-Mail-Adresse kann nur aus Kleinbuchstaben und Punkten bestehen, und keine Umlaute enthalten.')
 
-# Vordefiniertes Feld für den Benutzernamen
-username_form = forms.CharField(
-    label='E-Mail-Adresse',
-    widget=forms.TextInput(
-        attrs={'class': 'email',
-               'style': 'text-transform:lowercase;',
-               'placeholder': 'vorname.nachname',
-               'autofocus': True
-               }),
-    max_length=32,
-    validators=[correct_username]
-)
-
 
 def checkbetaaccess(username, self):
     # Überprüfe ob Beta-Server
@@ -39,7 +26,16 @@ def checkbetaaccess(username, self):
 
 
 class SignInForm(forms.Form):
-    username = username_form
+    username = forms.CharField(
+        label='E-Mail-Adresse',
+        widget=forms.TextInput(
+            attrs={'class': 'email',
+                   'style': 'text-transform:lowercase;',
+                   'placeholder': 'vorname.nachname',
+                   'autofocus': True
+                   }),
+        max_length=32
+    )
     password = forms.CharField(
         label='Passwort',
         widget=forms.PasswordInput(
@@ -120,7 +116,16 @@ class SignUpForm(forms.Form):
 
 
 class ResetForm(forms.Form):
-    username = username_form
+    username = forms.CharField(
+        label='E-Mail-Adresse',
+        widget=forms.TextInput(
+            attrs={'class': 'email',
+                   'style': 'text-transform:lowercase;',
+                   'placeholder': 'vorname.nachname',
+                   'autofocus': True
+                   }),
+        max_length=32
+    )
 
     def clean(self):
         cd = self.cleaned_data
