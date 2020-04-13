@@ -3,12 +3,11 @@ from .models import Code
 
 
 class RedeemForm(forms.Form):
-    code = forms.CharField(label='Code',
+    code = forms.CharField(label='Zugangscode einlösen',
                            max_length=12,
                            widget=forms.TextInput(
                                attrs={'class': 'code',
-                                      'style': 'text-transform:uppercase;',
-                                      'autofocus': True
+                                      'style': 'text-transform:uppercase;'
                                       }
                            ))
 

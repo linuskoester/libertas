@@ -1,8 +1,47 @@
 $secondary: rgb(230, 230, 230);
 $enable-gradients: true;
 
-@import './bootstrap/bootstrap';
+@import "./bootstrap/bootstrap";
 
 .navbar-dark .navbar-nav .nav-link {
     color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-brand:hover {
+    opacity: 0.9;
+}
+
+:target:before {
+    content: "";
+    display: block;
+    padding: 135px 0 0;
+    margin: -135px 0 0;
+}
+
+.bg-yellow {
+    background-color: #ffef35;
+}
+
+#scrollspy {
+    .nav-link {
+        color: $dark;
+    }
+    .nav-link:hover {
+        opacity: 0.8;
+    }
+    .active {
+        background-color: $dark;
+        color: $light;
+        opacity: 1 !important;
+    }
+}
+
+.card .thumbnail-gray {
+    filter: grayscale(100%);
+    transition: filter .2s;
+}
+
+.card:hover .thumbnail-gray {
+    filter: grayscale(0%);
+    transition: filter .15s;
 }
