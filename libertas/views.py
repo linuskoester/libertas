@@ -42,6 +42,14 @@ def podcast(request):
     return render(request, 'libertas/podcast.html', {'menu': 'podcast'})
 
 
+def team(request):
+    return render(request, 'libertas/team.html', {'menu': 'team'})
+
+
+def faq(request):
+    return render(request, 'libertas/faq.html', {'menu': 'faq'})
+
+
 def redeem(request):
     if not request.user.is_authenticated:
         return redirect('signin')

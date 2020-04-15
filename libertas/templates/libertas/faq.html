@@ -1,0 +1,132 @@
+{% extends 'libertas/base.html' %}
+
+{% block title %}Fragen & Antworten{% endblock %}
+
+{% block main %}
+
+<div class="jumbotron m-0 bg-dark text-light shadow"
+    style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
+    <h1 class="display-4">Fragen & Antworten</h1>
+</div>
+
+<nav id="scrollspy" class="navbar navbar-expand bg-light sticky-top rounded-bottom mb-3 shadow border border-secondary"
+    style="top: 56px;">
+    <ul class="nav nav-pills flex-row text-center">
+        <li class="nav-item flex-fill">
+            <a class="nav-link" href="#allgemein">Allgemein</a>
+        </li>
+        <li class="nav-item flex-fill">
+            <a class="nav-link" href="#online">Digitale Ausgabe & Account</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="my-3 w-100 shadow rounded accordion" id="accordion-allgemein">
+    <div class="card bg-gradient-primary p-3">
+        <h4 class="m-0 text-white" id="allgemein">Allgemein</h4>
+    </div>
+    <div class="card">
+        <div class="card-header p-0" id="heading">
+            <h2 class="mb-0">
+                <button class="btn btn-link w-100 h-100 text-left py-3 px-4" type="button" data-toggle="collapse" data-target="#accordion-allgemein-1"
+                    aria-expanded="true" aria-controls="accordion-allgemein-1">
+                    Frage 1
+                </button>
+            </h2>
+        </div>
+
+        <div id="accordion-allgemein-1" class="collapse" aria-labelledby="heading" data-parent="#accordion-allgemein">
+            <div class="card-body">
+                {% lorem 1 %}
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header p-0" id="heading">
+            <h2 class="mb-0">
+                <button class="btn btn-link w-100 h-100 text-left py-3 px-4" type="button" data-toggle="collapse" data-target="#accordion-allgemein-2"
+                    aria-expanded="true" aria-controls="accordion-allgemein-2">
+                    Frage 2
+                </button>
+            </h2>
+        </div>
+
+        <div id="accordion-allgemein-2" class="collapse" aria-labelledby="heading" data-parent="#accordion-allgemein">
+            <div class="card-body">
+                {% lorem 1 %}
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header p-0" id="heading">
+            <h2 class="mb-0">
+                <button class="btn btn-link w-100 h-100 text-left py-3 px-4" type="button" data-toggle="collapse" data-target="#accordion-allgemein-3"
+                    aria-expanded="true" aria-controls="accordion-allgemein-3">
+                    Frage 3
+                </button>
+            </h2>
+        </div>
+
+        <div id="accordion-allgemein-3" class="collapse" aria-labelledby="heading" data-parent="#accordion-allgemein">
+            <div class="card-body">
+                {% lorem 1 %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="my-3 w-100 shadow rounded accordion" id="accordion-online">
+    <div class="card bg-gradient-primary p-3">
+        <h4 class="m-0 text-white" id="online">Online-Ausgabe & Account</h4>
+    </div>
+    <div class="card">
+        <div class="card-header p-0" id="heading">
+            <h2 class="mb-0">
+                <button class="btn btn-link w-100 h-100 text-left py-3 px-4" type="button" data-toggle="collapse" data-target="#accordion-online-1"
+                    aria-expanded="true" aria-controls="accordion-online-1">
+                    Frage 1
+                </button>
+            </h2>
+        </div>
+
+        <div id="accordion-online-1" class="collapse" aria-labelledby="heading" data-parent="#accordion-online">
+            <div class="card-body">
+                {% lorem 1 %}
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header p-0" id="heading">
+            <h2 class="mb-0">
+                <button class="btn btn-link w-100 h-100 text-left py-3 px-4" type="button" data-toggle="collapse" data-target="#accordion-online-2"
+                    aria-expanded="true" aria-controls="accordion-online-2">
+                    Frage 2
+                </button>
+            </h2>
+        </div>
+
+        <div id="accordion-online-2" class="collapse" aria-labelledby="heading" data-parent="#accordion-online">
+            <div class="card-body">
+                {% lorem 1 %}
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header p-0" id="heading">
+            <h2 class="mb-0">
+                <button class="btn btn-link w-100 h-100 text-left py-3 px-4" type="button" data-toggle="collapse" data-target="#accordion-online-3"
+                    aria-expanded="true" aria-controls="accordion-online-3">
+                    Frage 3
+                </button>
+            </h2>
+        </div>
+
+        <div id="accordion-online-3" class="collapse" aria-labelledby="heading" data-parent="#accordion-online">
+            <div class="card-body">
+                {% lorem 1 %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

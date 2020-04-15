@@ -69,7 +69,10 @@
                         <a class="nav-link" href="{% url 'podcast' %}">Podcast</a>
                     </li>
                     <li class="nav-item {% if menu == "team" %}active font-weight-bold{% endif %}">
-                        <a class="nav-link" href="#">Team</a>
+                        <a class="nav-link" href="{% url 'team' %}">Team</a>
+                    </li>
+                    <li class="nav-item {% if menu == "faq" %}active font-weight-bold{% endif %}">
+                        <a class="nav-link" href="{% url 'faq' %}">Fragen & Antworten</a>
                     </li>
                 </ul>
                 <div class="dropdown-divider"></div>
