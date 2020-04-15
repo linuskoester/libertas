@@ -38,6 +38,10 @@ def startseite(request):
                                                         'inventory': inventory})
 
 
+def podcast(request):
+    return render(request, 'libertas/podcast.html', {'menu': 'podcast'})
+
+
 def redeem(request):
     if not request.user.is_authenticated:
         return redirect('signin')
