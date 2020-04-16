@@ -43,11 +43,11 @@ def podcast(request):
 
 
 def team(request):
-    return render(request, 'libertas/team.html', {'menu': 'team'})
+    return render(request, 'libertas/team.html', {'menu': 'more-team'})
 
 
 def faq(request):
-    return render(request, 'libertas/faq.html', {'menu': 'faq'})
+    return render(request, 'libertas/faq.html', {'menu': 'more-faq'})
 
 
 def redeem(request):
