@@ -36,6 +36,20 @@ $enable-gradients: true;
     }
 }
 
+.pagenav {
+    .nav-link {
+        color: $dark;
+    }
+    .nav-link:hover {
+        opacity: 0.8;
+    }
+    .nav-link.active {
+        background-color: $dark;
+        color: $light;
+        opacity: 1 !important;
+    }
+}
+
 .card .thumbnail-gray {
     filter: grayscale(100%);
     transition: filter .2s;

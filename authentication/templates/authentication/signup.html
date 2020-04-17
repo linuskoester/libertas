@@ -4,12 +4,18 @@
 
 {% block main %}
 
-<div class="mx-auto mt-4" style="max-width: 340px;">
-    <form method="post" class="needs-validation" novalidate>
-        <h1 class="h2 mb-4 text-center">Account erstellen</h1>
-        {% include "libertas/form.html" %}
-        <button class="btn btn-primary btn-block mt-2" type="submit">Account erstellen</button>
-    </form>
+<div class="row justify-content-center mt-3">
+    <div class="p-3 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+
+        <p class="text-center">Hast du schon einen Account? <a href="{% url 'signin' %}">Anmelden</a></p>
+        <div class="shadow rounded border border-secondary bg-light p-3">
+            <form method="post" class="needs-validation" novalidate>
+                <h1 class="h2">Account erstellen</h1>
+                {% include "libertas/form.html" %}
+                <button class="btn btn-primary btn-block mt-2" type="submit">Account erstellen</button>
+            </form>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
