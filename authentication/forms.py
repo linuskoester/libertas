@@ -11,19 +11,6 @@ correct_username = RegexValidator(
     r'^[a-zA-Z.]+$',
     'Deine E-Mail-Adresse kann nur aus Kleinbuchstaben und Punkten bestehen, und keine Umlaute enthalten.')
 
-# Vordefiniertes Feld für den Benutzernamen
-username_form = forms.CharField(
-    label='E-Mail-Adresse',
-    widget=forms.TextInput(
-        attrs={'class': 'email',
-               'style': 'text-transform:lowercase;',
-               'placeholder': 'vorname.nachname',
-               'autofocus': True
-               }),
-    max_length=32,
-    validators=[correct_username]
-)
-
 
 def checkbetaaccess(username, self):
     # Überprüfe ob Beta-Server
@@ -39,7 +26,16 @@ def checkbetaaccess(username, self):
 
 
 class SignInForm(forms.Form):
-    username = username_form
+    username = forms.CharField(
+        label='E-Mail-Adresse',
+        widget=forms.TextInput(
+            attrs={'class': 'email',
+                   'style': 'text-transform:lowercase;',
+                   'placeholder': 'vorname.nachname',
+                   'autofocus': True
+                   }),
+        max_length=32
+    )
     password = forms.CharField(
         label='Passwort',
         widget=forms.PasswordInput(
@@ -100,27 +96,41 @@ class SignUpForm(forms.Form):
     password_confirm = forms.CharField(
         label='Passwort bestätigen',
         widget=forms.PasswordInput())
+    confirm1 = forms.BooleanField(
+        label="""Ich bin mit den Nutzungsbedingungen einverstanden und stimme diesen zu.""")
+    confirm2 = forms.BooleanField(
+        label="""Ich bin mit der Datenschutzerkärung einverstanden und stimme dieser zu.""")
 
-    def clean(self):
-        cd = self.cleaned_data
-        # Überprüfe ob Passwörter übereinstimmen
-        if cd.get('password') != cd.get('password_confirm') and cd.get('password') is not None:
-            self.add_error('password_confirm',
-                           'Die Passwörter stimmen nicht überein.')
-        # Überprüfe ob ein Account existiert, dessen E-Mail BESTÄTIGT ist
-        if User.objects.filter(username=cd.get('username')).exists():
-            if User.objects.get(username=cd.get('username')).profile.email_confirmed:
-                self.add_error('username',
-                               """Für diese E-Mail-Adresse existiert bereits ein Account.
+
+def clean(self):
+    cd = self.cleaned_data
+    # Überprüfe ob Passwörter übereinstimmen
+    if cd.get('password') != cd.get('password_confirm') and cd.get('password') is not None:
+        self.add_error('password_confirm',
+                       'Die Passwörter stimmen nicht überein.')
+    # Überprüfe ob ein Account existiert, dessen E-Mail BESTÄTIGT ist
+    if User.objects.filter(username=cd.get('username')).exists():
+        if User.objects.get(username=cd.get('username')).profile.email_confirmed:
+            self.add_error('username',
+                           """Für diese E-Mail-Adresse existiert bereits ein Account.
                                Versuche dich anzumelden.""")
-        # Überprüfe auf Beta-Zugang, nur beim Beta-Server
-        # if bool(int(os.environ['LIBERTAS_BETA'])) and cd.get('username'):
-        checkbetaaccess(cd.get('username'), self)
-        return cd
+    # Überprüfe auf Beta-Zugang, nur beim Beta-Server
+    # if bool(int(os.environ['LIBERTAS_BETA'])) and cd.get('username'):
+    checkbetaaccess(cd.get('username'), self)
+    return cd
 
 
 class ResetForm(forms.Form):
-    username = username_form
+    username = forms.CharField(
+        label='E-Mail-Adresse',
+        widget=forms.TextInput(
+            attrs={'class': 'email',
+                   'style': 'text-transform:lowercase;',
+                   'placeholder': 'vorname.nachname',
+                   'autofocus': True
+                   }),
+        max_length=32
+    )
 
     def clean(self):
         cd = self.cleaned_data

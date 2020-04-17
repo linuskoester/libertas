@@ -1,0 +1,45 @@
+{% extends 'libertas/base.html' %}
+
+{% block title %}Podcast{% endblock %}
+
+{% block main %}
+
+<div class="jumbotron m-0 bg-dark text-light shadow"
+    style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
+    <h1 class="display-4">Podcast</h1>
+</div>
+
+<nav class="navbar navbar-expand bg-light sticky-top rounded-bottom mb-3 shadow border border-secondary"
+    style="top: 56px;">
+    <ul class="navbar-nav">
+        <span class="navbar-text font-weight-bold mr-2 d-none d-sm-block">Jetzt anhören:</span>
+        <li class="nav-item">
+            <a class="nav-link" href="https://open.spotify.com/show/3OmgDOrhoopY4THEFfhKw5?si=2ReOrcdYRh6MNFLSi3WHlA"
+                style="color: #1ED760"><i class="fab fa-spotify mx-1"></i> Spotify</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://soundcloud.com/user-378331563" style="color: #FF5500"><i
+                    class="fab fa-soundcloud mx-1"></i> Soundcloud</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://podcasts.apple.com/de/podcast/halepodcast/id1502035234"
+                style="color: #B541DF"><i class="fab fa-itunes-note mx-1"></i> iTunes</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="my-3 w-100 shadow rounded border border-secondary bg-light p-3">
+    <p><b>In dem weltberühmten <i>HalePodcast</i> sprechen Stefan, Lars und Philipp über alles, was in der Welt los ist
+            und was die Schule bewegt.</b> Außerdem halten sie euch bezüglich der Schülerzeitung auf dem Laufenden. Das
+        alles mal ernst. Mal august. Mal witzig. Mal ein bisschen schmutzig. Mal mit Gast. Mal ohne. Aber immer für euch
+        da.</p>
+    <p class="mb-0">Die drei waren übrigens die ersten mit der Idee, einen Podcast zu machen.</p>
+</div>
+
+<div class="my-3 w-100 shadow rounded rounded-lg border border-secondary p-2" style="background-color: #0F57A3;">
+    <h3 class="text-white ml-3 mt-3 mb-2">Aktueller Podcast</h3>
+    <iframe src="https://open.spotify.com/embed-podcast/show/3OmgDOrhoopY4THEFfhKw5" width="100%" height="232"
+        frameborder="0" allowtransparency="true" allow="encrypted-media" style="margin-bottom: -11px;"></iframe>
+</div>
+
+{% endblock %}
