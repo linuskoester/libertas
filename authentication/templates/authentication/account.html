@@ -4,20 +4,39 @@
 
 {% block main %}
 
-<h1>Dein Account</h1>
+<div class="jumbotron m-0 bg-dark text-light shadow"
+    style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
+    <h1 class="display-4">Dein Account</h1>
+</div>
 
-<div class="mt-4 row">
-    <div class="col-md-3 mb-4">
-        <nav class="nav nav-pills flex-row flex-md-column text-center text-md-left">
-            <a class="nav-link flex-fill mb-2 m-md-0 {% if menu == "user-account-account" %}active{% endif %}" href="{% url 'account' %}">Allgemein</a>
-            <a class="nav-link flex-fill mb-2 m-md-0 {% if menu == "user-account-password" %}active{% endif %}" href="{% url 'account_password' %}">Passwort</a>
-            <a class="nav-link flex-fill mb-2 m-md-0 {% if menu == "user-account-delete" %}active{% endif %}" href="{% url 'account_delete' %}">Account löschen</a>
-        </nav>
-    </div>
-    <div class="col-md">
-        {% block account %}
-        {% endblock %}
+<nav class="navbar navbar-expand pagenav bg-light sticky-top rounded-bottom mb-3 shadow border border-secondary"
+    style="top: 56px;">
+    <ul class="nav nav-pills flex-row text-center">
+        <li class="nav-item flex-fill">
+            <a class="nav-link {% if menu == "user-account-account" %}active{% endif %}"
+                href="{% url 'account' %}">Allgemein</a>
+        </li>
+        <li class="nav-item flex-fill">
+            <a class="nav-link {% if menu == "user-account-password" %}active{% endif %}"
+                href="{% url 'account_password' %}">Passwort</a>
+        </li>
+        <li class="nav-item flex-fill">
+            <a class="nav-link {% if menu == "user-account-delete" %}active{% endif %}"
+                href="{% url 'account_delete' %}">Account löschen</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="row justify-content-center mt-3">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+        <div class="shadow rounded border border-secondary bg-light p-3">
+            {% block account %}
+            {% endblock %}
+        </div>
     </div>
 </div>
 
+{% endblock %}
+
+{% block no_ad %}
 {% endblock %}

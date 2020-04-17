@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 
 from django.contrib import messages
 from django.contrib.admin.models import CHANGE, LogEntry
@@ -23,17 +23,31 @@ def log(user, flag, message):
         change_message=message)
 
 
-def ausgaben(request):
-    ausgaben = Ausgabe.objects
-
+def startseite(request):
+    ausgaben = Ausgabe.objects.filter(publish_date__lte=date.today())
     inventory = []
+
     if request.user.is_authenticated:
         user = User.objects.get(username=request.user)
-        for ausgabe in Ausgabe.objects.all():
+        for ausgabe in ausgaben:
             if Code.objects.filter(user=user, ausgabe=ausgabe).exists():
                 inventory.append(ausgabe)
 
-    return render(request, 'libertas/ausgaben.html', {'menu': 'ausgaben', 'ausgaben': ausgaben, 'inventory': inventory})
+    return render(request, 'libertas/startseite.html', {'menu': 'startseite',
+                                                        'ausgaben': ausgaben,
+                                                        'inventory': inventory})
+
+
+def podcast(request):
+    return render(request, 'libertas/podcast.html', {'menu': 'podcast'})
+
+
+def team(request):
+    return render(request, 'libertas/team.html', {'menu': 'more-team'})
+
+
+def faq(request):
+    return render(request, 'libertas/faq.html', {'menu': 'more-faq'})
 
 
 def redeem(request):
