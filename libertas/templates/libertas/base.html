@@ -75,12 +75,12 @@
                                 aria-haspopup="true" aria-expanded="false">
                                 Mehr
                             </a>
-                        <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item {% if menu == "more-team" %}active{% endif %}"
-                                href="{% url 'team' %}">Team</a>
-                            <a class="dropdown-item {% if menu == "more-faq" %}active{% endif %}"
-                                href="{% url 'faq' %}">Fragen & Antworten</a>
-                        </div>
+                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item {% if menu == "more-team" %}active{% endif %}"
+                                    href="{% url 'team' %}">Team</a>
+                                <a class="dropdown-item {% if menu == "more-faq" %}active{% endif %}"
+                                    href="{% url 'faq' %}">Fragen & Antworten</a>
+                            </div>
                         </li>
                     </ul>
                 </ul>
@@ -181,6 +181,9 @@
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
+    })
+    $(function () {
+        $('[data-toggle="popover"]').popover()
     })
 </script>
 
