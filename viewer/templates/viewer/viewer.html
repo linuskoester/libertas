@@ -28,6 +28,9 @@
     height: calc(100% - 56px) !important;
     padding-top: 56px !important;
   }
+  span {
+    cursor: default !important;
+  }
 </style>
 
 <link rel="resource" type="application/l10n" href="{% static 'viewer/web/locale/locale.properties' %}">
@@ -141,7 +144,9 @@
     <div id="sidebarResizer" class="hidden"></div>
   </div> <!-- sidebarContainer -->
 
-  <div id="mainContainer">
+  <div id="mainContainer"
+    style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;"
+    unselectable="on" onselectstart="return false;" onmousedown="return false;">
     <div class="findbar hidden doorHanger" id="findbar">
       <div id="findbarInputContainer">
         <input id="findInput" class="toolbarField" title="Find" placeholder="Find in document…" tabindex="91"
