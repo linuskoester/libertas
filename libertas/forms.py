@@ -14,7 +14,7 @@ class RedeemForm(forms.Form):
     confirm1 = forms.BooleanField(
         label="""Mir ist bewusst, dass jegliche Form der digitalen Vervielfältigung oder des Missbrauchs strafbar
                  ist, und zurückverfolgt werden kann.""",
-        help_text="""Wir behalten uns es vor Accounts umgehend zu sperren, welche gegen unsere Nutzungsbedingungen verstoßen.
+        help_text="""Wir behalten uns es vor, Accounts umgehend zu sperren, welche gegen unsere Nutzungsbedingungen verstoßen.
                      Es besteht kein Anspruch auf Rückerstattung oder Zugriff auf die erworbenen Ausgaben.""")
     confirm2 = forms.BooleanField(
         label="""Ich möchte sofortigen Zugriff auf die Ausgabe, deswegen verzichte
