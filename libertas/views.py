@@ -33,7 +33,7 @@ def startseite(request):
             if Code.objects.filter(user=user, ausgabe=ausgabe).exists():
                 inventory.append(ausgabe)
 
-    return render(request, 'libertas/startseite.html', {'menu': 'startseite',
+    return render(request, 'libertas/startseite.html', {'menu': 'sz-start',
                                                         'ausgaben': ausgaben,
                                                         'inventory': inventory})
 
@@ -43,11 +43,11 @@ def podcast(request):
 
 
 def team(request):
-    return render(request, 'libertas/team.html', {'menu': 'more-team'})
+    return render(request, 'libertas/team.html', {'menu': 'sz-team'})
 
 
 def faq(request):
-    return render(request, 'libertas/faq.html', {'menu': 'more-faq'})
+    return render(request, 'libertas/faq.html', {'menu': 'sz-faq'})
 
 
 def redeem(request):
