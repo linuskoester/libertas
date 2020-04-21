@@ -10,6 +10,7 @@ from django.contrib.admin.models import LogEntry, CHANGE, ADDITION
 from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
 import os
+from libertas.models import Configuration
 
 
 def log(user, flag, message):
@@ -24,7 +25,45 @@ def log(user, flag, message):
         change_message=message)
 
 
+def wartung(request):
+    if Configuration.objects.get(name="Einstellungen").wartung_voll:
+        if request.user.is_superuser:
+            messages.error(request, 'Wartungsmodus (Voll) aktiviert!')
+        else:
+            return "voll"
+
+    if Configuration.objects.get(name="Einstellungen").wartung_auth:
+        if request.user.is_authenticated:
+            if request.user.is_superuser:
+                messages.error(
+                    request, 'Wartungsmodus (Authentifizierungssystem) aktiviert!')
+            else:
+                messages.warning(
+                    request, 'Du wurdest aufgrund von Wartungsarbeiten abgemeldet.')
+                logout(request)
+        else:
+            if not request.user.is_superuser:
+                return "auth"
+
+    if Configuration.objects.get(name="Einstellungen").wartung_signup:
+        if request.user.is_superuser:
+            messages.error(request, 'Wartungsmodus (Registrierung) aktiviert!')
+        else:
+            return "signup"
+
+    if Configuration.objects.get(name="Einstellungen").wartung_viewer:
+        if request.user.is_superuser:
+            messages.error(request, 'Wartungsmodus (Viewer) aktiviert!')
+
+
 def signin(request):
+    if wartung(request) == "voll":
+        return render(request, 'libertas/wartung.html')
+    elif wartung(request) == "auth":
+        messages.error(
+            request, 'Zurzeit ist die Anmeldung aufgrund von Wartungsarbeiten nicht möglich.')
+        return redirect('index')
+
     # Wenn angemeldet, leite zur Startseite weiter
     if request.user.is_authenticated:
         return redirect('index')
@@ -47,6 +86,9 @@ def signin(request):
 
 
 def signout(request):
+    if wartung(request) == "voll":
+        return render(request, 'libertas/wartung.html')
+
     # Melde ab und leite zur Startseite weiter
     logout(request)
     messages.info(request, 'Du wurdest erfolgreich abgemeldet.')
@@ -54,6 +96,17 @@ def signout(request):
 
 
 def signup(request):
+    if wartung(request) == "voll":
+        return render(request, 'libertas/wartung.html')
+    elif wartung(request) == "auth":
+        messages.error(
+            request, 'Zurzeit ist die Registrierung aufgrund von Wartungsarbeiten nicht möglich.')
+        return redirect('index')
+    elif wartung(request) == "signup":
+        messages.error(
+            request, 'Zurzeit ist die Registrierung aufgrund von Wartungsarbeiten nicht möglich.')
+        return redirect('index')
+
     # Wenn angemeldet, leite zur Startseite weiter
     if request.user.is_authenticated:
         return redirect('index')
@@ -106,6 +159,17 @@ def signup(request):
 
 
 def signup_activate(request, uidb64, token):
+    if wartung(request) == "voll":
+        return render(request, 'libertas/wartung.html')
+    elif wartung(request) == "auth":
+        messages.error(
+            request, 'Zurzeit ist die Registrierung aufgrund von Wartungsarbeiten nicht möglich.')
+        return redirect('index')
+    elif wartung(request) == "auth":
+        messages.error(
+            request, 'Zurzeit ist die Registrierung aufgrund von Wartungsarbeiten nicht möglich.')
+        return redirect('index')
+
     # Versuche aus der URL den Benutzer auszulesen
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -140,6 +204,13 @@ def signup_activate(request, uidb64, token):
 
 
 def reset(request):
+    if wartung(request) == "voll":
+        return render(request, 'libertas/wartung.html')
+    elif wartung(request) == "auth":
+        messages.error(
+            request, 'Zurzeit ist die Anmeldung aufgrund von Wartungsarbeiten nicht möglich.')
+        return redirect('index')
+
     # Wenn angemeldet, leite zur Startseite weiter
     if request.user.is_authenticated:
         return redirect('index')
@@ -179,6 +250,9 @@ def reset(request):
 
 
 def reset_confirm(request, uidb64, token):
+    if wartung(request) == "voll":
+        return render(request, 'libertas/wartung.html')
+
     # Versuche aus der URL den Benutzer auszulesen
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -225,6 +299,9 @@ def reset_confirm(request, uidb64, token):
 
 
 def account_info(request):
+    if wartung(request) == "voll":
+        return render(request, 'libertas/wartung.html')
+
     # Falls Benutzer angemeldet
     if request.user.is_authenticated:
         return render(request, 'authentication/account_account.html', {'menu': 'user-account-account'})
@@ -234,6 +311,9 @@ def account_info(request):
 
 
 def account_password(request):
+    if wartung(request) == "voll":
+        return render(request, 'libertas/wartung.html')
+
     # Falls Benutzer angemeldet
     if request.user.is_authenticated:
         # Wenn Passwort-Zurücksetz-Formular ausgefüllt
@@ -269,6 +349,9 @@ def account_password(request):
 
 
 def account_delete(request):
+    if wartung(request) == "voll":
+        return render(request, 'libertas/wartung.html')
+
     # Wenn Benutzer angemeldet
     if request.user.is_authenticated:
         if request.method == 'POST':
