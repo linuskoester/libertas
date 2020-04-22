@@ -1,6 +1,6 @@
 {% extends 'libertas/base.html' %}
 
-{% block title %}Startseite{% endblock %}
+{% block title %}Schülerzeitung{% endblock %}
 
 {% block main %}
 
@@ -25,7 +25,7 @@
         </li>
         {% endif %}
         <li class="nav-item flex-fill">
-            <a class="nav-link" href="#news">Neuigkeiten</a>
+            <a class="nav-link" href="#news">News</a>
         </li>
     </ul>
 </nav>
@@ -34,7 +34,7 @@
 <div class="my-3 w-100 shadow rounded border border-secondary bg-light p-3">
     <h3 id="ueber-uns">Über uns</h3>
     <p><b>TheHaps ist die offizielle Schülerzeitung der Halepaghen-Schule Buxtehude. Wir sind keine „Schulzeitung“,
-        sondern eine Zeitschrift von Schülern für Schüler.</b> Das gesamte Team steht für einen seriösen, kritischen
+            sondern eine Zeitschrift von Schülern für Schüler.</b> Das gesamte Team steht für einen seriösen, kritischen
         und modernen Journalismus. <i>TheHaps ist bissig. witzig. modern.</i></p>
     <p>Wir verstehen uns als Jugendzeitschrift für Buxtehude, die einen politischen Schwerpunkt hat und mit
         einer klaren Haltung auftritt. Gerade in Zeiten eines erstarkenden Rechtsextremismus und Populismus
@@ -103,15 +103,27 @@
 </div>
 {% endif %}
 <div class="my-3 w-100 shadow rounded border border-secondary bg-light p-3">
-    <h3 id="news">Neuigkeiten</h3>
-    <h4><span class="badge badge-secondary">10.04.2020</span> News 1</h4>
-    <p>{% lorem 1 %}</p>
+    <h3 id="news">News</h3>
+    <h5>Erste Ausgabe kommt am 5. Mai raus! Jetzt nach Hause bestellen oder online lesen!</h5>
+    <p>Die erste Ausgabe von <i>TheHaps</i> wird am 5. Mai veröffentlicht! Das Titelthema lautet "Neustart" und Highlights der
+        Ausgabe sind unter anderem eine Reportage über die Flucht eines Schüler der HPS, ein Artikel, der sich mit der
+        Frage auseinandersetzt, was wir aus der Corona-Krise für die Klima-Krise lernen können, ein Interview mit einem
+        Chefarzt des Elbe-Klinikums Buxtehude über die Corona-Pandemie an dem Buxtehuder Krankenhaus sowie eine
+        Übersicht zu den Umbauplänen an der Schule. Außerdem rechnet Lars Hauschildt mit dem niedersächsischen
+        Kultusministerium ab, während sich Herr Rösler den 11 schnellen Fragen gestellt hat. All das und noch viel, viel
+        mehr in der ersten Ausgabe!</p>
+
+    <p><b>Achtung!</b><br>Da die Zeitschrift offensichtlich nicht in der Schule verkauft werden kann, können
+        Print-Ausgaben per E-Mail
+        bestellt werden. Wir liefern dann die Bestellung direkt an die Haustür! Die genauen Bestimmungen bezüglich des
+        Bestellsystems finden sich hier (Link). Dort ist auch erklärt, wie Online-Ausgaben erworben werden können.
+    </p>
+
     <hr>
-    <h4><span class="badge badge-secondary">11.04.2020</span> News 2</h4>
-    <p>{% lorem 1 %}</p>
-    <hr>
-    <h4><span class="badge badge-secondary">12.04.2020</span> News 3</h4>
-    <p>{% lorem 1 %}</p>
+    <h5>Fünf Sportübungen für die Zeit im Homeoffice</h5>
+    <p>In der ersten Ausgabe von <i>TheHaps</i> stellen unsere beiden Sportredakteur Lennart und Stefan fünf Sportübungen für
+        die Zeit im Homeoffice vor, die jeder Zuhause machen kann, um Fehlhaltungen zu verhindern und fit zu bleiben!
+        Hier erfährst du, wie du eine Ausgabe kaufen kannst. </p>
 </div>
 
 
