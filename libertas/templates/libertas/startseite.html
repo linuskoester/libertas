@@ -50,7 +50,7 @@
             <div class="container-fluid mt-3 overflow-auto">
                 <div class="row flex-row flex-nowrap pb-2">
                     {% for ausgabe in ausgaben.all %}
-                    <div class="col-5 col-sm-4 col-md-3 col-lg-4 col-xl-3 px-1">
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-4 col-xl-3 px-1">
                         <div class="card">
                             <img src="{% url 'viewer' ausgabe.number 'thumbnail' %}"
                                 class="card-img-top {% if user.is_authenticated and ausgabe not in inventory %}thumbnail-gray{% endif %}">
