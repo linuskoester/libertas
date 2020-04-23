@@ -97,9 +97,11 @@ class SignUpForm(forms.Form):
         label='Passwort bestätigen',
         widget=forms.PasswordInput())
     confirm1 = forms.BooleanField(
-        label="""Ich bin mit den Nutzungsbedingungen einverstanden und stimme diesen zu.""")
+        label="""Ich bin mit den <a href="/agb">Nutzungsbedingungen</a> einverstanden und
+                 stimme diesen zu.""")
     confirm2 = forms.BooleanField(
-        label="""Ich bin mit der Datenschutzerkärung einverstanden und stimme dieser zu.""")
+        label="""Ich bin mit der <a href="/datenschutz">Datenschutzerklärung</a> einverstanden
+                 und stimme dieser zu.""")
 
 
 def clean(self):

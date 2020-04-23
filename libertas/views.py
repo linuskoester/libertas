@@ -112,3 +112,24 @@ def redeem(request):
         form = RedeemForm()
 
     return render(request, 'libertas/redeem.html', {'menu': 'user-redeem', 'form': form})
+
+
+def datenschutz(request):
+    if wartung(request):
+        return render(request, 'libertas/wartung.html')
+
+    return render(request, 'libertas/datenschutz.html')
+
+
+def agb(request):
+    if wartung(request):
+        return render(request, 'libertas/wartung.html')
+
+    return render(request, 'libertas/agb.html')
+
+
+def impressum(request):
+    if wartung(request):
+        return render(request, 'libertas/wartung.html')
+
+    return render(request, 'libertas/impressum.html')
