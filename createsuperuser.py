@@ -1,5 +1,6 @@
 import os
 from django.contrib.auth.models import User
+from libertas.models import Configuration
 
 
 if not User.objects.filter(username=os.environ['DJANGO_ADMIN_USERNAME']).exists():
@@ -14,3 +15,10 @@ if not User.objects.filter(username=os.environ['DJANGO_ADMIN_USERNAME']).exists(
     print('Admin-Account erstellt!')
 else:
     print('Admin-Account existiert bereits!')
+
+if not Configuration.objects.filter(name="Einstellungen").exists():
+    c = Configuration(name="Einstellungen")
+    c.save()
+    print('Konfigurations-Objekt erstellt')
+else:
+    print('Konfigurations-Objekt existiert bereits!')
