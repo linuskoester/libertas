@@ -6,7 +6,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import redirect, render
 
 from .forms import RedeemForm
-from .models import Ausgabe, Code, User
+from .models import Ausgabe, Code, User, Configuration
+from django.contrib.auth import logout
 
 # from django.contrib import messages
 
@@ -23,7 +24,36 @@ def log(user, flag, message):
         change_message=message)
 
 
+def wartung(request):
+    if Configuration.objects.get(name="Einstellungen").wartung_voll:
+        if request.user.is_superuser:
+            messages.error(request, 'Wartungsmodus (Voll) aktiviert!')
+        else:
+            return True
+
+    if Configuration.objects.get(name="Einstellungen").wartung_auth:
+        if request.user.is_authenticated:
+            if request.user.is_superuser:
+                messages.error(
+                    request, 'Wartungsmodus (Authentifizierungssystem) aktiviert!')
+            else:
+                messages.warning(
+                    request, 'Du wurdest aufgrund von Wartungsarbeiten abgemeldet.')
+                logout(request)
+
+    if Configuration.objects.get(name="Einstellungen").wartung_signup:
+        if request.user.is_superuser:
+            messages.error(request, 'Wartungsmodus (Registrierung) aktiviert!')
+
+    if Configuration.objects.get(name="Einstellungen").wartung_viewer:
+        if request.user.is_superuser:
+            messages.error(request, 'Wartungsmodus (Viewer) aktiviert!')
+
+
 def startseite(request):
+    if wartung(request):
+        return render(request, 'libertas/wartung.html')
+
     ausgaben = Ausgabe.objects.filter(publish_date__lte=date.today())
     inventory = []
 
@@ -33,24 +63,36 @@ def startseite(request):
             if Code.objects.filter(user=user, ausgabe=ausgabe).exists():
                 inventory.append(ausgabe)
 
-    return render(request, 'libertas/startseite.html', {'menu': 'startseite',
+    return render(request, 'libertas/startseite.html', {'menu': 'sz-start',
                                                         'ausgaben': ausgaben,
                                                         'inventory': inventory})
 
 
 def podcast(request):
+    if wartung(request):
+        return render(request, 'libertas/wartung.html')
+
     return render(request, 'libertas/podcast.html', {'menu': 'podcast'})
 
 
 def team(request):
-    return render(request, 'libertas/team.html', {'menu': 'more-team'})
+    if wartung(request):
+        return render(request, 'libertas/wartung.html')
+
+    return render(request, 'libertas/team.html', {'menu': 'sz-team'})
 
 
 def faq(request):
-    return render(request, 'libertas/faq.html', {'menu': 'more-faq'})
+    if wartung(request):
+        return render(request, 'libertas/wartung.html')
+
+    return render(request, 'libertas/faq.html', {'menu': 'sz-faq'})
 
 
 def redeem(request):
+    if wartung(request):
+        return render(request, 'libertas/wartung.html')
+
     if not request.user.is_authenticated:
         return redirect('signin')
     if request.method == 'POST':
@@ -70,3 +112,24 @@ def redeem(request):
         form = RedeemForm()
 
     return render(request, 'libertas/redeem.html', {'menu': 'user-redeem', 'form': form})
+
+
+def datenschutz(request):
+    if wartung(request):
+        return render(request, 'libertas/wartung.html')
+
+    return render(request, 'libertas/datenschutz.html')
+
+
+def agb(request):
+    if wartung(request):
+        return render(request, 'libertas/wartung.html')
+
+    return render(request, 'libertas/agb.html')
+
+
+def impressum(request):
+    if wartung(request):
+        return render(request, 'libertas/wartung.html')
+
+    return render(request, 'libertas/impressum.html')

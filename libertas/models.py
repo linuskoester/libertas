@@ -54,3 +54,23 @@ class Code(models.Model):
     class Meta:
         verbose_name = "Code"
         verbose_name_plural = "Codes"
+
+
+class Configuration(models.Model):
+    name = models.CharField(
+        max_length=16, default="Einstellungen", unique=True)
+    wartung_voll = models.BooleanField(
+        verbose_name="Wartungsmodus (Voll)", default=False)
+    wartung_auth = models.BooleanField(
+        verbose_name="Wartungsmodus (Auth)", default=False)
+    wartung_signup = models.BooleanField(
+        verbose_name="Wartungsmodus (Registrierung)", default=False)
+    wartung_viewer = models.BooleanField(
+        verbose_name="Wartungsmodus (Viewer)", default=False)
+
+    class Meta:
+        verbose_name = "Konfiguration"
+        verbose_name_plural = "Konfiguration"
+
+    def __str__(self):
+        return "Einstellungen"

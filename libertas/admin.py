@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ausgabe, Code
+from .models import Ausgabe, Code, Configuration
 
 # Register your models here.
 
@@ -34,5 +34,15 @@ class CodeAdmin(admin.ModelAdmin):
     censored_code.short_description = 'Code'
 
 
+class ConfigurationAdmin(admin.ModelAdmin):
+    fieldsets = [(None, {'fields': ['name']}),
+                 ('Wartung',       {'fields': [
+                     'wartung_voll', 'wartung_auth', 'wartung_signup', 'wartung_viewer']})
+                 ]
+
+    list_display = ['name']
+
+
 admin.site.register(Ausgabe, AusgabeAdmin)
 admin.site.register(Code, CodeAdmin)
+admin.site.register(Configuration, ConfigurationAdmin)

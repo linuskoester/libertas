@@ -7,4 +7,7 @@ urlpatterns = [
     path('team', views.team, name='team'),  # Podcast
     path('faq', views.faq, name='faq'),  # Podcast
     path('redeem', views.redeem, name='redeem'),  # Code einlösen
+    path('datenschutz', views.datenschutz, name='datenschutz'),  # Datenschutz
+    path('impressum', views.impressum, name='impressum'),  # Impressum
+    path('agb', views.agb, name='agb'),  # AGB
 ]

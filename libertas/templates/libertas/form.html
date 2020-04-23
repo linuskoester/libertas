@@ -37,7 +37,7 @@
                         {% endif %}
                     {% endif %}
                 {% endfor %}>
-        <label class="custom-control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <label class="custom-control-label" for="{{ field.id_for_label }}">{{ field.label | safe | escape }}</label>
         {% if not field.errors %}
         <div class="invalid-feedback mt-0">
             Dieses Feld ist zwingend erforderlich.
