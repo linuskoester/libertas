@@ -21,8 +21,7 @@ class CodeInLine(admin.TabularInline):
     min_num = 0
     max_num = 0
     extra = 0
-    fields = ['ausgabe', 'redeemed']
-    readonly_fields = ['ausgabe', 'redeemed']
+    fields = ['code', 'ausgabe', 'redeemed']
 
 
 class UserProfileInline(admin.StackedInline):
