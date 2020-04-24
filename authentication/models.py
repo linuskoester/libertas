@@ -8,6 +8,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     email_confirmed = models.BooleanField('E-Mail bestätigt', default=False)
     notes = models.TextField('Interne Notizen', blank=True, default='')
+    ual = models.TextField('User Access Log', blank=True, default='')
 
     def __str__(self):
         return self.user.username

@@ -4,8 +4,23 @@ from libertas.models import Ausgabe
 from django.contrib import messages
 from django.http import Http404
 from libertas.models import Code, User, Configuration
-from datetime import date
+from datetime import date, datetime
 from django.contrib.auth import logout
+
+
+def ual(request, type, name, number):
+    user = User.objects.get(username=request.user)
+    if type == "v":
+        user.profile.ual += "V [" + str(datetime.now()) + "] Zugriff auf Viewer: " + \
+            name + " (#" + number + ") - " + \
+            request.META.get('REMOTE_ADDR') + " - " + \
+            request.META['HTTP_USER_AGENT'] + "\n"
+    if type == "d":
+        user.profile.ual += "D [" + str(datetime.now()) + "] Zugriff auf Datei:    " + \
+            name + " (#" + str(number) + ") - " + \
+            request.META.get('REMOTE_ADDR') + " - " + \
+            request.META['HTTP_USER_AGENT'] + "\n"
+    user.save()
 
 
 def wartung(request):
@@ -49,6 +64,7 @@ def viewer(request, number, view_type):
         if view_type == "read" and request.user.is_authenticated:
             user = User.objects.get(username=request.user)
             if Code.objects.filter(user=user, ausgabe=ausgabe).exists():
+                ual(request, "v", ausgabe.name, number)
                 pdf_data = "%s/0" % ausgabe.file_identifier
                 pdf_name = ausgabe.name
             else:
@@ -88,6 +104,7 @@ def protected_file(request, identifier, view_type):
     ausgabe = get_object_or_404(Ausgabe, file_identifier=identifier)
     if date.today() >= ausgabe.publish_date:
         if view_type == "0" and request.user.is_authenticated:
+            ual(request, "d", ausgabe.name, ausgabe.number)
             user = User.objects.get(username=request.user)
             if Code.objects.filter(user=user, ausgabe=ausgabe).exists():
                 return FileResponse(ausgabe.file)
