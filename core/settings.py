@@ -158,7 +158,7 @@ EMAIL_HOST_PASSWORD = os.environ['DJANGO_SMTP_HOST_PASSWORD']
 EMAIL_USE_TLS = bool(int(os.environ['DJANGO_SMTP_USE_TLS']))
 
 # Logging
-if bool(int(os.environ['LIBERTAS_BETA'])):
+if bool(int(os.environ['LIBERTAS_LOG'])):
     LOGGING = {
         'version': 1,
         'disable_existing_loggers': False,
