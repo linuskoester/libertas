@@ -56,7 +56,8 @@ def viewer(request, number, view_type):
         return render(request, 'libertas/wartung.html')
     elif wartung(request) == "viewer" and view_type != "thumbnail":
         messages.error(
-            request, 'Aufgrund von Wartungsarbeiten lassen sich zurzeit keine digitalen Ausgaben und Leseproben lesen.')
+            request, """Aufgrund von Wartungsarbeiten lassen sich zurzeit keine digitalen Ausgaben und Leseproben lesen.
+            <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
         return redirect('index')
 
     ausgabe = get_object_or_404(Ausgabe, number=number)
@@ -98,7 +99,8 @@ def protected_file(request, identifier, view_type):
         return render(request, 'libertas/wartung.html')
     elif wartung(request) == "viewer":
         messages.error(
-            request, 'Aufgrund von Wartungsarbeiten lassen sich zurzeit keine digitalen Ausgaben und Leseproben lesen.')
+            request, """Aufgrund von Wartungsarbeiten lassen sich zurzeit keine digitalen Ausgaben und Leseproben lesen.
+            <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
         return redirect('index')
 
     ausgabe = get_object_or_404(Ausgabe, file_identifier=identifier)
