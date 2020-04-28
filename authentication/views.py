@@ -61,7 +61,8 @@ def signin(request):
         return render(request, 'libertas/wartung.html')
     elif wartung(request) == "auth":
         messages.error(
-            request, 'Zurzeit ist die Anmeldung aufgrund von Wartungsarbeiten nicht möglich.')
+            request, """Zurzeit ist die Anmeldung aufgrund von Wartungsarbeiten nicht möglich.
+            <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
         return redirect('index')
 
     # Wenn angemeldet, leite zur Startseite weiter
@@ -100,11 +101,13 @@ def signup(request):
         return render(request, 'libertas/wartung.html')
     elif wartung(request) == "auth":
         messages.error(
-            request, 'Zurzeit ist die Registrierung aufgrund von Wartungsarbeiten nicht möglich.')
+            request, """Zurzeit ist die Registrierung aufgrund von Wartungsarbeiten nicht möglich.
+                        <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
         return redirect('index')
     elif wartung(request) == "signup":
         messages.error(
-            request, 'Zurzeit ist die Registrierung aufgrund von Wartungsarbeiten nicht möglich.')
+            request, """Zurzeit ist die Registrierung aufgrund von Wartungsarbeiten nicht möglich.
+                        <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
         return redirect('index')
 
     # Wenn angemeldet, leite zur Startseite weiter
@@ -163,11 +166,13 @@ def signup_activate(request, uidb64, token):
         return render(request, 'libertas/wartung.html')
     elif wartung(request) == "auth":
         messages.error(
-            request, 'Zurzeit ist die Registrierung aufgrund von Wartungsarbeiten nicht möglich.')
+            request, """Zurzeit ist die Registrierung aufgrund von Wartungsarbeiten nicht möglich.
+                        <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
         return redirect('index')
     elif wartung(request) == "auth":
         messages.error(
-            request, 'Zurzeit ist die Registrierung aufgrund von Wartungsarbeiten nicht möglich.')
+            request, """Zurzeit ist die Registrierung aufgrund von Wartungsarbeiten nicht möglich.
+                        <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
         return redirect('index')
 
     # Versuche aus der URL den Benutzer auszulesen
@@ -208,7 +213,8 @@ def reset(request):
         return render(request, 'libertas/wartung.html')
     elif wartung(request) == "auth":
         messages.error(
-            request, 'Zurzeit ist die Anmeldung aufgrund von Wartungsarbeiten nicht möglich.')
+            request, """Zurzeit ist die Anmeldung aufgrund von Wartungsarbeiten nicht möglich.
+            <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
         return redirect('index')
 
     # Wenn angemeldet, leite zur Startseite weiter
