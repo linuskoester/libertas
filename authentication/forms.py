@@ -103,23 +103,22 @@ class SignUpForm(forms.Form):
         label="""Ich bin mit der <a href="/datenschutz">Datenschutzerklärung</a> einverstanden
                  und stimme dieser zu.""")
 
-
-def clean(self):
-    cd = self.cleaned_data
-    # Überprüfe ob Passwörter übereinstimmen
-    if cd.get('password') != cd.get('password_confirm') and cd.get('password') is not None:
-        self.add_error('password_confirm',
-                       'Die Passwörter stimmen nicht überein.')
-    # Überprüfe ob ein Account existiert, dessen E-Mail BESTÄTIGT ist
-    if User.objects.filter(username=cd.get('username')).exists():
-        if User.objects.get(username=cd.get('username')).profile.email_confirmed:
-            self.add_error('username',
-                           """Für diese E-Mail-Adresse existiert bereits ein Account.
-                               Versuche dich anzumelden.""")
-    # Überprüfe auf Beta-Zugang, nur beim Beta-Server
-    # if bool(int(os.environ['LIBERTAS_BETA'])) and cd.get('username'):
-    checkbetaaccess(cd.get('username'), self)
-    return cd
+    def clean(self):
+        cd = self.cleaned_data
+        # Überprüfe ob Passwörter übereinstimmen
+        if cd.get('password') != cd.get('password_confirm') and cd.get('password') is not None:
+            self.add_error('password_confirm',
+                           'Die Passwörter stimmen nicht überein.')
+        # Überprüfe ob ein Account existiert, dessen E-Mail BESTÄTIGT ist
+        if User.objects.filter(username=cd.get('username')).exists():
+            if User.objects.get(username=cd.get('username')).profile.email_confirmed:
+                self.add_error('username',
+                               """Für diese E-Mail-Adresse existiert bereits ein Account.
+                                Versuche dich anzumelden.""")
+        # Überprüfe auf Beta-Zugang, nur beim Beta-Server
+        # if bool(int(os.environ['LIBERTAS_BETA'])) and cd.get('username'):
+        checkbetaaccess(cd.get('username'), self)
+        return cd
 
 
 class ResetForm(forms.Form):
