@@ -1,5 +1,6 @@
 from django import forms
 from .models import Code
+from datetime import date
 
 
 class RedeemForm(forms.Form):
@@ -32,5 +33,9 @@ class RedeemForm(forms.Form):
             if code.user:
                 self.add_error(
                     'code', 'Dieser Zugangscode wurde bereits verwendet.')
+            if date.today() < code.ausgabe.publish_date:
+                self.add_error(
+                    'code', """Die Ausgabe "%s" ist noch nicht öffentlich. Versuche den Code erneut
+                            einzulösen, wenn die Ausgabe veröffentlicht wurde.""" % code.ausgabe.name)
 
         return cd
