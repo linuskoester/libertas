@@ -9,6 +9,7 @@ class Profile(models.Model):
     email_confirmed = models.BooleanField('E-Mail bestätigt', default=False)
     notes = models.TextField('Interne Notizen', blank=True, default='')
     ual = models.TextField('User Access Log', blank=True, default='')
+    corona_bestellung = models.BooleanField('Corona-Bestellung', default=False)
 
     def __str__(self):
         return self.user.username

@@ -1,0 +1,79 @@
+{% extends 'libertas/base.html' %}
+
+{% block title %}Corona-Infos{% endblock %}
+
+{% block main %}
+
+<div class="jumbotron m-0 bg-warning text-dark shadow" style="overflow-wrap: break-word;">
+    <h1 class="display-4">Corona-Infos</h1>
+    <p class="lead">Informationen zu Änderungen aufgrund von COVID-19</p>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-6 pr-md-0 d-flex">
+        <div class="shadow rounded border border-secondary bg-light p-3">
+            <h2>Digitale Ausgabe bestellen <span class="badge badge-primary">1€</span></h2>
+            <p><b>Normalerweise kannst du Zugangscodes für unsere digitalen Ausgaben in der HPS
+                    erwerben. Während der Corona-Pandemie kannst du Zugangscodes automatisiert im Internet bestellen und
+                    die Bezahlung später nachreichen:</b>
+                {% if user.is_authenticated %}
+                {% if not published %}
+                <p><i>Die Ausgabe ist noch nicht öffentlicht. Versuche es nochmal, sobald die Ausgabe veröffentlicht wurde.</i></p>
+                {% elif besitz %}
+                <p><i>Du bist bereits im Besitz der Ausgabe.</i></p>
+                {% elif user.profile.corona_bestellung %}
+                <p><i>Du hast bereits eine digitale Ausgabe bestellt.</i></p>
+                {% elif user.email %}
+                <form method="post" class="needs-validation" novalidate>
+                    {% include "libertas/form.html" %}
+                    <p>Einen Zugangscode für die aktuelle Ausgabe senden wir an deine E-Mail-Adresse:
+                        <b>{{ user.email }}</b></p>
+                    <button class="btn btn-primary btn-block mt-2" type="submit">Zugangscode kostenpflichtig
+                        bestellen!</button>
+
+                </form>
+                {% else %}
+                <p><i>Du kannst keine digitale Ausgabe erwerben, da dein Account mit keiner
+                        E-Mail-Adresse verknüpft ist.</i></p>
+                {% endif %}
+                {% else %}
+                <p>Erstelle einen Account oder melde dich an, um eine digitale Ausgabe zu bestellen:</p>
+                <a class="btn btn-primary btn-block" href="{% url 'signin' %}" role="button">Anmelden</a>
+                <a class="btn btn-outline-primary btn-block" href="{% url 'signup' %}" role="button">Account
+                    erstellen</a>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6 pt-3 pt-md-0 pl-md-3 d-flex">
+        <div class="shadow rounded border border-secondary bg-light p-3 w-100">
+            <h2>Print-Ausgabe bestellen <span class="badge badge-primary">1,50€</span></h2>
+            <p><b>Normalerweise kannst du die gedruckten Ausgaben von TheHaps in der HPS und an anderen Standorten
+                    erwerben. Während der Corona-Pandemie bieten wir stattdessen ein Bestell- und Liefersystem an:</b>
+            </p>
+            <p>Wenn du eine Print-Ausgabe kaufen möchtest, schreibe eine E-Mail an <a
+                    href="mailto:thehaps@halepaghen.de">thehaps@halepaghen.de</a>, in der du
+                <ul>
+                    <li>die gewünschte Anzahl an Exemplaren,</li>
+                    <li>deinen Namen und</li>
+                    <li>deine exakte Wohnadresse angibst!</li>
+                </ul>
+                <i>Diese E-Mail ist verbindlich und rechtskräftig.</i></p>
+            <p>
+                Wir werden dir anschließend eine Bestätigungsemail schicken und die Ausgabe zeitnah austragen.
+                Die Bezahlung erfolgt direkt vor Ort - natürlich unter Einhaltung strenger Hygienevorschriften.</p>
+            <p class="mb-0">Sollte niemand die Tür öffnen bzw. niemand die Zeitung entgegennehmen, nimmt der Zulieferer
+                die
+                Bestellung wieder mit, wirft aber einen Zettel mit einem neuen Liefertermin und Lars' Telefonummer in
+                den Briefkasten. Du hast dann die Möglichkeit, dort anzurufen und einen alternativen Liefertermin
+                vorzuschlagen - ansonsten gilt der auf dem Zettel mitgeteilte neue Termin.<br>
+                Sollte die Zeitung dann erneut nicht erfolgreich ausgetragen werden können, verfällt die Lieferung. Der
+                fällige Geldbetrag ist allerdings dennoch unbedingt bei nächster Gelegenheit zu zahlen.</p>
+        </div>
+    </div>
+
+
+</div>
+
+
+{% endblock %}

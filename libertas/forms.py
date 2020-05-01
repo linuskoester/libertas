@@ -39,3 +39,15 @@ class RedeemForm(forms.Form):
                             einzulösen, wenn die Ausgabe veröffentlicht wurde.""" % code.ausgabe.name)
 
         return cd
+
+
+class CoronaForm(forms.Form):
+    confirm1 = forms.BooleanField(
+        label="""In dem ich einen Zugangscode online bestelle, verpflichte ich mich rechtskräftig dazu,
+                 1€ - nach Aufforderung von uns - nachzureichen.""",
+        help_text="""Wir behalten uns es vor, Accounts umgehend zu sperren, welche dagegen und gegen unsere
+                     <a href="/agb">Nutzungsbedingungen</a> verstoßen.
+                     Es besteht kein Anspruch auf Rückerstattung oder Zugriff auf die erworbenen Ausgaben.""")
+    confirm2 = forms.BooleanField(
+        label="""Ich bin mit den <a href="/agb">Nutzungsbedingungen</a> einverstanden und
+                 stimme diesen zu.""")
