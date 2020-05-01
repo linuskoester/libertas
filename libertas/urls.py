@@ -10,4 +10,5 @@ urlpatterns = [
     path('datenschutz', views.datenschutz, name='datenschutz'),  # Datenschutz
     path('impressum', views.impressum, name='impressum'),  # Impressum
     path('agb', views.agb, name='agb'),  # AGB
+    path('corona', views.corona, name='corona'),  # Corona-Infos
 ]

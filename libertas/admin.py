@@ -28,6 +28,7 @@ class CodeAdmin(admin.ModelAdmin):
     autocomplete_fields = ('ausgabe', 'user')
     list_display = ('censored_code', 'ausgabe', 'creation', 'user', 'redeemed')
     readonly_fields = ['code', 'creation']
+    list_filter = ('creation', 'redeemed', 'ausgabe')
 
     def censored_code(self, obj):
         return "%s****" % (obj.code[:-4])
