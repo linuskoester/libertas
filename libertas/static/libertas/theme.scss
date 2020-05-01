@@ -59,3 +59,7 @@ $enable-gradients: true;
     filter: grayscale(0%);
     transition: filter .15s;
 }
+
+.nav-link:hover span {
+    opacity: 0.9;
+}

@@ -39,12 +39,12 @@
     <p>Wir verstehen uns als Jugendzeitschrift für Buxtehude, die einen politischen Schwerpunkt hat und mit
         einer klaren Haltung auftritt. Gerade in Zeiten eines erstarkenden Rechtsextremismus und Populismus
         sehen wir darin unsere Hauptaufgabe.</p>
-    <p>Außerdem sind Kultur, Sport und Freizeit, Schulisches und vieles mehr Inhalte unserer Zeitschrift.</p>
+    <p class="mb-0">Außerdem sind Kultur, Sport und Freizeit, Schulisches und vieles mehr Inhalte unserer Zeitschrift.</p>
 </div>
 
 {% if ausgaben %}
 <div class="row">
-    <div class="col-lg-8 pr-lg-0">
+    <div class="col-lg-8 pr-lg-0 d-flex">
         <div class="shadow rounded border border-secondary bg-light p-3">
             <h3 id="ausgaben">Ausgaben</h3>
             <div class="container-fluid mt-3 overflow-auto">
@@ -91,6 +91,9 @@
                 erwerben, benötigst du einen Zugangscode, den du direkt bei uns in der HPS kaufen kannst!</p>
             <hr class="bg-white">
             {% if user.is_authenticated %}
+            <p>Aufgrund der aktuellen Coronavirus-Situation kannst du Zugangscodes online bestellen:</p>
+            <a class="btn btn-warning btn-block" href="{% url 'corona' %}" role="button">Mehr Informationen</a>
+            <hr class="bg-white">
             <p>Hier kannst du deinen Zugangscode einzulösen:</p>
             <a class="btn btn-light btn-block" href="{% url 'redeem' %}" role="button">Zugangscode einlösen</a>
             {% else %}
@@ -104,8 +107,8 @@
 {% endif %}
 <div class="my-3 w-100 shadow rounded border border-secondary bg-light p-3">
     <h3 id="news">News</h3>
-    <h5>Erste Ausgabe kommt am 5. Mai raus! Jetzt nach Hause bestellen oder online lesen!</h5>
-    <p>Die erste Ausgabe von <i>TheHaps</i> wird am 5. Mai veröffentlicht! Das Titelthema lautet "Neustart" und Highlights der
+    <h5>Erste Ausgabe kommt am 11. Mai raus! Jetzt nach Hause bestellen oder online lesen!</h5>
+    <p>Die erste Ausgabe von <i>TheHaps</i> wird am 11. Mai veröffentlicht! Das Titelthema lautet "Neustart" und Highlights der
         Ausgabe sind unter anderem eine Reportage über die Flucht eines Schüler der HPS, ein Artikel, der sich mit der
         Frage auseinandersetzt, was wir aus der Corona-Krise für die Klima-Krise lernen können, ein Interview mit einem
         Chefarzt des Elbe-Klinikums Buxtehude über die Corona-Pandemie an dem Buxtehuder Krankenhaus sowie eine
@@ -116,12 +119,12 @@
     <p><b>Achtung!</b><br>Da die Zeitschrift offensichtlich nicht in der Schule verkauft werden kann, können
         Print-Ausgaben per E-Mail
         bestellt werden. Wir liefern dann die Bestellung direkt an die Haustür! Die genauen Bestimmungen bezüglich des
-        Bestellsystems finden sich hier (Link). Dort ist auch erklärt, wie Online-Ausgaben erworben werden können.
+        Bestellsystems finden sich <a href="{% url 'corona' %}">hier</a>. Dort ist auch erklärt, wie Online-Ausgaben erworben werden können.
     </p>
 
     <hr>
     <h5>Fünf Sportübungen für die Zeit im Homeoffice</h5>
-    <p>In der ersten Ausgabe von <i>TheHaps</i> stellen unsere beiden Sportredakteur Lennart und Stefan fünf Sportübungen für
+    <p class="mb-0">In der ersten Ausgabe von <i>TheHaps</i> stellen unsere beiden Sportredakteur Lennart und Stefan fünf Sportübungen für
         die Zeit im Homeoffice vor, die jeder Zuhause machen kann, um Fehlhaltungen zu verhindern und fit zu bleiben!
         Hier erfährst du, wie du eine Ausgabe kaufen kannst. </p>
 </div>
