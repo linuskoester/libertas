@@ -38,7 +38,7 @@ class CodeAdmin(admin.ModelAdmin):
 class ConfigurationAdmin(admin.ModelAdmin):
     fieldsets = [(None, {'fields': ['name']}),
                  ('Wartung',       {'fields': [
-                     'wartung_voll', 'wartung_auth', 'wartung_signup', 'wartung_viewer']})
+                     'wartung_voll', 'wartung_auth', 'wartung_signup', 'wartung_viewer', 'wartung_corona']})
                  ]
 
     list_display = ['name']

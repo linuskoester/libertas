@@ -17,7 +17,9 @@
                     erwerben. Während der Corona-Pandemie kannst du Zugangscodes automatisiert im Internet bestellen und
                     die Bezahlung später nachreichen:</b>
                 {% if user.is_authenticated %}
-                {% if not published %}
+                {% if wartung %}
+                <p><i>Aufgrund einer Wartung lassen sich zur Zeit keine Zugangscodes bestellen.</i></p>
+                {% elif not published %}
                 <p><i>Die Ausgabe ist noch nicht öffentlicht. Versuche es nochmal, sobald die Ausgabe veröffentlicht wurde.</i></p>
                 {% elif besitz %}
                 <p><i>Du bist bereits im Besitz der Ausgabe.</i></p>

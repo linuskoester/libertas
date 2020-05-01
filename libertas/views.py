@@ -51,6 +51,11 @@ def wartung(request):
         if request.user.is_superuser:
             messages.error(request, 'Wartungsmodus (Viewer) aktiviert!')
 
+    if Configuration.objects.get(name="Einstellungen").wartung_corona:
+        if request.user.is_superuser:
+            messages.error(
+                request, 'Wartungsmodus (Corona-Bestellsystem) aktiviert!')
+
 
 def startseite(request):
     if wartung(request):
@@ -141,6 +146,11 @@ def corona(request):
     if wartung(request):
         return render(request, 'libertas/wartung.html')
 
+    if Configuration.objects.get(name="Einstellungen").wartung_corona:
+        wartungsmodus = True
+    else:
+        wartungsmodus = False
+
     published = False
     besitz = False
     if request.user.is_authenticated:
@@ -192,4 +202,7 @@ def corona(request):
     else:
         form = CoronaForm()
 
-    return render(request, 'libertas/corona.html', {'form': form, 'published': published, 'besitz': besitz},)
+    return render(request, 'libertas/corona.html', {'form': form,
+                                                    'published': published,
+                                                    'besitz': besitz,
+                                                    'wartung': wartungsmodus},)
