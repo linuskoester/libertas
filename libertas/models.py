@@ -35,7 +35,7 @@ class Ausgabe(models.Model):
 class Code(models.Model):
     code = models.CharField(
         max_length=12, primary_key=True)
-    creation = models.DateTimeField('Erstellung', auto_now=True)
+    creation = models.DateTimeField('Erstellung', auto_now_add=True)
     ausgabe = models.ForeignKey(
         Ausgabe, on_delete=models.PROTECT)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None,
