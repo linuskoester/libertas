@@ -11,6 +11,7 @@ class Profile(models.Model):
     ual = models.TextField('User Access Log', blank=True, default='')
     corona_bestellung = models.BooleanField('Corona-Bestellung', default=False)
 
+
     def __str__(self):
         return self.user.username
 
