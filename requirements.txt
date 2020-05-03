@@ -5,3 +5,4 @@ six
 gunicorn
 django_compressor
 django-libsass
+sentry-sdk
