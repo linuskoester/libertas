@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate
 
 # Ein Benutzername kann nur aus Klein-, Großbuchstaben und Punkten bestehen
 correct_username = RegexValidator(
-    r'^[a-zA-Z.]+$',
+    r'^[a-zA-Z.-]+$',
     'Deine E-Mail-Adresse kann nur aus Kleinbuchstaben und Punkten bestehen, und keine Umlaute enthalten.')
 
 
@@ -25,8 +25,13 @@ def checkbetaaccess(username, self):
                            "Für diese E-Mail-Adresse ist kein Beta-Zugang freigeschaltet.")
 
 
+class UsernameField(forms.CharField):
+    def to_python(self, value):
+        return value.lower()
+
+
 class SignInForm(forms.Form):
-    username = forms.CharField(
+    username = UsernameField(
         label='E-Mail-Adresse',
         widget=forms.TextInput(
             attrs={'class': 'email',
@@ -70,7 +75,7 @@ class SignInForm(forms.Form):
 
 
 class SignUpForm(forms.Form):
-    username = forms.CharField(
+    username = UsernameField(
         label='E-Mail-Adresse',
         help_text="""Die digitale Version von TheHaps ist zurzeit ausschließlich für
                      Schülerinnen und Schüler, sowie Lehrkräfte der Halepaghen-Schule
@@ -122,7 +127,7 @@ class SignUpForm(forms.Form):
 
 
 class ResetForm(forms.Form):
-    username = forms.CharField(
+    username = UsernameField(
         label='E-Mail-Adresse',
         widget=forms.TextInput(
             attrs={'class': 'email',

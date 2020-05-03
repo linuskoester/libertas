@@ -1,4 +1,5 @@
 {% extends 'libertas/base.html' %}
+{% load static %}
 
 {% block title %}Corona-Infos{% endblock %}
 
@@ -61,16 +62,9 @@
                     <li>deine exakte Wohnadresse angibst!</li>
                 </ul>
                 <i>Diese E-Mail ist verbindlich und rechtskräftig.</i></p>
-            <p>
+            <p class="mb-0">
                 Wir werden dir anschließend eine Bestätigungsemail schicken und die Ausgabe zeitnah austragen.
-                Die Bezahlung erfolgt direkt vor Ort - natürlich unter Einhaltung strenger Hygienevorschriften.</p>
-            <p class="mb-0">Sollte niemand die Tür öffnen bzw. niemand die Zeitung entgegennehmen, nimmt der Zulieferer
-                die
-                Bestellung wieder mit, wirft aber einen Zettel mit einem neuen Liefertermin und Lars' Telefonummer in
-                den Briefkasten. Du hast dann die Möglichkeit, dort anzurufen und einen alternativen Liefertermin
-                vorzuschlagen - ansonsten gilt der auf dem Zettel mitgeteilte neue Termin.<br>
-                Sollte die Zeitung dann erneut nicht erfolgreich ausgetragen werden können, verfällt die Lieferung. Der
-                fällige Geldbetrag ist allerdings dennoch unbedingt bei nächster Gelegenheit zu zahlen.</p>
+                Die Bezahlung erfolgt direkt vor Ort - natürlich unter Einhaltung <a href="{% static 'libertas/pdf/kontaktlose-lieferung-corona.pdf' %}">strenger Hygienevorschriften</a>.</p>
         </div>
     </div>
 
