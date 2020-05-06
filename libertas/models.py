@@ -17,6 +17,7 @@ def generate_code(length=12):
 class Ausgabe(models.Model):
     name = models.CharField(max_length=64)
     publish_date = models.DateField('Erscheinungsdatum', blank=True, null=True)
+    force_visible = models.BooleanField(verbose_name="Sichtbarkeit erzwingen", default=False)
     number = models.IntegerField('Ausgaben-Nr.', primary_key=True)
     file_identifier = models.CharField(
         max_length=16, default=generate_id, unique=True)

@@ -10,6 +10,7 @@ from .models import Ausgabe, Code, User, Configuration
 from django.contrib.auth import logout
 from django.template.loader import render_to_string
 import os
+from django.db.models import Q
 
 # from django.contrib import messages
 
@@ -61,7 +62,7 @@ def startseite(request):
     if wartung(request):
         return render(request, 'libertas/wartung.html')
 
-    ausgaben = Ausgabe.objects.filter(publish_date__lte=date.today())
+    ausgaben = Ausgabe.objects.filter(Q(publish_date__lte=date.today()) | Q(force_visible=True))
     inventory = []
 
     if request.user.is_authenticated:
