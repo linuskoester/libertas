@@ -1,0 +1,84 @@
+$gray-950: #1b1b1b;
+
+body {
+    background-color: $gray-900;
+    color: $light;
+}
+
+.bg-light {
+    background-color: $gray-800 !important;
+}
+
+.border-secondary {
+    border: none !important;
+}
+
+main .navbar {
+    background-color: $gray-700 !important;
+}
+
+#scrollspy .nav-link, main nav, .pagenav .nav-link {
+    color: $light;
+}
+
+hr {
+    border-color: $gray-600;
+}
+
+header .navbar {
+    background: darken($primary, 12%) linear-gradient(180deg, darken($primary, 7%), darken($primary, 12%)) repeat-x !important;
+}
+
+.bg-warning, .btn-warning {
+    background: $gray-800 !important;
+    color: $warning !important;
+    border: solid 1px $warning;
+}
+
+.btn-light {
+    background: $gray-800 !important;
+    color: $light !important;
+    border: solid 1px $light;
+}
+
+main .bg-gradient-primary, .btn-primary {
+    background: $gray-800 !important;
+    color: lighten($primary, 10%) !important;
+    border: solid 1px $primary;
+}
+
+.card {
+    background-color: $gray-700;
+}
+
+.card-img-top {
+    filter: brightness(90%);
+}
+
+.navbar-brand {
+    background-color: darken($primary, 8%);
+}
+
+nav {
+    box-shadow: 0px -8px 15px 8px $gray-900 !important;
+}
+
+.footer {
+    background-color: $gray-800 !important;
+    box-shadow: inset 0px 10px 15px -10px #2b2a2a;
+}
+
+.text-muted {
+    color: darken($light, 25%) !important;
+}
+
+.form-control {
+    background-color: $black !important;
+    border: none;
+    color: $light !important;
+}
+
+.custom-control-label:after {
+    background: $black no-repeat 50% / 50% 50%;
+    border-radius: 0.25rem;
+}
