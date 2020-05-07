@@ -1,10 +1,8 @@
 name: Build Release Package
 
 on:
-  push:
-    tags:
-      - v*
-
+  release:
+    types: [published]
 jobs:
   push_to_registry:
     name: Push Docker image to GitHub Packages
