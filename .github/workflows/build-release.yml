@@ -6,15 +6,19 @@ on:
       - release
 
 jobs:
-  build:
+  push_to_registry:
+    name: Push Docker image to GitHub Packages
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: the-haps/libertas/libertas
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        registry: docker.pkg.github.com
-        tags: "latest, v${{ github.run_number }}"
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: the-haps/libertas/libertas
+          tag_with_ref: true
+          push: ${{ startsWith(github.ref, 'refs/tags/') }}
+          tags: latest
