@@ -62,7 +62,8 @@ def startseite(request):
     if wartung(request):
         return render(request, 'libertas/wartung.html')
 
-    ausgaben = Ausgabe.objects.filter(Q(publish_date__lte=date.today()) | Q(force_visible=True))
+    ausgaben = Ausgabe.objects.filter(
+        Q(publish_date__lte=date.today()) | Q(force_visible=True))
     inventory = []
 
     if request.user.is_authenticated:
