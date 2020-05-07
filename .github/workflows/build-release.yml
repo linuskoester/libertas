@@ -1,7 +1,9 @@
 name: Build Release Package
 
 on:
-  create
+  create:
+    tags:        
+      - v*
 
 jobs:
   push_to_registry:
