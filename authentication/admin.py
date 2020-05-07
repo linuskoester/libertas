@@ -13,6 +13,14 @@ email_confirmed.boolean = True
 email_confirmed.short_description = 'Bestätigt'
 
 
+def corona_bestellung(obj):
+    return obj.profile.corona_bestellung
+
+
+corona_bestellung.boolean = True
+corona_bestellung.short_description = 'Corona-Bestellung'
+
+
 class CodeInLine(admin.TabularInline):
     model = Code
     show_change_link = True
@@ -33,7 +41,8 @@ class UserProfileInline(admin.StackedInline):
 
 class AccountsUserAdmin(UserAdmin):
     inlines = [UserProfileInline, CodeInLine]
-    list_display = ('username', 'email', 'is_active', email_confirmed)
+    list_display = ('username', 'email', 'is_active',
+                    email_confirmed, corona_bestellung)
 
 
 admin.site.unregister(User)
