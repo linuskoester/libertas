@@ -2,8 +2,8 @@ name: Build Release Package
 
 on:
   push:
-    branches:
-      - release
+    tags:        
+      - v*
 
 jobs:
   push_to_registry:
