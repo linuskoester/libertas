@@ -3,7 +3,7 @@ name: Build Beta Package
 on:
   push:
     branches:
-      - beta
+      - master
 
 jobs:
   push_to_registry:
