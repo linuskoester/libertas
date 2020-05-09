@@ -19,14 +19,11 @@ Informationen, wie du eine lokale Instanz von Libertas erstellst, findest du in 
 - Erkläre in einem Commit **immer** was für Änderungen du vorgenommen hast.
 - Nenne in der Pull Request, was für Änderungen du vorgenommen hast, und warum diese von Bedeutung sind. Sollte deine Änderungen mit einer Issue zusammenhängen, makiere es bitte.
 
-## Bedeutung der verschiedenen Branches
-- Release
-  - Der Release-Branch entspricht der Liveversion von Libertas auf https://thehaps.de.
-  - Der Branch ist schreibgeschützt, alle Änderungen müssen zuvor durch den Beta-Branch gelaufen sein.
-- Beta
-  - Der Beta-Branch entspricht der öffentlichen Betaversion von Libertas auf https://beta.thehaps.de/
+## Bedeutung der verschiedenen Branches/Tags
+- Master
+  - Der Master-Branch entspricht der öffentlichen Betaversion von Libertas auf https://beta.thehaps.de/
   - Nach jeder Änderung lädt der Server automatisch das neuste Paket herunter, sodass unter dem Link jederzeit die Version des Beta-Branches zu finden ist.
-  - Der Branch ist ebenfalls schreibgeschützt, alle Änderungen müssen zuerst in dem Development-Branch zusammengeführt werden.
+  - Der Branch ist schreibgeschützt, alle Änderungen müssen zuerst durch Development-Branch laufen.
 - Development
   - Hier werden alle Änderungen zusammengeführt, bevor sie in die anderen Branches gemerged werden.
-  - Es ist der Default-Branch.
+  - Er ist der Default-Branch.
