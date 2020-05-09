@@ -1,12 +1,10 @@
 name: Build Release Package
 
-on:
-  release:
-    tags:
-      - v*
+on: [push]
 
 jobs:
   push_to_registry:
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     name: Push Docker image to GitHub Packages
     runs-on: ubuntu-latest
     steps:
