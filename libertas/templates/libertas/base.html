@@ -68,7 +68,7 @@
                                 aria-haspopup="true" aria-expanded="false">
                                 Schülerzeitung
                             </a>
-                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
+                            <div class="dropdown-menu dropdown-menu-left shadow" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item {% if menu == "sz-start" %}active{% endif %}"
                                     href="{% url 'index' %}">Übersicht & Ausgaben</a>
                                 <a class="dropdown-item {% if menu == "sz-team" %}active{% endif %}"
@@ -105,7 +105,7 @@
                             aria-haspopup="true" aria-expanded="false">
                             {{ user.username }}
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item {% if menu == "user-redeem" %}active{% endif %}"
                                 href="{% url 'redeem' %}">Code einlösen...</a>
                             <div class="dropdown-divider"></div>

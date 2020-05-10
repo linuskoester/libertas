@@ -88,17 +88,17 @@ nav {
 }
 
 .text-muted {
-    color: darken($light, 25%) !important;
+    color: darken($light, 30%) !important;
 }
 
 .form-control {
-    background-color: $black !important;
+    background-color: $gray-950 !important;
     border: none;
     color: $light !important;
 }
 
 .custom-control-label:after {
-    background: $black no-repeat 50% / 50% 50%;
+    background: $gray-950 no-repeat 50% / 50% 50%;
     border-radius: 0.25rem;
 }
 
@@ -109,7 +109,7 @@ nav {
 }
 
 .dropdown-menu {
-    background: $gray-900;
+    background: $gray-800;
     border: solid 1px $primary;
 }
 
@@ -122,7 +122,7 @@ nav {
 }
 
 .dropdown-item:hover {
-    background: $gray-700 !important;
+    background: $gray-900 !important;
     color: white !important;
 }
 
@@ -160,4 +160,21 @@ nav {
 .alert-danger {
     color: $danger !important;
     border: solid 1px $danger;
+}
+
+.popover {
+    background: $gray-900;
+    border: solid 1px $primary;
+}
+
+.popover .arrow::after {
+    border-top-color: $primary;
+}
+
+.popover-body {
+    color: $gray-400;
+}
+
+.btn.btn-dark.rounded-circle {
+    border: 1px $gray-900 solid;
 }
