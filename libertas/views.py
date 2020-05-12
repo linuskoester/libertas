@@ -1,22 +1,16 @@
 from datetime import datetime, date
-
 from django.contrib import messages
 from django.contrib.admin.models import CHANGE, LogEntry
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import redirect, render
-
 from .forms import RedeemForm, CoronaForm
-from .models import Ausgabe, Code, User, Configuration
+from .models import Ausgabe, Code, User, Configuration, ausgaben_visible, ausgaben_user
 from django.contrib.auth import logout
 from django.template.loader import render_to_string
 import os
-from django.db.models import Q
-
-# from django.contrib import messages
 
 
-def log(user, flag, message):
-    # Funktion um Einträge bei Objektem im Django-Admin zu loggen
+def log_user(user, flag, message):
     LogEntry.objects.log_action(
         user_id=user.id,
         content_type_id=ContentType.objects.get_for_model(
@@ -27,50 +21,55 @@ def log(user, flag, message):
         change_message=message)
 
 
-def wartung(request):
-    if Configuration.objects.get(name="Einstellungen").wartung_voll:
-        if request.user.is_superuser:
-            messages.error(request, 'Wartungsmodus (Voll) aktiviert!')
-        else:
-            return True
-
-    if Configuration.objects.get(name="Einstellungen").wartung_auth:
-        if request.user.is_authenticated:
-            if request.user.is_superuser:
-                messages.error(
-                    request, 'Wartungsmodus (Authentifizierungssystem) aktiviert!')
-            else:
+def wartung(request, pagetype=""):
+    wartung = Configuration.objects.get(name="Einstellungen")
+    if request.user.is_superuser:
+        if wartung.voll():
+            messages.warning(request, 'Wartungsmodus (Voll) aktiviert!')
+        if wartung.auth():
+            messages.warning(request, 'Wartungsmodus (Auth.) aktiviert!')
+        if wartung.signup():
+            messages.warning(request, 'Wartungsmodus (Regist.) aktiviert!')
+        if wartung.viewer():
+            messages.warning(request, 'Wartungsmodus (Viewer) aktiviert!')
+        if wartung.corona():
+            messages.warning(request, 'Wartungsmodus (Corona) aktiviert!')
+    else:
+        if wartung.voll():
+            return render(request, 'libertas/wartung.html')
+        if wartung.auth():
+            if request.user.is_authenticated:
                 messages.warning(
                     request, 'Du wurdest aufgrund von Wartungsarbeiten abgemeldet.')
                 logout(request)
-
-    if Configuration.objects.get(name="Einstellungen").wartung_signup:
-        if request.user.is_superuser:
-            messages.error(request, 'Wartungsmodus (Registrierung) aktiviert!')
-
-    if Configuration.objects.get(name="Einstellungen").wartung_viewer:
-        if request.user.is_superuser:
-            messages.error(request, 'Wartungsmodus (Viewer) aktiviert!')
-
-    if Configuration.objects.get(name="Einstellungen").wartung_corona:
-        if request.user.is_superuser:
+            elif pagetype == "auth" or pagetype == "signup":
+                messages.error(
+                    request, """Zurzeit ist die Anmeldung und Registrierung aufgrund von Wartungsarbeiten nicht möglich.
+                                <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
+                return redirect('index')
+        if wartung.signup() and pagetype == "signup":
             messages.error(
-                request, 'Wartungsmodus (Corona-Bestellsystem) aktiviert!')
+                request, """Zurzeit ist die Registrierung aufgrund von Wartungsarbeiten nicht möglich.
+                            <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
+            return redirect('index')
+        if wartung.viewer() and pagetype == "viewer":
+            messages.error(
+                request, """Aufgrund von Wartungsarbeiten lassen sich zurzeit keine digitalen Ausgaben und Leseproben lesen.
+                            <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
+            return redirect('index')
+        if wartung.corona() and pagetype == "corona":
+            return True
+    return False
 
 
 def startseite(request):
-    if wartung(request):
-        return render(request, 'libertas/wartung.html')
+    # Wartung
+    w = wartung(request)
+    if w:
+        return w
 
-    ausgaben = Ausgabe.objects.filter(
-        Q(publish_date__lte=date.today()) | Q(force_visible=True))
-    inventory = []
-
-    if request.user.is_authenticated:
-        user = User.objects.get(username=request.user)
-        for ausgabe in ausgaben:
-            if Code.objects.filter(user=user, ausgabe=ausgabe).exists():
-                inventory.append(ausgabe)
+    ausgaben = ausgaben_visible()
+    inventory = ausgaben_user(request.user)
 
     return render(request, 'libertas/startseite.html', {'menu': 'sz-start',
                                                         'ausgaben': ausgaben,
@@ -78,29 +77,37 @@ def startseite(request):
 
 
 def podcast(request):
-    if wartung(request):
-        return render(request, 'libertas/wartung.html')
+    # Wartung
+    w = wartung(request)
+    if w:
+        return w
 
     return render(request, 'libertas/podcast.html', {'menu': 'podcast'})
 
 
 def team(request):
-    if wartung(request):
-        return render(request, 'libertas/wartung.html')
+    # Wartung
+    w = wartung(request)
+    if w:
+        return w
 
     return render(request, 'libertas/team.html', {'menu': 'sz-team'})
 
 
 def faq(request):
-    if wartung(request):
-        return render(request, 'libertas/wartung.html')
+    # Wartung
+    w = wartung(request)
+    if w:
+        return w
 
     return render(request, 'libertas/faq.html', {'menu': 'sz-faq'})
 
 
 def redeem(request):
-    if wartung(request):
-        return render(request, 'libertas/wartung.html')
+    # Wartung
+    w = wartung(request)
+    if w:
+        return w
 
     if not request.user.is_authenticated:
         return redirect('signin')
@@ -110,8 +117,8 @@ def redeem(request):
             code = form.cleaned_data['code'].upper()
             code = Code.objects.get(code=code)
             code.user = User.objects.get(username=request.user)
-            log(request.user, CHANGE, 'Benutzer hat Code %s (%s) eingelöst.' %
-                (code.code, code.ausgabe.name))
+            log_user(request.user, CHANGE, 'Benutzer hat Code %s (%s) eingelöst.' %
+                     (code.code, code.ausgabe.name))
             code.redeemed = datetime.now()
             code.save()
             messages.success(
@@ -124,32 +131,39 @@ def redeem(request):
 
 
 def datenschutz(request):
-    if wartung(request):
-        return render(request, 'libertas/wartung.html')
+    # Wartung
+    w = wartung(request)
+    if w:
+        return w
 
     return render(request, 'libertas/datenschutz.html')
 
 
 def agb(request):
-    if wartung(request):
-        return render(request, 'libertas/wartung.html')
+    # Wartung
+    w = wartung(request)
+    if w:
+        return w
 
     return render(request, 'libertas/agb.html')
 
 
 def impressum(request):
-    if wartung(request):
-        return render(request, 'libertas/wartung.html')
+    # Wartung
+    w = wartung(request)
+    if w:
+        return w
 
     return render(request, 'libertas/impressum.html')
 
 
 def corona(request):
-    if wartung(request):
-        return render(request, 'libertas/wartung.html')
-
-    if Configuration.objects.get(name="Einstellungen").wartung_corona:
+    # Wartung
+    w = wartung(request, "corona")
+    if w is True:
         wartungsmodus = True
+    elif w:
+        return w
     else:
         wartungsmodus = False
 
@@ -178,8 +192,9 @@ def corona(request):
             code = Code.objects.get(code=code.code)
             print(code)
 
-            log(request.user, CHANGE, 'Der Benutzer hat durch das Corona-Bestellsystem den Code %s (%s) bestellt.' %
-                (code.code, code.ausgabe.name))
+            log_user(request.user, CHANGE,
+                     'Der Benutzer hat durch das Corona-Bestellsystem den Code %s (%s) bestellt.' %
+                     (code.code, code.ausgabe.name))
             LogEntry.objects.log_action(
                 user_id=request.user.id,
                 content_type_id=ContentType.objects.get_for_model(

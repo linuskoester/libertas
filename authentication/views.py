@@ -6,64 +6,17 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .forms import SignUpForm, SignInForm, ResetForm, SetPasswordForm, ChangePasswordForm, DeleteAccountForm
 from .tokens import signup_token, reset_token
-from django.contrib.admin.models import LogEntry, CHANGE, ADDITION
-from django.contrib.contenttypes.models import ContentType
+from django.contrib.admin.models import CHANGE, ADDITION
 from django.contrib import messages
 import os
-from libertas.models import Configuration
-
-
-def log(user, flag, message):
-    # Funktion um Einträge bei Objektem im Django-Admin zu loggen
-    LogEntry.objects.log_action(
-        user_id=user.id,
-        content_type_id=ContentType.objects.get_for_model(
-            user).pk,
-        object_id=user.id,
-        object_repr=user.username,
-        action_flag=flag,
-        change_message=message)
-
-
-def wartung(request):
-    if Configuration.objects.get(name="Einstellungen").wartung_voll:
-        if request.user.is_superuser:
-            messages.error(request, 'Wartungsmodus (Voll) aktiviert!')
-        else:
-            return "voll"
-
-    if Configuration.objects.get(name="Einstellungen").wartung_auth:
-        if request.user.is_authenticated:
-            if request.user.is_superuser:
-                messages.error(
-                    request, 'Wartungsmodus (Authentifizierungssystem) aktiviert!')
-            else:
-                messages.warning(
-                    request, 'Du wurdest aufgrund von Wartungsarbeiten abgemeldet.')
-                logout(request)
-        else:
-            if not request.user.is_superuser:
-                return "auth"
-
-    if Configuration.objects.get(name="Einstellungen").wartung_signup:
-        if request.user.is_superuser:
-            messages.error(request, 'Wartungsmodus (Registrierung) aktiviert!')
-        else:
-            return "signup"
-
-    if Configuration.objects.get(name="Einstellungen").wartung_viewer:
-        if request.user.is_superuser:
-            messages.error(request, 'Wartungsmodus (Viewer) aktiviert!')
+from libertas.views import log_user, wartung
 
 
 def signin(request):
-    if wartung(request) == "voll":
-        return render(request, 'libertas/wartung.html')
-    elif wartung(request) == "auth":
-        messages.error(
-            request, """Zurzeit ist die Anmeldung aufgrund von Wartungsarbeiten nicht möglich.
-            <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
-        return redirect('index')
+    # Wartung
+    w = wartung(request, "auth")
+    if w:
+        return w
 
     # Wenn angemeldet, leite zur Startseite weiter
     if request.user.is_authenticated:
@@ -87,8 +40,10 @@ def signin(request):
 
 
 def signout(request):
-    if wartung(request) == "voll":
-        return render(request, 'libertas/wartung.html')
+    # Wartung
+    w = wartung(request)
+    if w:
+        return w
 
     # Melde ab und leite zur Startseite weiter
     logout(request)
@@ -97,18 +52,10 @@ def signout(request):
 
 
 def signup(request):
-    if wartung(request) == "voll":
-        return render(request, 'libertas/wartung.html')
-    elif wartung(request) == "auth":
-        messages.error(
-            request, """Zurzeit ist die Registrierung aufgrund von Wartungsarbeiten nicht möglich.
-                        <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
-        return redirect('index')
-    elif wartung(request) == "signup":
-        messages.error(
-            request, """Zurzeit ist die Registrierung aufgrund von Wartungsarbeiten nicht möglich.
-                        <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
-        return redirect('index')
+    # Wartung
+    w = wartung(request, "signup")
+    if w:
+        return w
 
     # Wenn angemeldet, leite zur Startseite weiter
     if request.user.is_authenticated:
@@ -124,8 +71,9 @@ def signup(request):
             if not User.objects.filter(username=username).exists():
                 # Erstelle Benutzer + Logeinträge
                 user = User.objects.create_user(username, email, password)
-                log(user, ADDITION, 'Account erstellt.')
-                log(user, CHANGE, 'Registriert und Aktivierungs-Email gesendet.')
+                log_user(user, ADDITION, 'Account erstellt.')
+                log_user(user, CHANGE,
+                         'Registriert und Aktivierungs-Email gesendet.')
                 user.save()
             # Wenn Benutzer schon existiert, aber E-Mail nicht bestätigt
             else:
@@ -133,7 +81,8 @@ def signup(request):
                 user = User.objects.get(username=username)
                 user.set_password(password)
                 user.save()
-                log(user, CHANGE, 'Registriert und Aktivierungs-Email gesendet.')
+                log_user(user, CHANGE,
+                         'Registriert und Aktivierungs-Email gesendet.')
                 # Die Form Validierung fängt alle Accounts ab, die bereits existieren
                 # und eine bestätigte E-Mail-Adresse haben. D.h. wird dieser Skript
                 # nicht ausgeführt, wenn der Account eine bestätigte E-Mail-Adresse hat.
@@ -162,18 +111,10 @@ def signup(request):
 
 
 def signup_activate(request, uidb64, token):
-    if wartung(request) == "voll":
-        return render(request, 'libertas/wartung.html')
-    elif wartung(request) == "auth":
-        messages.error(
-            request, """Zurzeit ist die Registrierung aufgrund von Wartungsarbeiten nicht möglich.
-                        <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
-        return redirect('index')
-    elif wartung(request) == "auth":
-        messages.error(
-            request, """Zurzeit ist die Registrierung aufgrund von Wartungsarbeiten nicht möglich.
-                        <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
-        return redirect('index')
+    # Wartung
+    w = wartung(request, "signup")
+    if w:
+        return w
 
     # Versuche aus der URL den Benutzer auszulesen
     try:
@@ -188,7 +129,7 @@ def signup_activate(request, uidb64, token):
         # Setze E-Mail auf bestätigt + Logeintrag
         user.profile.email_confirmed = True
         user.save()
-        log(user, CHANGE, 'Account bestätigt.')
+        log_user(user, CHANGE, 'Account bestätigt.')
         # Melde Benutzer an
         login(request, user)
         # Bestätigungsnachricht und Weiterleitung zur Startseite
@@ -209,13 +150,10 @@ def signup_activate(request, uidb64, token):
 
 
 def reset(request):
-    if wartung(request) == "voll":
-        return render(request, 'libertas/wartung.html')
-    elif wartung(request) == "auth":
-        messages.error(
-            request, """Zurzeit ist die Anmeldung aufgrund von Wartungsarbeiten nicht möglich.
-            <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
-        return redirect('index')
+    # Wartung
+    w = wartung(request, "auth")
+    if w:
+        return w
 
     # Wenn angemeldet, leite zur Startseite weiter
     if request.user.is_authenticated:
@@ -239,7 +177,8 @@ def reset(request):
                 })
                 user.email_user(subject, message)
                 # Logeintrag
-                log(user, CHANGE, 'Zurücksetzen des Passworts angefordert, Link gesendet.')
+                log_user(
+                    user, CHANGE, 'Zurücksetzen des Passworts angefordert, Link gesendet.')
             # Zeige Bestätigungsnachricht
             messages.success(request,
                              """Sofern ein Account mit dieser E-Mail-Adresse existiert,
@@ -256,8 +195,10 @@ def reset(request):
 
 
 def reset_confirm(request, uidb64, token):
-    if wartung(request) == "voll":
-        return render(request, 'libertas/wartung.html')
+    # Wartung
+    w = wartung(request, "auth")
+    if w:
+        return w
 
     # Versuche aus der URL den Benutzer auszulesen
     try:
@@ -275,12 +216,12 @@ def reset_confirm(request, uidb64, token):
             if form.is_valid():
                 # Ändere Passwort
                 user.set_password(form.cleaned_data['password'])
-                log(user, CHANGE, 'Passwort zurückgesetzt.')
+                log_user(user, CHANGE, 'Passwort zurückgesetzt.')
                 # Falls E-Mail noch nicht bestätigt, ändere sie zu bestätigt + Logeintrag
                 if not user.profile.email_confirmed:
                     user.profile.email_confirmed = True
-                    log(user, CHANGE,
-                        'E-Mail durch Zurücksetzen des Passworts bestätigt.')
+                    log_user(user, CHANGE,
+                             'E-Mail durch Zurücksetzen des Passworts bestätigt.')
                 # Speichere Benutzer
                 user.save()
                 # Leite zum Login weiter
@@ -305,8 +246,10 @@ def reset_confirm(request, uidb64, token):
 
 
 def account_info(request):
-    if wartung(request) == "voll":
-        return render(request, 'libertas/wartung.html')
+    # Wartung
+    w = wartung(request, "auth")
+    if w:
+        return w
 
     # Falls Benutzer angemeldet
     if request.user.is_authenticated:
@@ -317,8 +260,10 @@ def account_info(request):
 
 
 def account_password(request):
-    if wartung(request) == "voll":
-        return render(request, 'libertas/wartung.html')
+    # Wartung
+    w = wartung(request, "auth")
+    if w:
+        return w
 
     # Falls Benutzer angemeldet
     if request.user.is_authenticated:
@@ -334,7 +279,7 @@ def account_password(request):
                     # Ändere Passwort + Logeintrag
                     user.set_password(form.cleaned_data['password'])
                     user.save()
-                    log(user, CHANGE, 'Passwort vom Benutzer geändert.')
+                    log_user(user, CHANGE, 'Passwort vom Benutzer geändert.')
                     # Bestätigungsnachricht
                     messages.success(
                         request, 'Dein Passwort wurde erfolgreich geändert.')
@@ -355,8 +300,10 @@ def account_password(request):
 
 
 def account_delete(request):
-    if wartung(request) == "voll":
-        return render(request, 'libertas/wartung.html')
+    # Wartung
+    w = wartung(request, "auth")
+    if w:
+        return w
 
     # Wenn Benutzer angemeldet
     if request.user.is_authenticated:
