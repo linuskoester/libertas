@@ -1,13 +1,16 @@
-from datetime import datetime, date
+import os
+from datetime import date, datetime
+
 from django.contrib import messages
 from django.contrib.admin.models import CHANGE, LogEntry
+from django.contrib.auth import logout
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import redirect, render
-from .forms import RedeemForm, CoronaForm
-from .models import Ausgabe, Code, User, Configuration, ausgaben_visible, ausgaben_user
-from django.contrib.auth import logout
 from django.template.loader import render_to_string
-import os
+
+from .forms import CoronaForm, RedeemForm
+from .models import (Ausgabe, Code, Configuration, User, ausgaben_user,
+                     ausgaben_visible)
 
 
 def log_user(user, flag, message):

@@ -1,10 +1,11 @@
-from django import forms
-from django.core.validators import RegexValidator
-from django.contrib.auth.password_validation import validate_password
-from django.contrib.auth.models import User
 import os
 import urllib.request
+
+from django import forms
 from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
+from django.core.validators import RegexValidator
 
 # Ein Benutzername kann nur aus Klein-, Großbuchstaben und Punkten bestehen
 correct_username = RegexValidator(

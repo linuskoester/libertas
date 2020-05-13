@@ -1,15 +1,19 @@
-from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-from .forms import SignUpForm, SignInForm, ResetForm, SetPasswordForm, ChangePasswordForm, DeleteAccountForm
-from .tokens import signup_token, reset_token
-from django.contrib.admin.models import CHANGE, ADDITION
-from django.contrib import messages
 import os
+
+from django.contrib import messages
+from django.contrib.admin.models import ADDITION, CHANGE
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+
 from libertas.views import log_user, wartung
+
+from .forms import (ChangePasswordForm, DeleteAccountForm, ResetForm,
+                    SetPasswordForm, SignInForm, SignUpForm)
+from .tokens import reset_token, signup_token
 
 
 def signin(request):

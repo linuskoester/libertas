@@ -1,6 +1,8 @@
-from django import forms
-from .models import Code
 from datetime import date
+
+from django import forms
+
+from .models import Code
 
 
 class RedeemForm(forms.Form):

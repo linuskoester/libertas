@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import Ausgabe, Code, Configuration
 
 # Register your models here.
