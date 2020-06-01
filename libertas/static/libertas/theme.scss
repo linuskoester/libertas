@@ -1,14 +1,119 @@
-$secondary: rgb(230, 230, 230);
+$secondary: rgb(235, 235, 235);
 $enable-gradients: true;
 
 @import "./bootstrap/bootstrap";
 
-header nav {
-    box-shadow: 0px -8px 15px 8px #727272;
+// HINTERGRUND
+
+body {
+    // background-image: url('/static/libertas/img/background.jpeg');
+    background-size: 300px;
+    background-attachment: scroll;
 }
 
-.footer {
-    box-shadow: inset 0px 10px 15px -10px #afafaf;
+// THUMBNAIL STARTSEITE
+
+.main-jumbotron .text-right {
+    display: none;
+    .thumbnail-1 {
+        box-shadow: 0 0 15px -3px rgba(0, 0, 0, 0.75);
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .main-jumbotron {
+        overflow: hidden;
+
+        .text-right {
+            display: block;
+            height: 0;
+
+            .thumbnail-1 {
+                // display: unset;
+                height: 190px;
+                margin-bottom: -190px;
+                padding: 0;
+                position: relative;
+                bottom: 130px;
+                left: 10px;
+                transform: rotate(-10deg);
+                border-radius: 5px;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    .main-jumbotron .text-right .thumbnail-1 {
+        height: 220px;
+        margin-bottom: -220px;
+        bottom: 160px;
+        left: -20px;
+    }
+}
+
+@include media-breakpoint-up(xl) {
+    .main-jumbotron .text-right .thumbnail-1 {
+        left: -40px;
+    }
+}
+
+// MENÜLEISTE
+
+.nav-center {
+    flex-direction: row;
+    flex-wrap: wrap;
+    .nav-item {
+        width: 50%;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .nav-center {
+        flex-wrap: nowrap;
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    .nav-center {
+        position: fixed;
+        left: 50% !important;
+        transform: translateX(-50%);
+
+        flex-direction: column;
+        .nav-item {
+            width: unset;
+        }
+    }
+}
+
+$navbar: $white;
+
+header nav {
+    background-color: transparentize($navbar, 0.05);
+}
+
+@supports ((-webkit-backdrop-filter: blur(2em)) or (backdrop-filter: blur(2em))) {
+    header nav {
+        background-color: transparentize($navbar, 0.4) !important;
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px);
+        .dropdown-menu {
+            background-color: transparentize($navbar, 0.4) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px);
+        }
+    }
+}
+
+.navbar.fixed-top a.nav-link {
+    padding: 0.3rem !important;
+}
+
+.navbar.fixed-top .nav-color {
+    border-radius: 0.25rem !important;
+    color: white;
+    padding: 0.45rem !important;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -19,23 +124,21 @@ header nav {
     opacity: 0.9;
 }
 
-.bg-yellow {
-    background-color: #ffef35;
+.nav-link:hover span {
+    opacity: 0.9;
 }
 
-#scrollspy {
-    .nav-link {
-        color: $dark;
-    }
-    .nav-link:hover {
-        opacity: 0.8;
-    }
-    .active {
-        background-color: $dark;
-        color: $light;
-        opacity: 1 !important;
-    }
+a:hover .nav-color {
+    opacity: 0.8 !important;
 }
+
+// FOOTER
+
+.footer {
+    box-shadow: inset 0px 10px 15px -10px #afafaf;
+}
+
+// ZWEITE NAVIGATIONSLEISTE
 
 .pagenav {
     .nav-link {
@@ -51,6 +154,8 @@ header nav {
     }
 }
 
+// GRAYSCALE BEI AUSGABENÜBERSICHT
+
 .card .thumbnail-gray {
     filter: grayscale(100%);
     transition: filter 0.2s;
@@ -61,17 +166,8 @@ header nav {
     transition: filter 0.15s;
 }
 
-.nav-link:hover span {
-    opacity: 0.9;
-}
+// DARKMODE
 
-@media (prefers-color-scheme: dark) {
-    @import "./darkmode";
-}
-
-:target:before {
-    content: "";
-    display: block;
-    padding: 135px 0 0;
-    margin: -135px 0 0;
-}
+// @media (prefers-color-scheme: dark) {
+//     @import "./darkmode";
+// }

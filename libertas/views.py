@@ -74,8 +74,7 @@ def startseite(request):
     ausgaben = ausgaben_visible()
     inventory = ausgaben_user(request.user)
 
-    return render(request, 'libertas/startseite.html', {'menu': 'sz-start',
-                                                        'ausgaben': ausgaben,
+    return render(request, 'libertas/startseite.html', {'ausgaben': ausgaben,
                                                         'inventory': inventory})
 
 
@@ -94,7 +93,7 @@ def team(request):
     if w:
         return w
 
-    return render(request, 'libertas/team.html', {'menu': 'sz-team'})
+    return render(request, 'libertas/team.html', {'menu': 'team'})
 
 
 def faq(request):
@@ -103,7 +102,7 @@ def faq(request):
     if w:
         return w
 
-    return render(request, 'libertas/faq.html', {'menu': 'sz-faq'})
+    return render(request, 'libertas/faq.html', {'menu': 'faq'})
 
 
 def redeem(request):
@@ -222,7 +221,8 @@ def corona(request):
     else:
         form = CoronaForm()
 
-    return render(request, 'libertas/corona.html', {'form': form,
+    return render(request, 'libertas/corona.html', {'menu': 'buy',
+                                                    'form': form,
                                                     'published': published,
                                                     'besitz': besitz,
                                                     'wartung': wartungsmodus},)

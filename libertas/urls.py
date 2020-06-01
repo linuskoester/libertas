@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic import RedirectView
 
 from . import views
 
@@ -11,5 +12,7 @@ urlpatterns = [
     path('datenschutz', views.datenschutz, name='datenschutz'),  # Datenschutz
     path('impressum', views.impressum, name='impressum'),  # Impressum
     path('agb', views.agb, name='agb'),  # AGB
-    path('corona', views.corona, name='corona'),  # Corona-Infos
+    path('corona', RedirectView.as_view(url='buy')),  # Corona-Infos
+    path('buy', views.corona, name='buy'),  # Kaufen
+    path('buy', views.corona, name='corona'),  # Kaufen
 ]
