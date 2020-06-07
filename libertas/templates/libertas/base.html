@@ -48,10 +48,10 @@
     {% block header %}{% endblock %}
 </head>
 
-<body class="d-flex flex-column bg-white" style="min-height: 100%;">
+<body class="d-flex flex-column" style="min-height: 100%;">
     {% block body %}
     <header>
-        <nav class="navbar navbar-expand-lg fixed-top navbar-light p-lg-2 shadow">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-light p-lg-2 shadow-rd">
             <a class="navbar-brand p-0 mr-2" href="{% url 'index' %}">
                 <img src="{% static 'libertas/img/logo-blue.png' %}" style="height: 36px">
             </a>
@@ -108,17 +108,22 @@
                             aria-haspopup="true" aria-expanded="false">
                             {{ user.username }}
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="dropdown-menu dropdown-menu-right shadow-rd border"
+                            aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item {% if menu == "user-redeem" %}active{% endif %}"
-                                href="{% url 'redeem' %}"><i class="fas fa-tag mr-2"></i>Code einlösen...</a>
+                                href="{% url 'redeem' %}"><i class="fas fa-tag text-center" style="width: 22px;"></i>
+                                Code einlösen...</a>
                             <div class="dropdown-divider"></div>
                             {% if user.is_staff %}
-                            <a class="dropdown-item" href="{% url 'admin:index' %}"><i class="fas fa-users-cog mr-2"></i>Administration</a>
+                            <a class="dropdown-item" href="{% url 'admin:index' %}"><i
+                                    class="fas fa-users-cog text-center" style="width: 22px;"></i> Administration</a>
                             <div class="dropdown-divider"></div>
                             {% endif %}
                             <a class="dropdown-item {% if "user-account-" in menu %}active{% endif %}"
-                                href="{% url 'account' %}"><i class="fas fa-user mr-2"></i>Dein Account</a>
-                            <a class="dropdown-item" href="{% url 'signout' %}"><i class="fas fa-sign-out-alt mr-2"></i>Abmelden</a>
+                                href="{% url 'account' %}"><i class="fas fa-user text-center" style="width: 22px;"></i>
+                                Dein Account</a>
+                            <a class="dropdown-item" href="{% url 'signout' %}"><i
+                                    class="fas fa-sign-out-alt text-center" style="width: 22px;"></i> Abmelden</a>
                         </div>
                     </li>
                 </ul>
@@ -166,28 +171,38 @@
             <!-- <img src="/static/libertas/img/werbung/Werbebanner.png" style="max-width: 300px;"
                 class="d-block rounded img-fluid mx-auto mx-md-0 mr-md-2"> -->
             <a href="https://www.carl-duisberg-highschool.de"><img src="/static/libertas/img/werbung/cdc.jpg"
-                    style="max-height: 100px;" class="d-block rounded img-fluid mx-md-auto mx-md-0 mt-0"></a>
+                    style="max-height: 100px;" class="d-block rounded img-fluid mx-md-auto mx-md-0 mt-0 shadow-rd"></a>
         </div>
         {% endblock %}
     </div>
-    <footer class="footer pt-4 bg-secondary mx-0 d-sm-flex justify-content-center pl-4 pl-sm-0">
-        <div class="d-sm-inline-flex flex-column flex-sm-row mr-5">
-            <ul class="list-unstyled">
-                <li><a href="{% url 'agb' %}" class="text-muted">Nutzungsbedingungen</a></li>
-                <li><a href="{% url 'impressum' %}" class="text-muted">Impressum</a></li>
-                <li><a href="{% url 'datenschutz' %}" class="text-muted">Datenschutz</a></li>
+    <footer class="footer p-0">
+        <div class="mx-auto my-3 text-center">
+            <ul class="list-unstyled text-light d-flex m-0 justify-content-center">
+                <li class="mx-2"><i class="fas fa-balance-scale text-center" style="width: 20px;"></i> <a
+                        href="{% url 'agb' %}" class="text-light">Nutzungsbedingungen</a>
+                </li>
+                <li class="mx-2"><i class="fas fa-scroll text-center" style="width: 20px;"></i> <a
+                        href="{% url 'impressum' %}" class="text-light">Impressum</a>
+                </li>
+                <li class="mx-2"><i class="fas fa-user-secret text-center" style="width: 20px;"></i> <a
+                        href="{% url 'datenschutz' %}" class="text-light">Datenschutz</a>
+                </li>
+                <li class="mx-2">&middot;</li>
+                <li class="mx-2"><i class="fas fa-envelope text-center" style="width: 20px;"></i> <a
+                        href="{% url 'team' %}" class="text-light">Kontakt</a></li>
+                <li class="mx-2"><i class="fas fa-info-circle text-center" style="width: 20px;"></i> <a
+                        href="https://status.thehaps.de/" class="text-light">Status</a></li>
+                <li class="mx-2"><i class="fab fa-github text-center" style="width: 20px;"></i> <a
+                        href="https://github.com/the-haps" class="text-light">GitHub</a>
+                </li>
             </ul>
+            <p class="mt-3 text-gray small"><b><a class="text-gray"
+                        href="https://github.com/the-haps/libertas">Libertas v1.1</a></b><br>
+                Libertas ist open-source und lizensiert unter der <a class="text-gray"
+                    href="https://github.com/the-haps/libertas/blob/development/LICENSE">MIT-Lizenz</a> &copy; 2020 <a class="text-gray"
+                    href="https://github.com/CrazyEasy">Linus Köster</a></p>
         </div>
-        <div class="d-sm-inline-flex flex-column flex-sm-row">
-            <ul class="list-unstyled">
-                <li class="text-muted"><i class="fas fa-envelope"></i> <a href="{% url 'team' %}"
-                        class="text-muted">Kontakt</a></li>
-                <li class="text-muted"><i class="fas fa-info-circle"></i> <a href="https://status.thehaps.de/"
-                        class="text-muted">Status</a></li>
-                <li class="text-muted"><i class="fab fa-github"></i> <a href="https://github.com/the-haps"
-                        class="text-muted">GitHub</a></li>
-            </ul>
-        </div>
+
     </footer>
     {% endblock %}
     <script src="https://2299g1946cbj.statuspage.io/embed/script.js"></script>

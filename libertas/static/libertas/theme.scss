@@ -6,8 +6,8 @@ $enable-gradients: true;
 // HINTERGRUND
 
 body {
-    // background-image: url('/static/libertas/img/background.jpeg');
-    background-size: 300px;
+    background-image: url("/static/libertas/img/background-light.jpg");
+    background-size: 442px;
     background-attachment: scroll;
 }
 
@@ -93,16 +93,11 @@ header nav {
     background-color: transparentize($navbar, 0.05);
 }
 
-@supports ((-webkit-backdrop-filter: blur(2em)) or (backdrop-filter: blur(2em))) {
+@supports ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
     header nav {
         background-color: transparentize($navbar, 0.4) !important;
-        backdrop-filter: blur(8px) !important;
-        -webkit-backdrop-filter: blur(8px);
-        .dropdown-menu {
-            background-color: transparentize($navbar, 0.4) !important;
-            backdrop-filter: blur(8px) !important;
-            -webkit-backdrop-filter: blur(8px);
-        }
+        backdrop-filter: blur(6px) !important;
+        -webkit-backdrop-filter: blur(6px);
     }
 }
 
@@ -134,8 +129,19 @@ a:hover .nav-color {
 
 // FOOTER
 
+
+$footer: $black;
+
 .footer {
-    box-shadow: inset 0px 10px 15px -10px #afafaf;
+    background-color: transparentize($footer, 0.05);
+}
+
+@supports ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
+    .footer {
+        background-color: transparentize($footer, 0.2) !important;
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px);
+    }
 }
 
 // ZWEITE NAVIGATIONSLEISTE
@@ -164,6 +170,16 @@ a:hover .nav-color {
 .card:hover .thumbnail-gray {
     filter: grayscale(0%);
     transition: filter 0.15s;
+}
+
+// SCHATTEN
+
+.shadow-rd {
+    box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.175) !important;
+}
+
+.text-gray {
+    color: $gray-500 !important;
 }
 
 // DARKMODE
