@@ -133,14 +133,14 @@ a:hover .nav-color {
 $footer: $black;
 
 .footer {
-    background-color: transparentize($footer, 0.05);
+    background-color: transparentize($footer, 0.2);
 }
 
 @supports ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
     .footer {
         background-color: transparentize($footer, 0.2) !important;
-        backdrop-filter: blur(8px) !important;
-        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(5px) !important;
+        -webkit-backdrop-filter: blur(5px);
     }
 }
 
