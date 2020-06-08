@@ -2,7 +2,6 @@ import os
 from django.contrib.auth.models import User
 from libertas.models import Configuration
 
-
 if not User.objects.filter(username=os.environ['DJANGO_ADMIN_USERNAME']).exists():
     u = User(username=os.environ['DJANGO_ADMIN_USERNAME'])
     u.set_password(os.environ['DJANGO_ADMIN_PASSWORD'])
