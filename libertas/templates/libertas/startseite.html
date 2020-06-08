@@ -6,7 +6,7 @@
 {% block main %}
 
 <div class="jumbotron main-jumbotron mb-3 text-light bg-gradient-primary text-center py-5 shadow-rd">
-    <img src="{% static 'libertas/img/logo-white.png' %}" style="max-height: 75px">
+    <img src="{% static 'libertas/img/logo-white.png' %}" style="max-height: 75px" alt="TheHaps">
     <p class="h3 mt-4 font-italic mb-0">Das Magazin mit Biss.</p>
     <div class="text-right">
         <img src="{% url 'viewer' 1 'thumbnail' %}" class="thumbnail-1">
@@ -32,7 +32,7 @@
 <div class="row">
     <div class="col-lg-8 pr-lg-0 d-flex">
         <div class="mb-3 w-100 rounded bg-white p-3 w-100 border shadow-rd">
-            <h4 class="font-weight-bold"><i class="fas fa-newspaper mr-2" style="color: #cf3342;"></i>Aktuelle Ausgabe</h4>
+            <h2 class="font-weight-bold h4"><i class="fas fa-newspaper mr-2" style="color: #cf3342;"></i>Aktuelle Ausgabe</h2>
             <div class=container-fluid mt-3 overflow-auto">
                 <div class="row flex-row flex-nowrap pb-2">
                     {% for ausgabe in ausgaben.all %}
@@ -75,7 +75,7 @@
     </div>
     <div class="col-lg-4 pt-lg-0 pl-lg-3 d-flex">
         <div class="mb-3 w-100 rounded bg-white p-3 w-100 border shadow-rd">
-            <h4 class="font-weight-bold"><i class="fas fa-shopping-cart mr-2" style="color: #17a2b8;"></i>Kaufen</h4>
+            <h2 class="font-weight-bold h4"><i class="fas fa-shopping-cart mr-2" style="color: #17a2b8;"></i>Kaufen</h2>
             <p>Auf dieser Webseite kannst du alle bisher erschienen Ausgaben lesen. Um eine Online-Ausgabe zu
                 erwerben, benötigst du einen Zugangscode, den du direkt bei uns in der HPS kaufen kannst!</p>
             <hr>
@@ -95,7 +95,7 @@
 </div>
 {% endif %}
 <div class="mb-3 w-100 rounded bg-white p-3 w-100 border shadow-rd">
-    <h4 class="font-weight-bold"><i class="fas fa-comment-alt mr-2" style="color: rgb(10, 114, 184);"></i>News</h4>
+    <h2 class="font-weight-bold h4"><i class="fas fa-comment-alt mr-2" style="color: rgb(10, 114, 184);"></i>News</h2>
     <h5>Erste Ausgabe kommt am 11. Mai raus! Jetzt nach Hause bestellen oder online lesen!</h5>
     <p>Die erste Ausgabe von <i>TheHaps</i> wird am 11. Mai veröffentlicht! Das Titelthema lautet "Neustart" und Highlights der
         Ausgabe sind unter anderem eine Reportage über die Flucht eines Schüler der HPS, ein Artikel, der sich mit der
