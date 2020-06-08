@@ -1,4 +1,7 @@
-## Libertas ist lizensiert unter GNU AGPLv3 (c) 2020 Linus Köster
+[Libertas](https://github.com/the-haps/libertas/) ist lizensiert unter **GNU AGPLv3** &copy; 2020 Linus Köster
+
+
+
 
 
                     GNU AFFERO GENERAL PUBLIC LICENSE
