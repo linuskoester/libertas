@@ -13,7 +13,7 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v2
       - name: Include version number
-        run: print "BETA-${{ github.run_number }}" > version.txt
+        run: echo "BETA-${{ github.run_number }}" > version.txt
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v1
         with:
