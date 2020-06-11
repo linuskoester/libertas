@@ -1,0 +1,181 @@
+$gray-950: #1b1b1b;
+
+body {
+    background-color: $gray-900;
+    color: $light;
+}
+
+.bg-light {
+    background-color: $gray-800 !important;
+}
+
+.border-secondary {
+    border: none !important;
+}
+
+main .navbar {
+    background-color: $gray-700 !important;
+}
+
+#scrollspy .nav-link, main nav, .pagenav .nav-link {
+    color: $light;
+}
+
+hr {
+    border-color: $gray-600;
+}
+
+header .navbar {
+    background: darken($primary, 12%) linear-gradient(180deg, darken($primary, 7%), darken($primary, 12%)) repeat-x !important;
+}
+
+.bg-warning, .btn-warning {
+    background: $gray-800 !important;
+    color: $warning !important;
+    border: solid 1px $warning;
+}
+
+.btn-light, .btn-outline-light {
+    background: $gray-800 !important;
+    color: $light !important;
+    border: solid 1px $light;
+}
+
+.btn-secondary {
+    background: $gray-800 !important;
+    color: $gray-400 !important;
+    border: solid 1px $gray-400;
+}
+
+.btn-danger {
+    color: $danger !important;
+}
+
+main .bg-gradient-primary, .btn-primary {
+    background: $gray-800 !important;
+    color: lighten($primary, 10%) !important;
+    border: solid 1px $primary;
+}
+
+.btn {
+    background: transparent !important;
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    transition: background-color .1s;
+    color: $light !important;
+}
+
+.card {
+    background-color: $gray-900;
+}
+
+.card-img-top {
+    filter: brightness(90%);
+}
+
+.navbar-brand {
+    background-color: darken($primary, 8%);
+}
+
+nav {
+    box-shadow: 0px -8px 15px 8px $gray-900 !important;
+}
+
+.footer {
+    background-color: $gray-800 !important;
+    box-shadow: inset 0px 10px 15px -10px #2b2a2a;
+}
+
+.text-muted {
+    color: darken($light, 30%) !important;
+}
+
+.form-control {
+    background-color: $gray-950 !important;
+    border: none;
+    color: $light !important;
+}
+
+.custom-control-label:after {
+    background: $gray-950 no-repeat 50% / 50% 50%;
+    border-radius: 0.25rem;
+}
+
+.input-group-text {
+    background: $gray-700;
+    border: none !important;
+    color: $light !important;
+}
+
+.dropdown-menu {
+    background: $gray-800;
+    border: solid 1px $primary;
+}
+
+.dropdown-divider {
+    border-top: solid 1px $primary !important;
+}
+
+.dropdown-item {
+    color: white;
+}
+
+.dropdown-item:hover {
+    background: $gray-900 !important;
+    color: white !important;
+}
+
+.accordion .card {
+    background: $gray-800 !important;
+}
+
+.btn-link:hover, a:hover {
+    color: lighten($primary, 10%);
+}
+
+.dropdown-item.active {
+    background: darken($primary, 12%) linear-gradient(180deg, darken($primary, 7%), darken($primary, 12%)) repeat-x !important;
+}
+
+.alert {
+    background: transparent !important;
+}
+
+.alert-success {
+    color: $success !important;
+    border: solid 1px $success;
+}
+
+.alert-info {
+    color: $info !important;
+    border: solid 1px $info;
+}
+
+.alert-warning {
+    color: $warning !important;
+    border: solid 1px $warning;
+}
+
+.alert-danger {
+    color: $danger !important;
+    border: solid 1px $danger;
+}
+
+.popover {
+    background: $gray-900;
+    border: solid 1px $primary;
+}
+
+.popover .arrow::after {
+    border-top-color: $primary;
+}
+
+.popover-body {
+    color: $gray-400;
+}
+
+.btn.btn-dark.rounded-circle {
+    border: 1px $gray-900 solid;
+}

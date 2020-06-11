@@ -1,38 +1,20 @@
 {% extends 'libertas/base.html' %}
+{% load static %}
 
 {% block title %}Schülerzeitung{% endblock %}
 
 {% block main %}
 
-<div class="jumbotron m-0 bg-dark text-light shadow"
-    style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
-    <h1 class="display-4">TheHaps. Das Magazin mit Biss.</h1>
-    <p class="lead">Herzlich willkommen auf der Webseite der Schülerzeitung TheHaps!</p>
+<div class="jumbotron main-jumbotron mb-3 text-light bg-gradient-primary text-center py-5 shadow-rd">
+    <img src="{% static 'libertas/img/logo-white.png' %}" style="max-height: 75px" alt="TheHaps">
+    <p class="h3 mt-4 font-italic mb-0">Das Magazin mit Biss.</p>
+    <div class="text-right">
+        <img src="{% url 'viewer' 1 'thumbnail' %}" class="thumbnail-1">
+    </div>
 </div>
 
-<nav id="scrollspy" class="navbar navbar-expand bg-light sticky-top rounded-bottom mb-3 shadow border border-secondary"
-    style="top: 56px;">
-    <ul class="nav nav-pills flex-row text-center">
-        <li class="nav-item flex-fill">
-            <a class="nav-link" href="#ueber-uns">Über uns</a>
-        </li>
-        {% if ausgaben %}
-        <li class="nav-item flex-fill">
-            <a class="nav-link" href="#ausgaben">Ausgaben</a>
-        </li>
-        <li class="nav-item flex-fill d-lg-none">
-            <a class="nav-link" href="#erwerben">Erwerben</a>
-        </li>
-        {% endif %}
-        <li class="nav-item flex-fill">
-            <a class="nav-link" href="#news">News</a>
-        </li>
-    </ul>
-</nav>
 
-
-<div class="my-3 w-100 shadow rounded border border-secondary bg-light p-3">
-    <h3 id="ueber-uns">Über uns</h3>
+<div class="mb-3 w-100 rounded bg-white p-3 w-100 border shadow-rd">
     <p><b>TheHaps ist die offizielle Schülerzeitung der Halepaghen-Schule Buxtehude. Wir sind keine „Schulzeitung“,
             sondern eine Zeitschrift von Schülern für Schüler.</b> Das gesamte Team steht für einen seriösen, kritischen
         und modernen Journalismus. <i>TheHaps ist bissig. witzig. modern.</i></p>
@@ -42,16 +24,12 @@
     <p class="mb-0">Außerdem sind Kultur, Sport und Freizeit, Schulisches und vieles mehr Inhalte unserer Zeitschrift.</p>
 </div>
 
-<div class="my-3 w-100 shadow rounded bg-warning p-3 d-flex">
-    <p class="mb-0">Aufgrund der aktuellen COVID-19-Situation gelten andere Bestimmungen zum Erwerben von Ausgaben. Mehr Informationen findest du <a href="{% url 'corona' %}">hier</a>.</p>
-</div>
-
 {% if ausgaben %}
 <div class="row">
     <div class="col-lg-8 pr-lg-0 d-flex">
-        <div class="shadow rounded border border-secondary bg-light p-3 w-100">
-            <h3 id="ausgaben">Ausgaben</h3>
-            <div class="container-fluid mt-3 overflow-auto">
+        <div class="mb-3 w-100 rounded bg-white p-3 w-100 border shadow-rd">
+            <h2 class="font-weight-bold h4"><i class="fas fa-newspaper mr-2" style="color: #cf3342;"></i>Aktuelle Ausgabe</h2>
+            <div class=container-fluid mt-3 overflow-auto">
                 <div class="row flex-row flex-nowrap pb-2">
                     {% for ausgabe in ausgaben.all %}
                     <div class="col-6 col-sm-4 col-md-3 col-lg-4 col-xl-3 px-1">
@@ -59,10 +37,13 @@
                             <img src="{% url 'viewer' ausgabe.number 'thumbnail' %}"
                                 class="card-img-top {% if user.is_authenticated and ausgabe not in inventory %}thumbnail-gray{% endif %}">
                             <div class="card-footer">
-
                                 {% if not user.is_authenticated %}
                                 <a href="{% url 'signin' %}" class="btn btn-primary btn-block" data-toggle="tooltip"
                                     title="Du musst dich zuerst anmelden, um diese Ausgabe zu lesen.">Lesen</a>
+                                {% elif not ausgabe.published %}
+                                <a href="{% url 'viewer' ausgabe.number 'leseprobe' %}" data-toggle="tooltip"
+                                    title="Diese Ausgabe ist noch nicht veröffentlicht. Du kannst nur die Leseprobe lesen."
+                                    class="btn btn-secondary btn-block">Leseprobe</a>
                                 {% elif ausgabe in inventory %}
                                 <a href="{% url 'viewer' ausgabe.number 'read' %}"
                                     class="btn btn-primary btn-block stretched-link">Lesen</a>
@@ -88,29 +69,26 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4 pt-3 pt-lg-0 pl-lg-3 d-flex">
-        <div class="shadow rounded border bg-gradient-primary p-3 w-100 text-white">
-            <h3 id="erwerben" style="margin-top: -1px;">Ausgaben erwerben</h3>
+    <div class="col-lg-4 pt-lg-0 pl-lg-3 d-flex">
+        <div class="mb-3 w-100 rounded bg-white p-3 w-100 border shadow-rd">
+            <h2 class="font-weight-bold h4"><i class="fas fa-shopping-cart mr-2" style="color: #17a2b8;"></i>Kaufen</h2>
             <p>Auf dieser Webseite kannst du alle bisher erschienen Ausgaben lesen. Um eine Online-Ausgabe zu
                 erwerben, benötigst du einen Zugangscode, den du direkt bei uns in der HPS kaufen kannst!</p>
-            <hr class="bg-white">
+            <hr>
             {% if user.is_authenticated %}
-            <p>Aufgrund der aktuellen Coronavirus-Situation kannst du Zugangscodes online bestellen:</p>
-            <a class="btn btn-warning btn-block" href="{% url 'corona' %}" role="button">Mehr Informationen</a>
-            <hr class="bg-white">
             <p>Hier kannst du deinen Zugangscode einzulösen:</p>
-            <a class="btn btn-light btn-block" href="{% url 'redeem' %}" role="button">Zugangscode einlösen</a>
+            <a class="btn btn-primary btn-block" href="{% url 'redeem' %}" role="button">Zugangscode einlösen</a>
             {% else %}
             <p>Erstelle einen Account oder melde dich an, um einen Zugangscode einzulösen:</p>
-            <a class="btn btn-outline-light btn-block" href="{% url 'signin' %}" role="button">Anmelden</a>
-            <a class="btn btn-light btn-block" href="{% url 'signup' %}" role="button">Account erstellen</a>
+            <a class="btn btn-outline-primary btn-block" href="{% url 'signin' %}" role="button">Anmelden</a>
+            <a class="btn btn-primary btn-block" href="{% url 'signup' %}" role="button">Account erstellen</a>
             {% endif %}
         </div>
     </div>
 </div>
 {% endif %}
-<div class="my-3 w-100 shadow rounded border border-secondary bg-light p-3">
-    <h3 id="news">News</h3>
+<div class="mb-3 w-100 rounded bg-white p-3 w-100 border shadow-rd">
+    <h2 class="font-weight-bold h4"><i class="fas fa-comment-alt mr-2" style="color: rgb(10, 114, 184);"></i>News</h2>
     <h5>Erste Ausgabe kommt am 11. Mai raus! Jetzt nach Hause bestellen oder online lesen!</h5>
     <p>Die erste Ausgabe von <i>TheHaps</i> wird am 11. Mai veröffentlicht! Das Titelthema lautet "Neustart" und Highlights der
         Ausgabe sind unter anderem eine Reportage über die Flucht eines Schüler der HPS, ein Artikel, der sich mit der
@@ -119,18 +97,11 @@
         Übersicht zu den Umbauplänen an der Schule. Außerdem rechnet Lars Hauschildt mit dem niedersächsischen
         Kultusministerium ab, während sich Herr Rösler den 11 schnellen Fragen gestellt hat. All das und noch viel, viel
         mehr in der ersten Ausgabe!</p>
-
-    <p><b>Achtung!</b><br>Da die Zeitschrift offensichtlich nicht in der Schule verkauft werden kann, können
-        Print-Ausgaben per E-Mail
-        bestellt werden. Wir liefern dann die Bestellung direkt an die Haustür! Die genauen Bestimmungen bezüglich des
-        Bestellsystems finden sich <a href="{% url 'corona' %}">hier</a>. Dort ist auch erklärt, wie Online-Ausgaben erworben werden können.
-    </p>
-
     <hr>
     <h5>Fünf Sportübungen für die Zeit im Homeoffice</h5>
     <p class="mb-0">In der ersten Ausgabe von <i>TheHaps</i> stellen unsere beiden Sportredakteur Lennart und Stefan fünf Sportübungen für
         die Zeit im Homeoffice vor, die jeder Zuhause machen kann, um Fehlhaltungen zu verhindern und fit zu bleiben!
-        <a href="{% url 'corona' %}">Hier</a> erfährst du, wie du eine Ausgabe kaufen kannst. </p>
+        <a href="{% url 'buy' %}">Hier</a> erfährst du, wie du eine Ausgabe kaufen kannst. </p>
 </div>
 
 

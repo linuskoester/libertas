@@ -11,9 +11,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
-
 
 # Sentry
 if bool(int(os.environ['SENTRY'])):
@@ -86,6 +86,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'libertas.processor.libertas_version',
             ],
         },
     },
