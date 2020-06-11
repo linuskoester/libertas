@@ -24,10 +24,6 @@
     <p class="mb-0">Außerdem sind Kultur, Sport und Freizeit, Schulisches und vieles mehr Inhalte unserer Zeitschrift.</p>
 </div>
 
-<!-- <div class="mb-3 w-100 shadow rounded bg-warning p-3 d-flex">
-    <p class="mb-0">Aufgrund der aktuellen COVID-19-Situation gelten andere Bestimmungen zum Erwerben von Ausgaben. Mehr Informationen findest du <a href="{% url 'corona' %}">hier</a>.</p>
-</div> -->
-
 {% if ausgaben %}
 <div class="row">
     <div class="col-lg-8 pr-lg-0 d-flex">
@@ -80,9 +76,6 @@
                 erwerben, benötigst du einen Zugangscode, den du direkt bei uns in der HPS kaufen kannst!</p>
             <hr>
             {% if user.is_authenticated %}
-            <p>Aufgrund der aktuellen Coronavirus-Situation kannst du Zugangscodes online bestellen:</p>
-            <a class="btn btn-warning btn-block" href="{% url 'corona' %}" role="button">Mehr Informationen</a>
-            <hr>
             <p>Hier kannst du deinen Zugangscode einzulösen:</p>
             <a class="btn btn-primary btn-block" href="{% url 'redeem' %}" role="button">Zugangscode einlösen</a>
             {% else %}
@@ -104,18 +97,11 @@
         Übersicht zu den Umbauplänen an der Schule. Außerdem rechnet Lars Hauschildt mit dem niedersächsischen
         Kultusministerium ab, während sich Herr Rösler den 11 schnellen Fragen gestellt hat. All das und noch viel, viel
         mehr in der ersten Ausgabe!</p>
-
-    <p><b>Achtung!</b><br>Da die Zeitschrift offensichtlich nicht in der Schule verkauft werden kann, können
-        Print-Ausgaben per E-Mail
-        bestellt werden. Wir liefern dann die Bestellung direkt an die Haustür! Die genauen Bestimmungen bezüglich des
-        Bestellsystems finden sich <a href="{% url 'corona' %}">hier</a>. Dort ist auch erklärt, wie Online-Ausgaben erworben werden können.
-    </p>
-
     <hr>
     <h5>Fünf Sportübungen für die Zeit im Homeoffice</h5>
     <p class="mb-0">In der ersten Ausgabe von <i>TheHaps</i> stellen unsere beiden Sportredakteur Lennart und Stefan fünf Sportübungen für
         die Zeit im Homeoffice vor, die jeder Zuhause machen kann, um Fehlhaltungen zu verhindern und fit zu bleiben!
-        <a href="{% url 'corona' %}">Hier</a> erfährst du, wie du eine Ausgabe kaufen kannst. </p>
+        <a href="{% url 'buy' %}">Hier</a> erfährst du, wie du eine Ausgabe kaufen kannst. </p>
 </div>
 
 

@@ -112,8 +112,6 @@ class Configuration(models.Model):
         verbose_name="Wartungsmodus (Registrierung)", default=False)
     wartung_viewer = models.BooleanField(
         verbose_name="Wartungsmodus (Viewer)", default=False)
-    wartung_corona = models.BooleanField(
-        verbose_name="Wartungsmodus (Corona-Bestellsystem)", default=False)
 
     class Meta:
         verbose_name = "Konfiguration"
@@ -139,10 +137,5 @@ class Configuration(models.Model):
 
     def viewer(self):
         if self.wartung_viewer:
-            return True
-        return False
-
-    def corona(self):
-        if self.wartung_corona:
             return True
         return False

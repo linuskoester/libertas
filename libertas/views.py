@@ -1,16 +1,13 @@
-import os
-from datetime import date, datetime
+from datetime import datetime
 
 from django.contrib import messages
 from django.contrib.admin.models import CHANGE, LogEntry
 from django.contrib.auth import logout
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import redirect, render
-from django.template.loader import render_to_string
 
-from .forms import CoronaForm, RedeemForm
-from .models import (Ausgabe, Code, Configuration, User, ausgaben_user,
-                     ausgaben_visible)
+from .forms import RedeemForm
+from .models import Code, Configuration, User, ausgaben_user, ausgaben_visible
 
 
 def log_user(user, flag, message):
@@ -35,8 +32,6 @@ def wartung(request, pagetype=""):
             messages.warning(request, 'Wartungsmodus (Regist.) aktiviert!')
         if wartung.viewer():
             messages.warning(request, 'Wartungsmodus (Viewer) aktiviert!')
-        if wartung.corona():
-            messages.warning(request, 'Wartungsmodus (Corona) aktiviert!')
     else:
         if wartung.voll():
             return render(request, 'libertas/wartung.html')
@@ -60,8 +55,6 @@ def wartung(request, pagetype=""):
                 request, """Aufgrund von Wartungsarbeiten lassen sich zurzeit keine digitalen Ausgaben und Leseproben lesen.
                             <a href="https://status.thehaps.de/">Hier</a> findest du mehr Informationen.""")
             return redirect('index')
-        if wartung.corona() and pagetype == "corona":
-            return True
     return False
 
 
@@ -132,6 +125,15 @@ def redeem(request):
     return render(request, 'libertas/redeem.html', {'menu': 'user-redeem', 'form': form})
 
 
+def buy(request):
+    # Wartung
+    w = wartung(request)
+    if w:
+        return w
+
+    return render(request, 'libertas/buy.html')
+
+
 def datenschutz(request):
     # Wartung
     w = wartung(request)
@@ -159,70 +161,10 @@ def impressum(request):
     return render(request, 'libertas/impressum.html')
 
 
-def corona(request):
+def error404(request):
     # Wartung
-    w = wartung(request, "corona")
-    if w is True:
-        wartungsmodus = True
-    elif w:
+    w = wartung(request)
+    if w:
         return w
-    else:
-        wartungsmodus = False
 
-    published = False
-    besitz = False
-    if request.user.is_authenticated:
-        user = User.objects.get(username=request.user)
-        if Ausgabe.objects.filter(number=1).exists():
-            ausgabe = Ausgabe.objects.get(number=1)
-            if date.today() >= ausgabe.publish_date:
-                published = True
-
-            if Code.objects.filter(user=user, ausgabe=ausgabe).exists():
-                besitz = True
-
-    if request.method == 'POST':
-        form = CoronaForm(request.POST)
-        if form.is_valid():
-            user = User.objects.get(username=request.user)
-            user.profile.corona_bestellung = True
-            user.save()
-
-            code = Code(ausgabe=Ausgabe.objects.get(number=1))
-            code.save()
-
-            code = Code.objects.get(code=code.code)
-            print(code)
-
-            log_user(request.user, CHANGE,
-                     'Der Benutzer hat durch das Corona-Bestellsystem den Code %s (%s) bestellt.' %
-                     (code.code, code.ausgabe.name))
-            LogEntry.objects.log_action(
-                user_id=request.user.id,
-                content_type_id=ContentType.objects.get_for_model(
-                    code).pk,
-                object_id=code.code,
-                object_repr=request.user.username,
-                action_flag=CHANGE,
-                change_message='Wurde von Benutzer über das Corona-Bestellsystem bestellt.')
-
-            subject = 'Dein Zugangscode für die digitale Ausgabe von TheHaps ist da!'
-            message = render_to_string('libertas/corona_email.html', {
-                'user': user,
-                'domain': os.environ['LIBERTAS_DOMAIN'],
-                'code': code.code
-            })
-            user.email_user(subject, message)
-
-            messages.success(
-                request, 'Dein Zugangscode wurde erfolgreich an <code>%s</code> gemailt.' % request.user.email)
-
-            return redirect('index')
-    else:
-        form = CoronaForm()
-
-    return render(request, 'libertas/corona.html', {'menu': 'buy',
-                                                    'form': form,
-                                                    'published': published,
-                                                    'besitz': besitz,
-                                                    'wartung': wartungsmodus},)
+    return render(request, 'libertas/error/404.html')

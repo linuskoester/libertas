@@ -13,6 +13,6 @@ urlpatterns = [
     path('impressum', views.impressum, name='impressum'),  # Impressum
     path('agb', views.agb, name='agb'),  # AGB
     path('corona', RedirectView.as_view(url='buy')),  # Corona-Infos
-    path('buy', views.corona, name='buy'),  # Kaufen
-    path('buy', views.corona, name='corona'),  # Kaufen
+    path('buy', views.buy, name='corona'),  # Kaufen
+    path('buy', views.buy, name='buy'),  # Kaufen
 ]
