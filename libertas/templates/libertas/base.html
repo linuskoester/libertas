@@ -35,101 +35,108 @@
     <link rel="apple-touch-icon" type="image/png" sizes="2000x2000" href="{% static 'libertas/favicon/large.png' %}">
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
     <link href="{% static 'libertas/fontawesome/css/all.min.css' %}" rel="stylesheet">
 
     {% block header %}{% endblock %}
 </head>
 
-<body class="d-flex flex-column" style="min-height: 100%;" data-spy="scroll" data-target="#scrollspy" data-offset="140">
+<body class="d-flex flex-column" style="min-height: 100%;">
     {% block body %}
     <header>
-        <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-gradient-primary p-md-2"
-            style="box-shadow: 0px -8px 15px 8px #727272;">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-light p-lg-2 shadow-rd">
             <a class="navbar-brand p-0 mr-2" href="{% url 'index' %}">
-                <img src="{% static 'libertas/img/logo.png' %}" height="34" alt="">
+                <img src="{% static 'libertas/img/logo-blue.png' %}" style="height: 36px">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle {% if "sz-" in menu %}active font-weight-bold{% endif %}"
-                                href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                Schülerzeitung
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item {% if menu == "sz-start" %}active{% endif %}"
-                                    href="{% url 'index' %}">Übersicht & Ausgaben</a>
-                                <a class="dropdown-item {% if menu == "sz-team" %}active{% endif %}"
-                                    href="{% url 'team' %}">Team</a>
-                                <a class="dropdown-item {% if menu == "sz-faq" %}active{% endif %}"
-                                    href="{% url 'faq' %}">Fragen & Antworten</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <li class="nav-item {% if menu == "podcast" %}active font-weight-bold{% endif %}">
-                        <a class="nav-link" href="{% url 'podcast' %}">Podcast</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'corona' %}"><span class="bg-warning p-1 text-dark rounded">Corona-Infos</span></a>
-                    </li>
-                </ul>
                 <div class="dropdown-divider"></div>
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.instagram.com/thehaps.de/"><i
-                                class="fab fa-instagram"></i><span class="d-md-none"> Instagram</span></a>
+                <ul class="navbar-nav nav-center">
+                    <li class="nav-item {% if menu == "ausgaben" %}active font-weight-bold{% endif %}">
+                        <a class="nav-link" href="{% url 'index' %}">
+                            <span class="nav-color d-block d-lg-inline w-100" style="background: #cf3342;">
+                                <i class="fas fa-newspaper d-lg-none d-xl-inline"></i> Ausgaben</span>
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.snapchat.com/add/thehaps.de"><i
-                                class="fab fa-snapchat-ghost"></i><span class="d-md-none"> Snapchat</span></a>
+                    <li class="nav-item {% if menu == "buy" %}active font-weight-bold{% endif %}">
+                        <a class="nav-link" href="{% url 'buy' %}">
+                            <span class="nav-color d-block d-lg-inline w-100" style="background: #17a2b8;">
+                                <i class="fas fa-shopping-cart d-lg-none d-xl-inline"></i> Kaufen</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {% if menu == "team" %}active font-weight-bold{% endif %}">
+                        <a class="nav-link" href="{% url 'team' %}">
+                            <span class="nav-color d-block d-lg-inline w-100" style="background: #6f42c1;">
+                                <i class="fas fa-users d-lg-none d-xl-inline"></i> Team</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {% if menu == "faq" %}active font-weight-bold{% endif %}">
+                        <a class="nav-link" href="{% url 'faq' %}">
+                            <span class="nav-color d-block d-lg-inline w-100" style="background: #269c41">
+                                <i class="fas fa-question-circle d-lg-none d-xl-inline"></i> FAQ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {% if menu == "podcast" %}active font-weight-bold{% endif %}">
+                        <a class="nav-link" href="{% url 'podcast' %}">
+                            <span class="nav-color d-block d-lg-inline w-100" style="background: #cc377d;">
+                                <i class="fas fa-microphone d-lg-none d-xl-inline"></i> Podcast</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {% if menu == "news" %}active font-weight-bold{% endif %}">
+                        <a class="nav-link" href="{% url 'index' %}">
+                            <span class="nav-color d-block d-lg-inline w-100" style="background: rgb(10, 114, 184);">
+                                <i class="fas fa-comment-alt d-lg-none d-xl-inline"></i> News</span>
+                        </a>
                     </li>
                 </ul>
                 <div class="dropdown-divider"></div>
                 {% if user.is_authenticated %}
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {% if "user-" in menu %}active font-weight-bold{% endif %}"
+                        <a class="nav-link dropdown-toggle text-dark {% if "user-" in menu %}active font-weight-bold{% endif %}"
                             href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             {{ user.username }}
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="dropdown-menu dropdown-menu-right shadow-rd border"
+                            aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item {% if menu == "user-redeem" %}active{% endif %}"
-                                href="{% url 'redeem' %}">Code einlösen...</a>
+                                href="{% url 'redeem' %}"><i class="fas fa-tag text-center" style="width: 22px;"></i>
+                                Code einlösen...</a>
                             <div class="dropdown-divider"></div>
                             {% if user.is_staff %}
-                            <a class="dropdown-item" href="{% url 'admin:index' %}">Administration</a>
+                            <a class="dropdown-item" href="{% url 'admin:index' %}"><i
+                                    class="fas fa-users-cog text-center" style="width: 22px;"></i> Administration</a>
                             <div class="dropdown-divider"></div>
                             {% endif %}
                             <a class="dropdown-item {% if "user-account-" in menu %}active{% endif %}"
-                                href="{% url 'account' %}">Dein Account</a>
-                            <a class="dropdown-item" href="{% url 'signout' %}">Abmelden</a>
+                                href="{% url 'account' %}"><i class="fas fa-user text-center" style="width: 22px;"></i>
+                                Dein Account</a>
+                            <a class="dropdown-item" href="{% url 'signout' %}"><i
+                                    class="fas fa-sign-out-alt text-center" style="width: 22px;"></i> Abmelden</a>
                         </div>
                     </li>
                 </ul>
                 {% else %}
-                <a class="btn btn-outline-light mt-2 mt-md-0" href="{% url 'signin' %}" role="button">Anmelden</a>
-                <a class="btn btn-light ml-md-1 mt-2 mt-md-0" href="{% url 'signup' %}" role="button">Account
+                <a class="btn btn-link mt-2 mt-md-0 ml-auto" href="{% url 'signin' %}" role="button">Anmelden</a>
+                <a class="btn btn-primary ml-md-1 mt-2 mt-md-0" href="{% url 'signup' %}" role="button">Account
                     erstellen</a>
                 {% endif %}
 
             </div>
         </nav>
     </header>
-    <main role="main" class="flex-shrink-0 pb-5 mb-2" style="padding-top: 80px;">
+    <main role="main" class="flex-shrink-0 mb-5" style="padding-top: 80px;">
         <div class="container mt-3">
             {% if messages %}
             {% for message in messages %}
@@ -157,36 +164,52 @@
         </div>
     </main>
 
-    <div class="mt-auto mb-3 mx-auto">
+    <div class="mt-auto mb-4 mx-auto">
         {% block no_ad %}
         <p class="text-muted mb-1 mx-2">Werbung</p>
         <div class="d-flex flex-column flex-md-row mx-2">
             <!-- <img src="/static/libertas/img/werbung/Werbebanner.png" style="max-width: 300px;"
                 class="d-block rounded img-fluid mx-auto mx-md-0 mr-md-2"> -->
-            <a href="https://www.carl-duisberg-highschool.de"><img src="/static/libertas/img/werbung/cdc.jpg" style="max-height: 100px;"
-                    class="d-block rounded img-fluid mx-md-auto mx-md-0 mt-0"></a>
+            <a href="https://www.carl-duisberg-highschool.de"><img src="/static/libertas/img/werbung/cdc.jpg"
+                    style="max-height: 100px;" class="d-block rounded img-fluid mx-md-auto mx-md-0 mt-0 shadow-rd"></a>
         </div>
         {% endblock %}
     </div>
-    <footer class="footer pt-4 bg-secondary mx-0 d-sm-flex justify-content-center pl-4 pl-sm-0"
-        style="box-shadow: inset 0px 10px 15px -10px #afafaf;">
-        <div class="d-sm-inline-flex flex-column flex-sm-row mr-5">
-            <ul class="list-unstyled">
-                <li><a href="{% url 'agb' %}" class="text-muted">Nutzungsbedingungen</a></li>
-                <li><a href="{% url 'impressum' %}" class="text-muted">Impressum</a></li>
-                <li><a href="{% url 'datenschutz' %}" class="text-muted">Datenschutz</a></li>
+    <footer class="footer p-0">
+        <div class="mx-auto my-3 text-center d-block mx-0">
+            <ul
+                class="list-unstyled text-light d-sm-inline-flex flex-column flex-sm-row m-0 flex-sm-wrap justify-content-center">
+                <li class="mx-2"><i class="fas fa-balance-scale"></i> <a href="{% url 'agb' %}"
+                        class="text-light">Nutzungsbedingungen</a>
+                </li>
+                <li class="mx-2"><i class="fas fa-scroll"></i> <a href="{% url 'impressum' %}"
+                        class="text-light">Impressum</a>
+                </li>
+                <li class="mx-2"><i class="fas fa-user-secret"></i> <a href="{% url 'datenschutz' %}"
+                        class="text-light">Datenschutz</a>
+                </li>
             </ul>
-        </div>
-        <div class="d-sm-inline-flex flex-column flex-sm-row">
-            <ul class="list-unstyled">
-                <li class="text-muted"><i class="fas fa-envelope"></i> <a href="{% url 'team' %}"
-                    class="text-muted">Kontakt</a></li>
-                <li class="text-muted"><i class="fas fa-info-circle"></i> <a href="https://status.thehaps.de/"
-                    class="text-muted">Status</a></li>
-                <li class="text-muted"><i class="fab fa-github"></i> <a href="https://github.com/the-haps"
-                        class="text-muted">GitHub</a></li>
+            <ul class="list-unstyled text-light d-none flex-md-row d-md-inline-flex m-0 justify-content-center">
+                <li class="mx-1 d-none d-md-flex">&middot;</li>
             </ul>
+            <ul
+                class="mt-2 mt-md-0 list-unstyled text-light d-sm-inline-flex flex-column flex-sm-row m-0 flex-sm-wrap justify-content-center mx-0">
+                <li class="mx-2"><i class="fas fa-envelope"></i> <a href="{% url 'team' %}"
+                        class="text-light">Kontakt</a></li>
+                <li class="mx-2"><i class="fas fa-info-circle"></i> <a href="https://status.thehaps.de/"
+                        class="text-light">Status</a></li>
+                <li class="mx-2"><i class="fab fa-github"></i> <a href="https://github.com/the-haps"
+                        class="text-light">GitHub</a>
+                </li>
+            </ul>
+            <p class="mt-3 text-gray small"><b><a class="text-gray" href="https://github.com/the-haps/libertas">Libertas
+                        {{ libertas_version }}</a></b><br>
+                Libertas ist open-source und lizensiert unter <a class="text-gray"
+                    href="https://github.com/the-haps/libertas/blob/development/LICENSE.md">GNU AGPLv3</a> <i
+                    class="far fa-copyright"></i> 2020 <a class="text-gray" href="https://github.com/CrazyEasy">Linus
+                    Köster</a></p>
         </div>
+
     </footer>
     {% endblock %}
     <script src="https://2299g1946cbj.statuspage.io/embed/script.js"></script>

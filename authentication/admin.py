@@ -1,8 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Profile
-from libertas.models import Code
 from django.contrib.auth.models import User
+
+from libertas.models import Code
+
+from .models import Profile
 
 
 def email_confirmed(obj):

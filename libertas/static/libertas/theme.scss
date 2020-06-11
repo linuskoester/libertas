@@ -1,7 +1,115 @@
-$secondary: rgb(230, 230, 230);
+$secondary: rgb(235, 235, 235);
 $enable-gradients: true;
 
 @import "./bootstrap/bootstrap";
+
+// HINTERGRUND
+
+body {
+    background-image: url("/static/libertas/img/background-light.jpg");
+    background-size: 442px;
+    background-attachment: scroll;
+}
+
+// THUMBNAIL STARTSEITE
+
+.main-jumbotron .text-right {
+    display: none;
+    .thumbnail-1 {
+        box-shadow: 0 0 15px -3px rgba(0, 0, 0, 0.75);
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .main-jumbotron {
+        overflow: hidden;
+
+        .text-right {
+            display: block;
+            height: 0;
+
+            .thumbnail-1 {
+                // display: unset;
+                height: 190px;
+                margin-bottom: -190px;
+                padding: 0;
+                position: relative;
+                bottom: 130px;
+                left: 10px;
+                transform: rotate(-10deg);
+                border-radius: 5px;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    .main-jumbotron .text-right .thumbnail-1 {
+        height: 220px;
+        margin-bottom: -220px;
+        bottom: 160px;
+        left: -20px;
+    }
+}
+
+@include media-breakpoint-up(xl) {
+    .main-jumbotron .text-right .thumbnail-1 {
+        left: -40px;
+    }
+}
+
+// MENÜLEISTE
+
+.nav-center {
+    flex-direction: row;
+    flex-wrap: wrap;
+    .nav-item {
+        width: 50%;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .nav-center {
+        flex-wrap: nowrap;
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    .nav-center {
+        position: fixed;
+        left: 50% !important;
+        transform: translateX(-50%);
+
+        flex-direction: column;
+        .nav-item {
+            width: unset;
+        }
+    }
+}
+
+$navbar: $white;
+
+header nav {
+    background-color: transparentize($navbar, 0.05);
+}
+
+@supports ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
+    header nav {
+        background-color: transparentize($navbar, 0.4) !important;
+        backdrop-filter: blur(6px) !important;
+        -webkit-backdrop-filter: blur(6px);
+    }
+}
+
+.navbar.fixed-top a.nav-link {
+    padding: 0.3rem !important;
+}
+
+.navbar.fixed-top .nav-color {
+    border-radius: 0.25rem !important;
+    color: white;
+    padding: 0.45rem !important;
+}
 
 .navbar-dark .navbar-nav .nav-link {
     color: rgba(255, 255, 255, 0.9);
@@ -11,30 +119,32 @@ $enable-gradients: true;
     opacity: 0.9;
 }
 
-:target:before {
-    content: "";
-    display: block;
-    padding: 135px 0 0;
-    margin: -135px 0 0;
+.nav-link:hover span {
+    opacity: 0.9;
 }
 
-.bg-yellow {
-    background-color: #ffef35;
+a:hover .nav-color {
+    opacity: 0.8 !important;
 }
 
-#scrollspy {
-    .nav-link {
-        color: $dark;
-    }
-    .nav-link:hover {
-        opacity: 0.8;
-    }
-    .active {
-        background-color: $dark;
-        color: $light;
-        opacity: 1 !important;
+// FOOTER
+
+
+$footer: $black;
+
+.footer {
+    background-color: transparentize($footer, 0.2);
+}
+
+@supports ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
+    .footer {
+        background-color: transparentize($footer, 0.2) !important;
+        backdrop-filter: blur(5px) !important;
+        -webkit-backdrop-filter: blur(5px);
     }
 }
+
+// ZWEITE NAVIGATIONSLEISTE
 
 .pagenav {
     .nav-link {
@@ -50,16 +160,62 @@ $enable-gradients: true;
     }
 }
 
+// GRAYSCALE BEI AUSGABENÜBERSICHT
+
 .card .thumbnail-gray {
     filter: grayscale(100%);
-    transition: filter .2s;
+    transition: filter 0.2s;
 }
 
 .card:hover .thumbnail-gray {
     filter: grayscale(0%);
-    transition: filter .15s;
+    transition: filter 0.15s;
 }
 
-.nav-link:hover span {
-    opacity: 0.9;
+// SCHATTEN
+
+.shadow-rd {
+    box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.175) !important;
 }
+
+.text-gray {
+    color: $gray-500 !important;
+}
+
+// ALERTS
+
+.alert {
+    opacity: 0.8;
+}
+
+@supports ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
+    .alert {
+        opacity: 1;
+    }
+    .alert-info {
+        background: transparentize($info, 0.8) !important;
+        backdrop-filter: blur(6px) !important;
+        -webkit-backdrop-filter: blur(6px);
+    }
+    .alert-error {
+        background: transparentize($red, 0.8) !important;
+        backdrop-filter: blur(6px) !important;
+        -webkit-backdrop-filter: blur(6px);
+    }
+    .alert-warning {
+        background: transparentize($warning, 0.8) !important;
+        backdrop-filter: blur(6px) !important;
+        -webkit-backdrop-filter: blur(6px);
+    }
+    .alert-success {
+        background: transparentize($success, 0.8) !important;
+        backdrop-filter: blur(6px) !important;
+        -webkit-backdrop-filter: blur(6px);
+    }
+}
+
+// DARKMODE
+
+// @media (prefers-color-scheme: dark) {
+//     @import "./darkmode";
+// }
