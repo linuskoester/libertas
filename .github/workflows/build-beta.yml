@@ -22,7 +22,7 @@ jobs:
           SENTRY_PROJECT: beta
         with:
           tagName: BETA-${{ github.run_number }}
-          environment: qa
+          environment: BETA
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v1
         with:
