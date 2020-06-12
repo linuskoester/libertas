@@ -131,7 +131,7 @@ def buy(request):
     if w:
         return w
 
-    return render(request, 'libertas/buy.html')
+    return render(request, 'libertas/buy.html', {'menu': 'buy'})
 
 
 def datenschutz(request):
