@@ -15,6 +15,20 @@ import os
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
+# Get Version
+if os.environ.get('LIBERTAS_VERSION') is None:
+    try:
+        file = open('version.txt', 'r')
+        version = file.read()
+        file.close()
+    except FileNotFoundError:
+        version = 'DEV'
+
+    if version == '':
+        os.environ['LIBERTAS_VERSION'] = 'DEV'
+    else:
+        os.environ['LIBERTAS_VERSION'] = version
+
 # Sentry
 if bool(int(os.environ['SENTRY'])):
     sentry_sdk.init(
@@ -25,6 +39,7 @@ if bool(int(os.environ['SENTRY'])):
         # django.contrib.auth) you may enable sending PII data.
         send_default_pii=True
     )
+    sentry_sdk.init(release="libertas@%s" % os.environ.get('LIBERTAS_VERSION'))
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
