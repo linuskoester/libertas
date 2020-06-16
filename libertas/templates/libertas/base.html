@@ -36,13 +36,13 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
+        </script>
     <link href="{% static 'libertas/fontawesome/css/all.min.css' %}" rel="stylesheet">
 
     {% block header %}{% endblock %}
@@ -167,11 +167,12 @@
     <div class="mt-auto mb-4 mx-auto">
         {% block no_ad %}
         <p class="text-muted mb-1 mx-2">Werbung</p>
-        <div class="d-flex flex-column flex-md-row mx-2">
-            <!-- <img src="/static/libertas/img/werbung/Werbebanner.png" style="max-width: 300px;"
-                class="d-block rounded img-fluid mx-auto mx-md-0 mr-md-2"> -->
-            <a href="https://www.carl-duisberg-highschool.de"><img src="/static/libertas/img/werbung/cdc.jpg"
-                    style="max-height: 100px;" class="d-block rounded img-fluid mx-md-auto mx-md-0 mt-0 shadow-rd"></a>
+        <div class="d-flex flex-column flex-lg-row mx-2">
+            <a href="https://www.hopkas-spreewaldstall.de/"><img src="/static/libertas/img/werbung/spreewald.png"
+                    style="max-height: 100px;"
+                    class="d-block rounded img-fluid mr-lg-1 mb-2 mb-lg-0 mt-0 shadow-rd"></a>
+            <a href="https://www.carl-duisberg-highschool.de/"><img src="/static/libertas/img/werbung/cdc.jpg"
+                    style="max-height: 100px;" class="d-block rounded ml-lg-1 img-fluid mt-0 shadow-rd"></a>
         </div>
         {% endblock %}
     </div>
