@@ -18,7 +18,7 @@ def generate_code(length=12):
 
 
 def ausgaben_visible():
-    return Ausgabe.objects.filter(
+    return Ausgabe.objects.order_by('-number').filter(
         Q(publish_date__lte=date.today()) | Q(force_visible=True))
 
 
@@ -26,7 +26,6 @@ def ausgaben_user(user):
     inventory = []
     for ausgabe in ausgaben_visible():
         if ausgabe.access_read(user):
-            print("hi")
             inventory.append(ausgabe)
     return inventory
 
@@ -37,6 +36,7 @@ class Ausgabe(models.Model):
     force_visible = models.BooleanField(
         verbose_name="Sichtbarkeit erzwingen", default=False)
     number = models.IntegerField('Ausgaben-Nr.', primary_key=True)
+    description = models.TextField('Beschreibung', blank=True, default='')
     file_identifier = models.CharField(
         max_length=16, default=generate_id, unique=True)
     file = models.FileField('Datei', upload_to='ausgaben')
@@ -72,7 +72,7 @@ class Ausgabe(models.Model):
 
     # Ist der Benutzer dazu berechtigt die Leseprobe zu lesen?
     def access_leseprobe(self, user):
-        if user.is_authenticated and self.visible() and self.leseprobe:
+        if self.visible() and self.leseprobe:
             return True
         return False
 

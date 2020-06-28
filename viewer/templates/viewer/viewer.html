@@ -3,7 +3,7 @@
 {% load static %}
 {% load compress %}
 
-{% block title %}{{ pdf_name }}{% endblock %}
+{% block title %}{% if leseprobe %}Leseprobe:{% endif %} {{ ausgabe.name }} ({{ ausgabe.publish_date | date:"F Y" }}){% endblock %}
 
 {% block no_footer %}{% endblock %}
 
@@ -106,9 +106,9 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <span class="navbar-text mx-auto text-light text-truncate">
-      {{ pdf_name }}
+      {{ ausgabe.name }} (#{{ ausgabe.number }}, {{ ausgabe.publish_date | date:"F Y" }}) {% if leseprobe %}<span class="badge badge-light ml-1 align-text-top">Leseprobe</span>{% endif %}
     </span>
-    <a class="btn btn-outline-light ml-2" href="{% url 'index' %}" role="button">Schließen</a>
+    <button class="btn btn-outline-light ml-2" onclick="window.history.back();" role="button">Schließen</button>
   </nav>
 </header>
 
