@@ -8,9 +8,11 @@
 <div class="jumbotron main-jumbotron mb-3 text-light bg-gradient-primary text-center py-5 shadow-rd">
     <img src="{% static 'libertas/img/logo-white.png' %}" style="max-height: 75px" alt="TheHaps">
     <p class="h3 mt-4 font-italic mb-0">Das Magazin mit Biss.</p>
+    {% if ausgabe %}
     <div class="text-right">
-        <img src="{% url 'viewer' 1 'thumbnail' %}" class="thumbnail-1">
+        <img src="{% url 'viewer' ausgabe.number 'thumbnail' %}" class="thumbnail-1">
     </div>
+    {% endif %}
 </div>
 
 
@@ -21,50 +23,104 @@
     <p>Wir verstehen uns als Jugendzeitschrift für Buxtehude, die einen politischen Schwerpunkt hat und mit
         einer klaren Haltung auftritt. Gerade in Zeiten eines erstarkenden Rechtsextremismus und Populismus
         sehen wir darin unsere Hauptaufgabe.</p>
-    <p class="mb-0">Außerdem sind Kultur, Sport und Freizeit, Schulisches und vieles mehr Inhalte unserer Zeitschrift.</p>
+    <p class="mb-0">Außerdem sind Kultur, Sport und Freizeit, Schulisches und vieles mehr Inhalte unserer Zeitschrift.
+    </p>
 </div>
 
-{% if ausgaben %}
+{% if ausgabe %}
 <div class="row">
     <div class="col-lg-8 pr-lg-0 d-flex">
         <div class="mb-3 w-100 rounded bg-white p-3 w-100 border shadow-rd">
-            <h2 class="font-weight-bold h4"><i class="fas fa-newspaper mr-2" style="color: #cf3342;"></i>Aktuelle Ausgabe</h2>
-            <div class=container-fluid mt-3 overflow-auto">
-                <div class="row flex-row flex-nowrap pb-2">
-                    {% for ausgabe in ausgaben.all %}
-                    <div class="col-6 col-sm-4 col-md-3 col-lg-4 col-xl-3 px-1">
-                        <div class="card">
-                            <img src="{% url 'viewer' ausgabe.number 'thumbnail' %}"
-                                class="card-img-top {% if user.is_authenticated and ausgabe not in inventory %}thumbnail-gray{% endif %}">
-                            <div class="card-footer">
-                                {% if not user.is_authenticated %}
-                                <a href="{% url 'signin' %}" class="btn btn-primary btn-block" data-toggle="tooltip"
-                                    title="Du musst dich zuerst anmelden, um diese Ausgabe zu lesen.">Lesen</a>
-                                {% elif not ausgabe.published %}
-                                <a href="{% url 'viewer' ausgabe.number 'leseprobe' %}" data-toggle="tooltip"
-                                    title="Diese Ausgabe ist noch nicht veröffentlicht. Du kannst nur die Leseprobe lesen."
-                                    class="btn btn-secondary btn-block">Leseprobe</a>
-                                {% elif ausgabe in inventory %}
-                                <a href="{% url 'viewer' ausgabe.number 'read' %}"
-                                    class="btn btn-primary btn-block stretched-link">Lesen</a>
-                                {% else %}
-                                {% if ausgabe.leseprobe %}
-                                <a href="{% url 'viewer' ausgabe.number 'leseprobe' %}" data-toggle="tooltip"
-                                    title="Um die vollständige Ausgabe zu lesen, musst du einen Zugangscode einlösen."
-                                    class="btn btn-secondary btn-block">Leseprobe</a>
-                                {% else %}
-                                <span class="d-inline-block w-100" tabindex="0" data-toggle="tooltip"
-                                    title="Für diese Ausgabe gibt es keine Leseprobe.">
-                                    <button class="btn btn-secondary btn-block" style="pointer-events: none;"
-                                        type="button" disabled>Leseprobe</button>
-                                </span>
-                                {% endif %}
-                                {% endif %}
-                                <p class="card-text text-center text-muted mt-3">{{ ausgabe.name }}</p>
+            <h2 class="font-weight-bold h4"><i class="fas fa-newspaper mr-2" style="color: #cf3342;"></i>Aktuelle
+                Ausgabe</h2>
+
+            <div class="row m-0">
+                <div class="col-12 col-sm-4 col-xl-3 p-0 text-center">
+                    <img src="{% url 'viewer' ausgabe.number 'thumbnail' %}"
+                        class="d-none d-sm-block w-100 rounded border shadow-rd" style="max-width: 250px;">
+                    <div class="border mt-2 p-2 rounded">
+                        <!-- NUTZER NICHT ANGEMELDET -->
+                        {% if not user.is_authenticated %}
+                        {% if ausgabe.published %}
+                        <a href="{% url 'buy' %}" class="btn btn-primary btn-block"><i class="fas fa-shopping-cart"></i>
+                            Kaufen</a>
+                        {% endif %}
+                        {% if ausgabe.leseprobe %}
+                        <button class="btn btn-secondary btn-block" data-toggle="modal"
+                            data-target="#lp-{{ ausgabe.number }}">Leseprobe</button>
+                        {% endif %}
+                        {% if ausgabe.published %}
+                        <a href="{% url 'signin' %}" class="btn btn-secondary btn-block" data-toggle="tooltip"
+                            data-placement="bottom" title="Melde dich an, um einen Code einzulösen.">Code einlösen</a>
+
+                        <p class="mt-3 mb-0 small text-center">
+                            <a href="{% url 'signin' %}" class="font-weight-bold">Melde dich an</a>, wenn du diese
+                            Ausgabe bereits erworben hast.
+                        </p>
+                        {% endif %}
+                        <!-- NUTZER IM BESITZ DER AUSGABE -->
+                        {% elif ausgabe in inventory %}
+                        <a href="{% url 'viewer' ausgabe.number 'read' %}" class="btn btn-primary btn-block"><i
+                                class="fas fa-book-open"></i> Lesen</a>
+                        <!-- NUTZER NICHT IM BESITZ DER AUSGABE -->
+                        {% else %}
+                        {% if ausgabe.published %}
+                        <a href="{% url 'buy' %}" class="btn btn-primary btn-block"><i class="fas fa-shopping-cart"></i>
+                            Kaufen</a>
+                        {% endif %}
+                        {% if ausgabe.leseprobe %}
+                        <a href="{% url 'viewer' ausgabe.number 'leseprobe' %}"
+                            class="btn btn-secondary btn-block">Leseprobe</a>
+                        {% endif %}
+                        {% if ausgabe.published %}
+                        <a href="{% url 'redeem' %}" class="btn btn-secondary btn-block">Code einlösen</a>
+                        {% endif %}
+                        {% endif %}
+                        <!-- Wenn Ausgabe noch nicht veröffentlicht -->
+                        {% if not ausgabe.published %}
+                        <p class="mt-3 mb-0 small text-center">
+                            Diese Ausgabe erscheint am <b>{{ ausgabe.publish_date }}</b>.
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-8 col-xl-9 m-0 px-3 pt-3 pt-sm-2">
+                    <h2 class="font-weight-bold h4"><span class="badge mr-2 text-white align-bottom"
+                            style="background-color: #cf3342;">#{{ ausgabe.number }}</span>{{ ausgabe.name }}</h2>
+                    {% if ausgabe.published %}
+                    <p class="text-muted font-italic mb-1">veröffentlicht im {{ ausgabe.publish_date | date:"F Y" }}</p>
+                    {% else %}
+                    <p class="text-muted font-italic mb-1">erscheint am {{ ausgabe.publish_date }}</p>
+                    {% endif %}
+                    {% if ausgabe.description %}
+                    <p class="mb-0">{{ ausgabe.description }}</p>
+                    {% endif %}
+                </div>
+                <div class="modal fade" id="lp-{{ ausgabe.number }}" tabindex="-1" role="dialog"
+                    aria-labelledby="lp-{{ ausgabe.number }}-label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="lp-{{ ausgabe.number }}-label">Leseprobe: {{ ausgabe.name }}
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Schließen">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Um eine Leseprobe zu lesen, musst du den <a
+                                    href="{% url 'agb' %}">Nutzungsbedingungen</a> und der <a
+                                    href="{% url 'datenschutz' %}">Datenschutzerklärung</a> zustimmen.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zurück</button>
+                                <a href="{% url 'viewer' ausgabe.number 'leseprobe' %}"
+                                    class="btn btn-primary text-white">Ich stimme
+                                    zu</a>
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -90,7 +146,8 @@
 <div class="mb-3 w-100 rounded bg-white p-3 w-100 border shadow-rd">
     <h2 class="font-weight-bold h4"><i class="fas fa-comment-alt mr-2" style="color: rgb(10, 114, 184);"></i>News</h2>
     <h5>Erste Ausgabe kommt am 11. Mai raus! Jetzt nach Hause bestellen oder online lesen!</h5>
-    <p>Die erste Ausgabe von <i>TheHaps</i> wird am 11. Mai veröffentlicht! Das Titelthema lautet "Neustart" und Highlights der
+    <p>Die erste Ausgabe von <i>TheHaps</i> wird am 11. Mai veröffentlicht! Das Titelthema lautet "Neustart" und
+        Highlights der
         Ausgabe sind unter anderem eine Reportage über die Flucht eines Schüler der HPS, ein Artikel, der sich mit der
         Frage auseinandersetzt, was wir aus der Corona-Krise für die Klima-Krise lernen können, ein Interview mit einem
         Chefarzt des Elbe-Klinikums Buxtehude über die Corona-Pandemie an dem Buxtehuder Krankenhaus sowie eine
@@ -99,7 +156,8 @@
         mehr in der ersten Ausgabe!</p>
     <hr>
     <h5>Fünf Sportübungen für die Zeit im Homeoffice</h5>
-    <p class="mb-0">In der ersten Ausgabe von <i>TheHaps</i> stellen unsere beiden Sportredakteur Lennart und Stefan fünf Sportübungen für
+    <p class="mb-0">In der ersten Ausgabe von <i>TheHaps</i> stellen unsere beiden Sportredakteur Lennart und Stefan
+        fünf Sportübungen für
         die Zeit im Homeoffice vor, die jeder Zuhause machen kann, um Fehlhaltungen zu verhindern und fit zu bleiben!
         <a href="{% url 'buy' %}">Hier</a> erfährst du, wie du eine Ausgabe kaufen kannst. </p>
 </div>

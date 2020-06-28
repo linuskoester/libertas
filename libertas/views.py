@@ -64,11 +64,28 @@ def startseite(request):
     if w:
         return w
 
+    try:
+        ausgabe = ausgaben_visible()[0]
+    except IndexError:
+        ausgabe = False
+    inventory = ausgaben_user(request.user)
+
+    return render(request, 'libertas/startseite.html', {'ausgabe': ausgabe,
+                                                        'inventory': inventory})
+
+
+def ausgaben(request):
+    # Wartung
+    w = wartung(request)
+    if w:
+        return w
+
     ausgaben = ausgaben_visible()
     inventory = ausgaben_user(request.user)
 
-    return render(request, 'libertas/startseite.html', {'ausgaben': ausgaben,
-                                                        'inventory': inventory})
+    return render(request, 'libertas/ausgaben.html', {'menu': 'ausgaben',
+                                                      'ausgaben': ausgaben,
+                                                      'inventory': inventory})
 
 
 def podcast(request):
@@ -118,7 +135,7 @@ def redeem(request):
             code.save()
             messages.success(
                 request, 'Du hast jetzt Zugriff auf die Ausgabe <code>%s</code>.' % code.ausgabe.name)
-            return redirect('index')
+            return redirect('ausgaben')
     else:
         form = RedeemForm()
 

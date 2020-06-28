@@ -29,14 +29,14 @@ def viewer(request, number, view_type):
     if w:
         return w
 
+    leseprobe = False
     ausgabe = get_object_or_404(Ausgabe, number=number)
     if view_type == "read" and ausgabe.access_read(request.user):
         ual(request, "v", ausgabe.name, number)
         pdf_data = "%s/0" % ausgabe.file_identifier
-        pdf_name = ausgabe.name
     elif view_type == "leseprobe" and ausgabe.access_leseprobe(request.user):
         pdf_data = "%s/1" % ausgabe.file_identifier
-        pdf_name = "%s (Leseprobe)" % ausgabe.name
+        leseprobe = True
     elif view_type == "thumbnail" and ausgabe.visible():
         return FileResponse(ausgabe.thumbnail)
     elif request.user.is_authenticated:
@@ -46,10 +46,10 @@ def viewer(request, number, view_type):
         return redirect('redeem')
     else:
         messages.error(
-            request, 'Du musst dich zuerst anmelden um eine Ausgabe oder Leseprobe zu lesen.')
+            request, 'Du musst dich zuerst anmelden um eine Ausgabe zu lesen.')
         return redirect('signin')
 
-    return render(request, 'viewer/viewer.html', {'pdf_data': pdf_data, 'pdf_name': pdf_name})
+    return render(request, 'viewer/viewer.html', {'pdf_data': pdf_data, 'ausgabe': ausgabe, 'leseprobe': leseprobe})
 
 
 def protected_file(request, identifier, view_type):

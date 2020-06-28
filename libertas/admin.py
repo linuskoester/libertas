@@ -8,7 +8,7 @@ from .models import Ausgabe, Code, Configuration
 class AusgabeAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Generell',               {
-         'fields': ['name', 'number', 'publish_date', 'force_visible']}),
+         'fields': ['name', 'number', 'publish_date', 'description', 'force_visible']}),
         ('Dateien', {'fields': ['file', 'leseprobe', 'thumbnail']}),
     ]
 
