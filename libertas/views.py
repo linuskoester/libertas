@@ -7,7 +7,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import redirect, render
 
 from .forms import RedeemForm
-from .models import Code, Configuration, User, ausgaben_user, ausgaben_visible
+from .models import Code, Configuration, User, ausgaben_user, ausgaben_visible, news_list
 
 
 def log_user(user, flag, message):
@@ -70,8 +70,14 @@ def startseite(request):
         ausgabe = False
     inventory = ausgaben_user(request.user)
 
+    try:
+        news = news_list()[:2]
+    except IndexError:
+        news = False
+
     return render(request, 'libertas/startseite.html', {'ausgabe': ausgabe,
-                                                        'inventory': inventory})
+                                                        'inventory': inventory,
+                                                        'news_list': news})
 
 
 def ausgaben(request):
@@ -86,6 +92,15 @@ def ausgaben(request):
     return render(request, 'libertas/ausgaben.html', {'menu': 'ausgaben',
                                                       'ausgaben': ausgaben,
                                                       'inventory': inventory})
+
+
+def news(request):
+    # Wartung
+    w = wartung(request)
+    if w:
+        return w
+
+    return render(request, 'libertas/news.html', {'menu': 'news', 'news_list': news_list()})
 
 
 def podcast(request):

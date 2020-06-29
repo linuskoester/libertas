@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Ausgabe, Code, Configuration
+from .models import Ausgabe, Code, Configuration, News
 
 # Register your models here.
 
@@ -45,6 +45,14 @@ class ConfigurationAdmin(admin.ModelAdmin):
     list_display = ['name']
 
 
+class NewsAdmin(admin.ModelAdmin):
+    ordering = ['-date']
+    search_fields = ('tag', 'title', 'author', 'date')
+    list_display = ('tag', 'title', 'author', 'date')
+    list_display_links = ['title']
+
+
 admin.site.register(Ausgabe, AusgabeAdmin)
 admin.site.register(Code, CodeAdmin)
 admin.site.register(Configuration, ConfigurationAdmin)
+admin.site.register(News, NewsAdmin)

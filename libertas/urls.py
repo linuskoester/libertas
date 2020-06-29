@@ -16,4 +16,5 @@ urlpatterns = [
     path('buy', views.buy, name='corona'),
     path('buy', views.buy, name='buy'),
     path('ausgaben', views.ausgaben, name='ausgaben'),
+    path('news', views.news, name='news'),
 ]
