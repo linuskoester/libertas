@@ -240,6 +240,21 @@ $footer: $black;
                     border-right: 1px $color solid;
                 }
             }
+            .#{$classname}#{$infix}-0 {
+                border: none;
+            }
+            .#{$classname}-top#{$infix}-0 {
+                border-top: none;
+            }
+            .#{$classname}-bottom#{$infix}-0 {
+                border-bottom: none;
+            }
+            .#{$classname}-left#{$infix}-0 {
+                border-left: none;
+            }
+            .#{$classname}-right#{$infix}-0 {
+                border-right: none;
+            }
         }
     }
 }
