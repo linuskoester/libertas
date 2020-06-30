@@ -193,7 +193,7 @@ def impressum(request):
     return render(request, 'libertas/impressum.html')
 
 
-def error404(request):
+def error404(request, exception):
     # Wartung
     w = wartung(request)
     if w:

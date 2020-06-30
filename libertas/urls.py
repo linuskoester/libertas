@@ -21,5 +21,5 @@ urlpatterns = [
     # path('error500', views.error500, name='error500'),
 ]
 
-handler404 = 'viws.error404'
-handler500 = 'viws.error500'
+handler404 = 'libertas.views.error404'
+handler500 = 'libertas.views.error500'
