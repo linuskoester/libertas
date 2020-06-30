@@ -8,6 +8,8 @@ from django.shortcuts import redirect, render
 
 from .forms import RedeemForm
 from .models import Code, Configuration, User, ausgaben_user, ausgaben_visible, news_list
+from django.template.loader import render_to_string
+from django.http.response import HttpResponseNotFound, HttpResponseServerError
 
 
 def log_user(user, flag, message):
@@ -199,7 +201,7 @@ def error404(request, exception):
     if w:
         return w
 
-    return render(request, 'libertas/error/404.html')
+    return HttpResponseNotFound(render_to_string('libertas/error/404.html'))
 
 
 def error500(request):
@@ -208,4 +210,4 @@ def error500(request):
     if w:
         return w
 
-    return render(request, 'libertas/error/500.html')
+    return HttpResponseServerError(render_to_string('libertas/error/500.html'))
