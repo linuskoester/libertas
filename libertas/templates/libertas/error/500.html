@@ -1,0 +1,23 @@
+{% extends 'libertas/base.html' %}
+{% load static %}
+
+{% block title %}Interner Fehler{% endblock %}
+
+{% block main %}
+<h1 class="text-center text-primary display-1 font-weight-bold mb-0"
+    style="text-shadow: 0rem 0.2rem 0.7rem rgba(0, 0, 0, 0.5);"><img style="max-height: 9rem;"
+        src="{% static 'libertas/img/panda.png' %}" class="d-none d-sm-inline">500</h1>
+<div class="row justify-content-center mt-2">
+    <div class="p-3 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+        <div class="shadow-rd rounded border bg-white p-3">
+            <h2 class="font-weight-bold h4"><i class="fas fa-bug mr-2 text-primary"></i>Interner Fehler</h2>
+            <p>Das liegt nicht an dir, sondern an der Webseite. Der Fehler wurde automatisch gemeldet und wird bald
+                behoben. Versuche es am besten einfach nochmal!</p>
+            <button class="btn btn-primary" onclick="window.history.back();" role="button">Zurück</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block no_ad %}
+{% endblock %}

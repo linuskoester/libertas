@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Ausgabe, Code, Configuration
+from .models import Ausgabe, Code, Configuration, News
 
 # Register your models here.
 
@@ -8,7 +8,7 @@ from .models import Ausgabe, Code, Configuration
 class AusgabeAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Generell',               {
-         'fields': ['name', 'number', 'publish_date', 'force_visible']}),
+         'fields': ['name', 'number', 'publish_date', 'description', 'force_visible']}),
         ('Dateien', {'fields': ['file', 'leseprobe', 'thumbnail']}),
     ]
 
@@ -45,6 +45,14 @@ class ConfigurationAdmin(admin.ModelAdmin):
     list_display = ['name']
 
 
+class NewsAdmin(admin.ModelAdmin):
+    ordering = ['-date']
+    search_fields = ('tag', 'title', 'author', 'date')
+    list_display = ('tag', 'title', 'author', 'date')
+    list_display_links = ['title']
+
+
 admin.site.register(Ausgabe, AusgabeAdmin)
 admin.site.register(Code, CodeAdmin)
 admin.site.register(Configuration, ConfigurationAdmin)
+admin.site.register(News, NewsAdmin)

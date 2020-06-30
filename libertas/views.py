@@ -7,7 +7,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import redirect, render
 
 from .forms import RedeemForm
-from .models import Code, Configuration, User, ausgaben_user, ausgaben_visible
+from .models import Code, Configuration, User, ausgaben_user, ausgaben_visible, news_list
 
 
 def log_user(user, flag, message):
@@ -64,11 +64,43 @@ def startseite(request):
     if w:
         return w
 
+    try:
+        ausgabe = ausgaben_visible()[0]
+    except IndexError:
+        ausgabe = False
+    inventory = ausgaben_user(request.user)
+
+    try:
+        news = news_list()[:2]
+    except IndexError:
+        news = False
+
+    return render(request, 'libertas/startseite.html', {'ausgabe': ausgabe,
+                                                        'inventory': inventory,
+                                                        'news_list': news})
+
+
+def ausgaben(request):
+    # Wartung
+    w = wartung(request)
+    if w:
+        return w
+
     ausgaben = ausgaben_visible()
     inventory = ausgaben_user(request.user)
 
-    return render(request, 'libertas/startseite.html', {'ausgaben': ausgaben,
-                                                        'inventory': inventory})
+    return render(request, 'libertas/ausgaben.html', {'menu': 'ausgaben',
+                                                      'ausgaben': ausgaben,
+                                                      'inventory': inventory})
+
+
+def news(request):
+    # Wartung
+    w = wartung(request)
+    if w:
+        return w
+
+    return render(request, 'libertas/news.html', {'menu': 'news', 'news_list': news_list()})
 
 
 def podcast(request):
@@ -118,7 +150,7 @@ def redeem(request):
             code.save()
             messages.success(
                 request, 'Du hast jetzt Zugriff auf die Ausgabe <code>%s</code>.' % code.ausgabe.name)
-            return redirect('index')
+            return redirect('ausgaben')
     else:
         form = RedeemForm()
 
@@ -168,3 +200,12 @@ def error404(request):
         return w
 
     return render(request, 'libertas/error/404.html')
+
+
+def error500(request):
+    # Wartung
+    w = wartung(request)
+    if w:
+        return w
+
+    return render(request, 'libertas/error/500.html')

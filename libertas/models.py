@@ -18,15 +18,18 @@ def generate_code(length=12):
 
 
 def ausgaben_visible():
-    return Ausgabe.objects.filter(
+    return Ausgabe.objects.order_by('-number').filter(
         Q(publish_date__lte=date.today()) | Q(force_visible=True))
+
+
+def news_list():
+    return News.objects.order_by('-date', '-pk').filter(date__lte=date.today())
 
 
 def ausgaben_user(user):
     inventory = []
     for ausgabe in ausgaben_visible():
         if ausgabe.access_read(user):
-            print("hi")
             inventory.append(ausgabe)
     return inventory
 
@@ -37,6 +40,7 @@ class Ausgabe(models.Model):
     force_visible = models.BooleanField(
         verbose_name="Sichtbarkeit erzwingen", default=False)
     number = models.IntegerField('Ausgaben-Nr.', primary_key=True)
+    description = models.TextField('Beschreibung', blank=True, default='')
     file_identifier = models.CharField(
         max_length=16, default=generate_id, unique=True)
     file = models.FileField('Datei', upload_to='ausgaben')
@@ -72,7 +76,7 @@ class Ausgabe(models.Model):
 
     # Ist der Benutzer dazu berechtigt die Leseprobe zu lesen?
     def access_leseprobe(self, user):
-        if user.is_authenticated and self.visible() and self.leseprobe:
+        if self.visible() and self.leseprobe:
             return True
         return False
 
@@ -99,6 +103,21 @@ class Code(models.Model):
     class Meta:
         verbose_name = "Code"
         verbose_name_plural = "Codes"
+
+
+class News(models.Model):
+    title = models.CharField('Titel', max_length=250)
+    date = models.DateField('Datum')
+    author = models.CharField('Autor', max_length=64, blank=True)
+    tag = models.CharField(max_length=32, blank=True)
+    content = models.TextField('Inhalt', blank=False)
+
+    def __str__(self):
+        return "News #%s" % (self.pk)
+
+    class Meta:
+        verbose_name = "News"
+        verbose_name_plural = "News"
 
 
 class Configuration(models.Model):

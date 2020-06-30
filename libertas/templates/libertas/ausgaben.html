@@ -5,43 +5,106 @@
 {% block main %}
 
 <style>
-    .card .thumbnail-gray {
-        filter: grayscale(100%);
-        transition: filter .2s;
+    h2 .permalink {
+        opacity: 0;
+        transition: opacity .2s;
     }
-
-    .card:hover .thumbnail-gray {
-        filter: grayscale(0%);
-        transition: filter .2s;
+    h2:hover .permalink {
+        opacity: 0.8;
+        transition: opacity .2s;
     }
 </style>
 
-<h1>Ausgaben</h1>
+<div class="jumbotron m-0 text-light shadow-rd py-5" style="background: #cf3342; overflow-wrap: break-word;">
+    <h1 class="display-4"><i class="fas fa-newspaper"></i> Ausgaben</h1>
+</div>
 
-<div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 mt-4">
-    {% for ausgabe in ausgaben.all %}
-    <div class="col mb-4">
-        <div class="card">
-            <img src="{% url 'viewer' ausgabe.number 'thumbnail' %}"
-                class="card-img-top {% if user.is_authenticated and ausgabe not in inventory %}thumbnail-gray{% endif %}">
-            <div class="card-footer">
-                {% if not user.is_authenticated %}
-                <a href="{% url 'signin' %}" class="btn btn-primary btn-block" data-toggle="tooltip"
-                    data-placement="bottom" title="Du musst dich zuerst anmelden, um diese Ausgabe zu lesen.">Lesen</a>
-                {% elif ausgabe in inventory %}
-                <a href="{% url 'viewer' ausgabe.number 'read' %}" class="btn btn-primary btn-block">Lesen</a>
-                {% else %}
-                <a href="{% url 'redeem' %}" class="btn btn-primary btn-block">Code einlösen</a>
-                {% if ausgabe.leseprobe %}
-                <a href="{% url 'viewer' ausgabe.number 'leseprobe' %}"
-                    class="btn btn-secondary btn-block">Leseprobe</a>
-                {% endif %}
-                {% endif %}
-                <p class="card-text text-center text-muted mt-3">{{ ausgabe.name }}</p>
+{% for ausgabe in ausgaben.all %}
+<div class="my-3 mx-0 w-100 shadow-rd rounded border bg-white p-0 row overflow-hidden">
+    <div class="d-none d-md-block col-md-3 col-lg-3 col-xl-2 p-0 text-center">
+        <img src="{% url 'viewer' ausgabe.number 'thumbnail' %}" class="w-100">
+    </div>
+
+    <div
+        class="col-12 col-md-9 col-lg-6 col-xl-8 m-0 p-3 border-left-md-secondary border-right-lg-secondary overflow-hidden">
+        <h2 class="font-weight-bold h4" id="{{ ausgabe.number }}"><span class="badge mr-2 text-white align-bottom"
+                style="background-color: #cf3342;">#{{ ausgabe.number }}</span>{{ ausgabe.name }} <a href="{% url 'ausgaben' %}#{{ ausgabe.number }}" class="text-muted font-weight-normal permalink" data-toggle="tooltip" title="Permalink">#</a></h2>
+        {% if ausgabe.published %}
+        <p class="text-muted font-italic mb-1">veröffentlicht im {{ ausgabe.publish_date | date:"F Y" }}</p>
+        {% else %}
+        <p class="text-muted font-italic mb-1">erscheint am {{ ausgabe.publish_date }}</p>
+        {% endif %}
+        {% if ausgabe.description %}
+        <p class="mb-0">{{ ausgabe.description }}</p>
+        {% endif %}
+    </div>
+
+    <div class="col-12 col-lg-3 col-xl-2 p-3 border-top-secondary border-top-lg-0">
+        <!-- NUTZER NICHT ANGEMELDET -->
+        {% if not user.is_authenticated %}
+        {% if ausgabe.published %}
+        <a href="{% url 'buy' %}" class="btn btn-primary btn-block"><i class="fas fa-shopping-cart"></i> Kaufen</a>
+        {% endif %}
+        {% if ausgabe.leseprobe %}
+        <button class="btn btn-secondary btn-block" data-toggle="modal"
+            data-target="#lp-{{ ausgabe.number }}">Leseprobe</button>
+        {% endif %}
+        {% if ausgabe.published %}
+        <a href="{% url 'signin' %}" class="btn btn-secondary btn-block" data-toggle="tooltip" data-placement="bottom"
+            title="Melde dich an, um einen Code einzulösen.">Code einlösen</a>
+
+        <p class="mt-3 mb-0 small text-center">
+            <a href="{% url 'signin' %}" class="font-weight-bold">Melde dich an</a>, wenn du diese Ausgabe bereits
+            erworben hast.
+        </p>
+        {% endif %}
+        <!-- NUTZER IM BESITZ DER AUSGABE -->
+        {% elif ausgabe in inventory %}
+        <a href="{% url 'viewer' ausgabe.number 'read' %}" class="btn btn-primary btn-block"><i
+                class="fas fa-book-open"></i> Lesen</a>
+        <!-- NUTZER NICHT IM BESITZ DER AUSGABE -->
+        {% else %}
+        {% if ausgabe.published %}
+        <a href="{% url 'buy' %}" class="btn btn-primary btn-block"><i class="fas fa-shopping-cart"></i> Kaufen</a>
+        {% endif %}
+        {% if ausgabe.leseprobe %}
+        <a href="{% url 'viewer' ausgabe.number 'leseprobe' %}" class="btn btn-secondary btn-block">Leseprobe</a>
+        {% endif %}
+        {% if ausgabe.published %}
+        <a href="{% url 'redeem' %}" class="btn btn-secondary btn-block">Code einlösen</a>
+        {% endif %}
+        {% endif %}
+        <!-- Wenn Ausgabe noch nicht veröffentlicht -->
+        {% if not ausgabe.published %}
+        <p class="mt-3 mb-0 small text-center">
+            Diese Ausgabe erscheint am <b>{{ ausgabe.publish_date }}</b>.
+        </p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="modal fade" id="lp-{{ ausgabe.number }}" tabindex="-1" role="dialog"
+    aria-labelledby="lp-{{ ausgabe.number }}-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="lp-{{ ausgabe.number }}-label">Leseprobe: {{ ausgabe.name }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Schließen">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Um eine Leseprobe zu lesen, musst du den <a href="{% url 'agb' %}">Nutzungsbedingungen</a> und der <a
+                    href="{% url 'datenschutz' %}">Datenschutzerklärung</a> zustimmen.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zurück</button>
+                <a href="{% url 'viewer' ausgabe.number 'leseprobe' %}" class="btn btn-primary text-white">Ich stimme
+                    zu</a>
             </div>
         </div>
     </div>
-    {% endfor %}
 </div>
+{% endfor %}
 
 {% endblock %}

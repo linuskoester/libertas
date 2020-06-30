@@ -22,7 +22,7 @@ jobs:
           SENTRY_PROJECT: live
         with:
           tagName: ${{ github.ref }}
-          environment: qa
+          environment: LIVE
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v1
         with:
