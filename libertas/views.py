@@ -200,3 +200,12 @@ def error404(request):
         return w
 
     return render(request, 'libertas/error/404.html')
+
+
+def error500(request):
+    # Wartung
+    w = wartung(request)
+    if w:
+        return w
+
+    return render(request, 'libertas/error/500.html')

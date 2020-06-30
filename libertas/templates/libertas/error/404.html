@@ -1,0 +1,24 @@
+{% extends 'libertas/base.html' %}
+{% load static %}
+
+{% block title %}Seite nicht gefunden{% endblock %}
+
+{% block main %}
+<h1 class="text-center text-primary display-1 font-weight-bold mb-0"
+    style="text-shadow: 0rem 0.2rem 0.7rem rgba(0, 0, 0, 0.5);"><img style="max-height: 9rem;"
+        src="{% static 'libertas/img/panda.png' %}" class="d-none d-sm-inline">404</h1>
+<div class="row justify-content-center mt-2">
+    <div class="p-3 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+        <div class="shadow-rd rounded border bg-white p-3">
+            <h2 class="font-weight-bold h4"><i class="fas fa-bug mr-2 text-primary"></i>Seite nicht gefunden</h2>
+            <p>Das kann zum Beispiel daran liegen, dass du dich beim Link vertippt hast oder diese Seite nicht mehr
+                existiert.</p>
+            <a class="btn btn-primary" href="{% url 'index' %}">Zur Startseite</a>
+            <button class="btn btn-secondary ml-1" onclick="window.history.back();" role="button">Zurück</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block no_ad %}
+{% endblock %}
