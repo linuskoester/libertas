@@ -14,20 +14,44 @@
     <div class="col-md-6 pr-md-2 mb-3 mb-md-0 d-flex">
         <div class="shadow-rd rounded border bg-white p-3">
             <h2 class="font-weight-bold h4"><span class="badge mr-2 text-white align-bottom"
-                    style="background-color: #17a2b8;">0,50€</span>Digitale Ausgabe kaufen</h2>
-            <p><b>{% lorem 1 %}</b>
+                    style="background-color: #17a2b8;">1,50€</span>Print-Ausgabe kaufen</h2>
+            <p><b>Eine Print-Ausgabe von TheHaps kannst du am Verkaufsstand in der Halepaghen-Schule kaufen. Wäre da
+                    nicht diese Pandemie, verkaufen wir einige Tage nach dem Erscheinungsdatum auch an anderen Orten
+                    in der Stadt.</b></p>
 
-            <p class="mb-0">{% lorem 1 %}</p>
+            <p>Wenn du dir eine Ausgabe im Vorwege sichern möchtest oder alte Ausgaben kaufen willst, kannst du auch
+                eine E-Mail an <a href="mailto:thehaps@halepaghen.de">thehaps@halepaghen.de</a> schreiben, die alle
+                diesbezüglich relevanten Informationen enthält.
+            </p>
+
         </div>
     </div>
     <div class="col-md-6 pl-md-2 d-flex">
-        <div class="shadow-rd rounded border bg-white p-3 w-100">
+        <div class="shadow-rd rounded border bg-white p-3">
             <h2 class="font-weight-bold h4"><span class="badge mr-2 text-white align-bottom"
-                    style="background-color: #17a2b8;">1,50€</span>Print-Ausgabe kaufen</h2>
-            <p><b>{% lorem 1 %}</b>
+                    style="background-color: #17a2b8;">1€</span>Digitale Ausgabe kaufen</h2>
+            <p><b>Die digitale Ausgabe von TheHaps kannst du erwerben, indem du vorher einen Zugangscode kaufst. Die
+                    Zugangscodes verkaufen wir überall dort, wo wir auch Print-Ausgaben verkaufen.</b></p>
 
-            <p class="mb-0">{% lorem 1 %}</p>
+            <p>Sobald du den Zugangscode hast, musst du dir nur noch einen Account auf dieser Webseite
+                anlegen und den Code einlösen. – Viel Spaß beim Lesen!</p>
+
+            <p>Bei Problemen oder Fragen schreibe uns einfach eine E-Mail an <a
+                    href="mailto:thehaps@halepaghen.de">thehaps@halepaghen.de</a> und wir helfen dir gerne!</p>
+            <p class="font-italic text-center text-muted small mb-0">Digitale Ausgaben sind zurzeit nur für
+                Schüler und Lehrkräfte der HPS verfügbar!</p>
+            <hr>
+            {% if user.is_authenticated %}
+            <a href="{% url 'redeem' %}" class="btn btn-primary btn-block mt-3"><i
+                    class="fas fa-tag mr-2"></i>Zugangscode
+                einlösen</a>
+            {% else %}
+            <p class="mb-0"><a href="{% url 'signup' %}">Erstelle einen Account</a> oder <a
+                    href="{% url 'signin' %}">melde dich an</a>, wenn du einen Zugangscode einlösen möchtest.</p>
+
+            {% endif %}
         </div>
+
     </div>
 
 
