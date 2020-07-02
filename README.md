@@ -1,8 +1,4 @@
 # Libertas
-[![Development](https://img.shields.io/github/workflow/status/the-haps/libertas/Python%20Syntax%20Check/development?label=development&logo=github&style=flat-square)](https://github.com/the-haps/libertas/tree/development)
-[![Beta](https://img.shields.io/github/workflow/status/the-haps/libertas/Build%20Beta%20Package/beta?label=beta&logo=github&style=flat-square)](https://github.com/the-haps/libertas/tree/beta)
-<!-- [![Release](https://img.shields.io/github/workflow/status/the-haps/libertas/Build%20Release%20Package/release?label=release&logo=github&style=flat-square)](https://github.com/the-haps/libertas/tree/release) -->
-
 
 ## Was ist Libertas?
 Libertas ist der Projektname für die Web-App der Schülerzeitung "TheHaps" von der Halepaghen-Schule. Die App ermöglicht den digitalen Erwerb und das Lesen der Zeitung, direkt aus dem Browser.
