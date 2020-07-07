@@ -51,7 +51,7 @@
 <body class="d-flex flex-column" style="min-height: 100%;">
     {% block body %}
     <header>
-        <nav class="navbar navbar-expand-lg fixed-top navbar-light p-lg-2 shadow-rd">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-light p-lg-2 shadow-rd" style="font-size: 16px;">
             <a class="navbar-brand p-0 mr-2" href="{% url 'index' %}">
                 <img src="{% static 'libertas/img/logo-blue.png' %}" style="height: 36px">
             </a>
@@ -65,37 +65,37 @@
                     <li class="nav-item {% if menu == "ausgaben" %}active font-weight-bold{% endif %}">
                         <a class="nav-link" href="{% url 'ausgaben' %}">
                             <span class="nav-color d-block d-lg-inline w-100" style="background: #cf3342;">
-                                <i class="fas fa-newspaper d-lg-none d-xl-inline"></i> Ausgaben</span>
+                                <i class="fas fa-newspaper d-lg-none d-xl-inline text-center" style="width: 20px;"></i> Ausgaben</span>
                         </a>
                     </li>
                     <li class="nav-item {% if menu == "buy" %}active font-weight-bold{% endif %}">
                         <a class="nav-link" href="{% url 'buy' %}">
                             <span class="nav-color d-block d-lg-inline w-100" style="background: #17a2b8;">
-                                <i class="fas fa-shopping-cart d-lg-none d-xl-inline"></i> Kaufen</span>
+                                <i class="fas fa-shopping-cart d-lg-none d-xl-inline text-center" style="width: 20px;"></i> Kaufen</span>
                         </a>
                     </li>
                     <li class="nav-item {% if menu == "team" %}active font-weight-bold{% endif %}">
                         <a class="nav-link" href="{% url 'team' %}">
                             <span class="nav-color d-block d-lg-inline w-100" style="background: #6f42c1;">
-                                <i class="fas fa-users d-lg-none d-xl-inline"></i> Team</span>
+                                <i class="fas fa-users d-lg-none d-xl-inline text-center" style="width: 20px;"></i> Team</span>
                         </a>
                     </li>
                     <li class="nav-item {% if menu == "faq" %}active font-weight-bold{% endif %}">
                         <a class="nav-link" href="{% url 'faq' %}">
                             <span class="nav-color d-block d-lg-inline w-100" style="background: #269c41">
-                                <i class="fas fa-question-circle d-lg-none d-xl-inline"></i> FAQ</span>
+                                <i class="fas fa-question-circle d-lg-none d-xl-inline text-center" style="width: 20px;"></i> FAQ</span>
                         </a>
                     </li>
                     <li class="nav-item {% if menu == "podcast" %}active font-weight-bold{% endif %}">
                         <a class="nav-link" href="{% url 'podcast' %}">
                             <span class="nav-color d-block d-lg-inline w-100" style="background: #cc377d;">
-                                <i class="fas fa-microphone d-lg-none d-xl-inline"></i> Podcast</span>
+                                <i class="fas fa-microphone d-lg-none d-xl-inline text-center" style="width: 20px;"></i> Podcast</span>
                         </a>
                     </li>
                     <li class="nav-item {% if menu == "news" %}active font-weight-bold{% endif %}">
                         <a class="nav-link" href="{% url 'news' %}">
                             <span class="nav-color d-block d-lg-inline w-100" style="background: rgb(10, 114, 184);">
-                                <i class="fas fa-comment-alt d-lg-none d-xl-inline"></i> News</span>
+                                <i class="fas fa-comment-alt d-lg-none d-xl-inline text-center" style="width: 20px;"></i> News</span>
                         </a>
                     </li>
                 </ul>
