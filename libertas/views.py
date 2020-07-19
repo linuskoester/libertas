@@ -92,9 +92,9 @@ def ausgaben(request):
     ausgaben = ausgaben_visible()
     inventory = ausgaben_user(request.user)
 
-    return render(request, 'libertas/ausgaben.html', {'menu': 'ausgaben',
-                                                      'ausgaben': ausgaben,
-                                                      'inventory': inventory})
+    return render(request, 'libertas/pages/ausgaben.html', {'menu': 'ausgaben',
+                                                            'ausgaben': ausgaben,
+                                                            'inventory': inventory})
 
 
 def artikel(request, pk):
@@ -114,7 +114,7 @@ def news(request):
     if w:
         return w
 
-    return render(request, 'libertas/news.html', {'menu': 'news', 'news_list': news_list()})
+    return render(request, 'libertas/pages/news.html', {'menu': 'news', 'news_list': news_list()})
 
 
 def podcast(request):
@@ -123,7 +123,7 @@ def podcast(request):
     if w:
         return w
 
-    return render(request, 'libertas/podcast.html', {'menu': 'podcast'})
+    return render(request, 'libertas/pages/podcast.html', {'menu': 'podcast'})
 
 
 def team(request):
@@ -132,7 +132,7 @@ def team(request):
     if w:
         return w
 
-    return render(request, 'libertas/team.html', {'menu': 'team'})
+    return render(request, 'libertas/pages/team.html', {'menu': 'team'})
 
 
 def faq(request):
@@ -141,7 +141,7 @@ def faq(request):
     if w:
         return w
 
-    return render(request, 'libertas/faq.html', {'menu': 'faq'})
+    return render(request, 'libertas/pages/faq.html', {'menu': 'faq'})
 
 
 def redeem(request):
@@ -168,7 +168,7 @@ def redeem(request):
     else:
         form = RedeemForm()
 
-    return render(request, 'libertas/redeem.html', {'menu': 'user-redeem', 'form': form})
+    return render(request, 'libertas/pages/redeem.html', {'menu': 'user-redeem', 'form': form})
 
 
 def buy(request):
@@ -177,7 +177,7 @@ def buy(request):
     if w:
         return w
 
-    return render(request, 'libertas/buy.html', {'menu': 'buy'})
+    return render(request, 'libertas/pages/buy.html', {'menu': 'buy'})
 
 
 def datenschutz(request):
@@ -186,7 +186,7 @@ def datenschutz(request):
     if w:
         return w
 
-    return render(request, 'libertas/datenschutz.html')
+    return render(request, 'libertas/pages/legal/datenschutz.html')
 
 
 def agb(request):
@@ -195,7 +195,7 @@ def agb(request):
     if w:
         return w
 
-    return render(request, 'libertas/agb.html')
+    return render(request, 'libertas/pages/legal/agb.html')
 
 
 def impressum(request):
@@ -204,7 +204,7 @@ def impressum(request):
     if w:
         return w
 
-    return render(request, 'libertas/impressum.html')
+    return render(request, 'libertas/pages/legal/impressum.html')
 
 
 def error404(request, exception):
