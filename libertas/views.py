@@ -4,10 +4,10 @@ from django.contrib import messages
 from django.contrib.admin.models import CHANGE, LogEntry
 from django.contrib.auth import logout
 from django.contrib.contenttypes.models import ContentType
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import RedeemForm
-from .models import Code, Configuration, User, ausgaben_user, ausgaben_visible, news_list
+from .models import Artikel, Code, Configuration, User, ausgaben_user, ausgaben_visible, news_list, artikel_list
 from django.template.loader import render_to_string
 from django.http.response import HttpResponseNotFound, HttpResponseServerError
 
@@ -79,7 +79,8 @@ def startseite(request):
 
     return render(request, 'libertas/startseite.html', {'ausgabe': ausgabe,
                                                         'inventory': inventory,
-                                                        'news_list': news})
+                                                        'news_list': news,
+                                                        'artikel_list': artikel_list()})
 
 
 def ausgaben(request):
@@ -94,6 +95,17 @@ def ausgaben(request):
     return render(request, 'libertas/ausgaben.html', {'menu': 'ausgaben',
                                                       'ausgaben': ausgaben,
                                                       'inventory': inventory})
+
+
+def artikel(request, pk):
+    # Wartung
+    w = wartung(request)
+    if w:
+        return w
+
+    artikel = get_object_or_404(Artikel, pk=pk)
+
+    return render(request, 'libertas/pages/artikel.html', {'artikel': artikel})
 
 
 def news(request):

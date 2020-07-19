@@ -17,6 +17,7 @@ urlpatterns = [
     path('buy', views.buy, name='buy'),
     path('ausgaben', views.ausgaben, name='ausgaben'),
     path('news', views.news, name='news'),
+    path('artikel/<int:pk>', views.artikel, name='artikel'),
     # path('error404', views.error404, name='error404'),
     # path('error500', views.error500, name='error500'),
 ]
