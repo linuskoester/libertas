@@ -26,6 +26,10 @@ def news_list():
     return News.objects.order_by('-date', '-pk').filter(date__lte=date.today())
 
 
+def artikel_list():
+    return Artikel.objects.order_by('-date', '-pk').filter(date__lte=date.today())
+
+
 def ausgaben_user(user):
     inventory = []
     for ausgabe in ausgaben_visible():
@@ -103,6 +107,22 @@ class Code(models.Model):
     class Meta:
         verbose_name = "Code"
         verbose_name_plural = "Codes"
+
+
+class Artikel(models.Model):
+    title = models.CharField('Titel', max_length=250)
+    date = models.DateField('Datum')
+    author = models.CharField('Autor', max_length=64, blank=True)
+    tag = models.CharField(max_length=32, blank=True)
+    description = models.TextField('Beschreibung', blank=False)
+    content = models.TextField('Inhalt', blank=False)
+
+    def __str__(self):
+        return "Artikel #%s" % (self.pk)
+
+    class Meta:
+        verbose_name = "Artikel"
+        verbose_name_plural = "Artikel"
 
 
 class News(models.Model):
