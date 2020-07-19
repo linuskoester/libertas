@@ -22,3 +22,6 @@ urlpatterns = [
     path('viewer/', include('viewer.urls')),
     path('admin/', admin.site.urls),
 ]
+
+handler404 = 'libertas.views.error404'
+handler500 = 'libertas.views.error500'
