@@ -30,159 +30,16 @@
 {% if ausgabe %}
 <div class="row">
     <div class="col-lg-8 pr-lg-0 d-flex">
-        <div class="mb-3 w-100 rounded bg-white p-3 w-100 border shadow-rd">
-            <h2 class="font-weight-bold h4"><i class="fas fa-newspaper mr-2" style="color: #cf3342;"></i>Aktuelle
-                Ausgabe</h2>
-
-            <div class="row m-0">
-                <div class="col-12 col-sm-4 col-xl-3 p-0 text-center">
-                    <img src="{% url 'viewer' ausgabe.number 'thumbnail' %}"
-                        class="d-none d-sm-block w-100 rounded border shadow-rd" style="max-width: 250px;">
-                    <div class="border mt-2 p-2 rounded">
-                        <!-- NUTZER NICHT ANGEMELDET -->
-                        {% if not user.is_authenticated %}
-                        {% if ausgabe.published %}
-                        <a href="{% url 'buy' %}" class="btn btn-primary btn-block"><i class="fas fa-shopping-cart"></i>
-                            Kaufen</a>
-                        {% endif %}
-                        {% if ausgabe.leseprobe %}
-                        <button class="btn btn-secondary btn-block" data-toggle="modal"
-                            data-target="#lp-{{ ausgabe.number }}">Leseprobe</button>
-                        {% endif %}
-                        {% if ausgabe.published %}
-                        <a href="{% url 'signin' %}" class="btn btn-secondary btn-block" data-toggle="tooltip"
-                            data-placement="bottom" title="Melde dich an, um einen Code einzulösen.">Code einlösen</a>
-
-                        <p class="mt-2 mb-0 small text-center text-muted">
-                            <a href="{% url 'signin' %}">Melde dich an</a>, wenn du diese
-                            Ausgabe bereits erworben hast.
-                        </p>
-                        {% endif %}
-                        <!-- NUTZER IM BESITZ DER AUSGABE -->
-                        {% elif ausgabe in inventory %}
-                        <a href="{% url 'viewer' ausgabe.number 'read' %}" class="btn btn-primary btn-block"><i
-                                class="fas fa-book-open"></i> Lesen</a>
-                        <!-- NUTZER NICHT IM BESITZ DER AUSGABE -->
-                        {% else %}
-                        {% if ausgabe.published %}
-                        <a href="{% url 'buy' %}" class="btn btn-primary btn-block"><i class="fas fa-shopping-cart"></i>
-                            Kaufen</a>
-                        {% endif %}
-                        {% if ausgabe.leseprobe %}
-                        <a href="{% url 'viewer' ausgabe.number 'leseprobe' %}"
-                            class="btn btn-secondary btn-block">Leseprobe</a>
-                        {% endif %}
-                        {% if ausgabe.published %}
-                        <a href="{% url 'redeem' %}" class="btn btn-secondary btn-block">Code einlösen</a>
-                        {% endif %}
-                        {% endif %}
-                        <!-- Wenn Ausgabe noch nicht veröffentlicht -->
-                        {% if not ausgabe.published %}
-                        <p class="mt-3 mb-0 small text-center">
-                            Diese Ausgabe erscheint am <b>{{ ausgabe.publish_date }}</b>.
-                        </p>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-8 col-xl-9 m-0 p-0 px-sm-3 pt-3 pt-sm-2">
-                    <h2 class="font-weight-bold h4"><span class="badge mr-2 text-white align-bottom"
-                            style="background-color: #cf3342;">#{{ ausgabe.number }}</span>{{ ausgabe.name }}</h2>
-                    {% if ausgabe.published %}
-                    <p class="text-muted font-italic mb-1">veröffentlicht im {{ ausgabe.publish_date | date:"F Y" }}</p>
-                    {% else %}
-                    <p class="text-muted font-italic mb-1">erscheint am {{ ausgabe.publish_date }}</p>
-                    {% endif %}
-                    {% if ausgabe.description %}
-                    <p class="mb-0">{{ ausgabe.description }}</p>
-                    {% endif %}
-                </div>
-                <div class="modal fade" id="lp-{{ ausgabe.number }}" tabindex="-1" role="dialog"
-                    aria-labelledby="lp-{{ ausgabe.number }}-label" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lp-{{ ausgabe.number }}-label">Leseprobe: {{ ausgabe.name }}
-                                </h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Schließen">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                Um eine Leseprobe zu lesen, musst du den <a
-                                    href="{% url 'agb' %}">Nutzungsbedingungen</a> und der <a
-                                    href="{% url 'datenschutz' %}">Datenschutzerklärung</a> zustimmen.
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zurück</button>
-                                <a href="{% url 'viewer' ausgabe.number 'leseprobe' %}"
-                                    class="btn btn-primary text-white">Ich stimme
-                                    zu</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% include "libertas/modules/ausgabe.html" %}
     </div>
     <div class="col-lg-4 pt-lg-0 pl-lg-3 d-flex">
-        <div class="mb-3 w-100 rounded bg-white p-3 w-100 border shadow-rd">
-            <h2 class="font-weight-bold h4"><i class="fas fa-shopping-cart mr-2" style="color: #17a2b8;"></i>Kaufen</h2>
-            <p>Eine Print-Ausgabe von TheHaps kannst du am Verkaufsstand in der Halepaghen-Schule kaufen.</p>
-            <p>Die digitale
-                Ausgabe von TheHaps kannst du erwerben, indem du vorher einen Zugangscode kaufst. Die
-                Zugangscodes verkaufen wir überall dort, wo wir auch Print-Ausgaben verkaufen.</p>
-            <div class="border mt-2 p-2 rounded">
-                <a class="btn btn-primary btn-block" href="{% url 'buy' %}"><i
-                        class="fas fa-shopping-cart mr-2"></i>Kaufen</a>
-                {% if user.is_authenticated %}
-                <a class="btn btn-secondary btn-block" href="{% url 'redeem' %}"><i class="fas fa-tag mr-2"></i>Zugangscode
-                    einlösen</a>
-                {% else %}
-                <p class="mb-0 mx-1 mt-2 small text-muted"><a href="{% url 'signup' %}">Erstelle einen Account</a> oder <a
-                        href="{% url 'signin' %}">melde dich an</a>, wenn du einen Zugangscode einlösen möchtest.</p>
-                {% endif %}
-            </div>
-        </div>
+        {% include "libertas/modules/kaufen.html" %}
     </div>
 </div>
 {% endif %}
 
 {% include "libertas/modules/artikel.html" %}
-
-{% if news_list %}
-<style>
-    h2 .permalink {
-        opacity: 0;
-        transition: opacity .2s;
-    }
-
-    h2:hover .permalink {
-        opacity: 0.8;
-        transition: opacity .2s;
-    }
-</style>
-<div class="mb-3 w-100 rounded bg-white p-3 w-100 border shadow-rd">
-    <h2 class="font-weight-bold h4"><i class="fas fa-comment-alt mr-2" style="color: rgb(10, 114, 184);"></i>News
-    </h2>
-    {% for news in news_list %}
-    <div class="mb-3 w-100 rounded border bg-white p-3">
-        <h2 class="font-weight-bold h4" id="1"><span class="badge mr-2 text-white align-bottom"
-                style="background-color: rgb(10, 114, 184);">{{ news.tag }}</span>{{ news.title }} <a
-                href="{% url 'news' %}#{{ news.pk }}" class="text-muted font-weight-normal permalink"
-                data-toggle="tooltip" title="Permalink">#</a></h2>
-        <p class="text-muted font-italic">{% if news.author %}{{ news.author }} &middot; {% endif %}veröffentlicht
-            am
-            {{ news.date }}</p>
-        <p class="mb-0">{{ news.content | safe | escape }}</p>
-    </div>
-    {% endfor %}
-    <div class="w-100 text-right">
-        <a class="btn btn-primary" href="{% url 'news' %}"><i class="fas fa-comment-alt mr-2"></i>Alle News</a>
-    </div>
-</div>
-{% endif %}
-
+{% include "libertas/modules/news.html" %}
 
 
 {% endblock %}
