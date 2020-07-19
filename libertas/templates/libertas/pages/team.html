@@ -15,30 +15,24 @@
         <div class="col-md-4 text-center">
             <img src="{% static 'libertas/img/team/philipp_bravos.jpg' %}" class="img-fluid rounded-circle w-75 mb-3"
                 style="max-width: 150px;">
-            <p class="font-weight-bold mb-1">Philipp Bravos<button type="button"
-                    class="btn btn-dark rounded-circle btn-sm text-white ml-2" data-container="body"
-                    data-toggle="popover" data-placement="top" data-content="philipp.bravos&#64;halepaghen.de"><i
-                        class="fas fa-envelope"></i></button></p>
+            <p class="font-weight-bold mb-1">Philipp Bravos
+                {% include 'libertas/snippets/emailbutton.html' with email='philipp.bravos@halepaghen.de' %}</p>
             <span class="text-muted">Chefredakteur,<br> leitender Redakteur <i>Politik</i>,<br> Podcaster</span>
         </div>
         <hr class="w-100 d-md-none">
         <div class="col-md-4 text-center">
             <img src="{% static 'libertas/img/team/lars_hauschildt.jpg' %}" class="img-fluid rounded-circle w-75 mb-3"
                 style="max-width: 150px;">
-            <p class="font-weight-bold mb-1">Lars Johannes Hauschildt<button type="button"
-                    class="btn btn-dark rounded-circle btn-sm text-white ml-2" data-container="body"
-                    data-toggle="popover" data-placement="top" data-content="lars.hauschildt&#64;halepaghen.de"><i
-                        class="fas fa-envelope"></i></button></p>
+            <p class="font-weight-bold mb-1">Lars Johannes Hauschildt
+                {% include 'libertas/snippets/emailbutton.html' with email='lars.hauschildt@halepaghen.de' %}</p>
             <span class="text-muted">stellv. Chefredakteur,<br> leitender Redakteur <i>Kultur</i>,<br> Podcaster</span>
         </div>
         <hr class="w-100 d-md-none">
         <div class="col-md-4 text-center">
             <img src="{% static 'libertas/img/team/stefan_heise.jpg' %}" class="img-fluid rounded-circle w-75 mb-3"
                 style="max-width: 150px;">
-            <p class="font-weight-bold mb-1">Stefan Heise<button type="button"
-                    class="btn btn-dark rounded-circle btn-sm text-white ml-2" data-container="body"
-                    data-toggle="popover" data-placement="top" data-content="stefan.heise&#64;halepaghen.de"><i
-                        class="fas fa-envelope"></i></button></p>
+            <p class="font-weight-bold mb-1">Stefan Heise
+                {% include 'libertas/snippets/emailbutton.html' with email='stefan.heise@halepaghen.de' %}</p>
             <span class="text-muted">leitender Redakteur <i>Sport&Freizeit</i>,<br> Sponsoring,<br> Podcaster</span>
         </div>
     </div>
@@ -51,66 +45,36 @@
         <div class="col-xl-6">
             <div class="row">
                 <div class="col-md-6 text-center">
-                    <span class="d-block mb-2">Erika Dollinger<button type="button"
-                            class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                            data-toggle="popover" data-placement="top"
-                            data-content="erika.dollinger&#64;halepaghen.de"><i
-                                class="fas fa-envelope"></i></button></span>
-                    <span class="d-block mb-2">Lennart Klein<button type="button"
-                            class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                            data-toggle="popover" data-placement="top" data-content="lennart.klein&#64;halepaghen.de"><i
-                                class="fas fa-envelope"></i></button></span>
-                    <span class="d-block mb-2">Charlotte Heise<button type="button"
-                            class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                            data-toggle="popover" data-placement="top"
-                            data-content="charlotte.heise&#64;halepaghen.de"><i
-                                class="fas fa-envelope"></i></button></span>
-                    <span class="d-block mb-2">Paula Golinski<button type="button"
-                            class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                            data-toggle="popover" data-placement="top"
-                            data-content="paula.golinksi&#64;halepaghen.de"><i
-                                class="fas fa-envelope"></i></button></span>
-                    <span class="d-block mb-2">Lone Prolingheuer<button type="button"
-                            class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                            data-toggle="popover" data-placement="top"
-                            data-content="lone.prolingheuer&#64;halepaghen.de"><i
-                                class="fas fa-envelope"></i></button></span>
-                    <span class="d-block mb-2">Lotta Carls<button type="button"
-                            class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                            data-toggle="popover" data-placement="top" data-content="lotta.carls&#64;halepaghen.de"><i
-                                class="fas fa-envelope"></i></button></span>
+                    <span class="d-block mb-2">Erika Dollinger
+                        {% include 'libertas/snippets/emailbutton.html' with email='erika.dollinger@halepaghen.de' %}</span>
+                    <span class="d-block mb-2">Lennart Klein
+                        {% include 'libertas/snippets/emailbutton.html' with email='lennart.klein@halepaghen.de' %}</span>
+                    <span class="d-block mb-2">Charlotte Heise
+                        {% include 'libertas/snippets/emailbutton.html' with email='charlotte.heise@halepaghen.de' %}</span>
+                    <span class="d-block mb-2">Paula Golinski
+                        {% include 'libertas/snippets/emailbutton.html' with email='paula.golinksi@halepaghen.de' %}</span>
+                    <span class="d-block mb-2">Lone Prolingheuer
+                        {% include 'libertas/snippets/emailbutton.html' with email='lone.prolingheuer@halepaghen.de' %}</span>
+                    <span class="d-block mb-2">Lotta Carls
+                        {% include 'libertas/snippets/emailbutton.html' with email='lotta.carls@halepaghen.de' %}</span>
                 </div>
                 <div class="col-md-6 text-center">
-                    <span class="d-block mb-2">Johanna Dolf<button type="button"
-                            class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                            data-toggle="popover" data-placement="top" data-content="johanna.dolf&#64;halepaghen.de"><i
-                                class="fas fa-envelope"></i></button></span>
-                    <span class="d-block mb-2">Lennart Rinneberg<button type="button"
-                            class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                            data-toggle="popover" data-placement="top"
-                            data-content="lennart.rinneberg&#64;halepaghen.de"><i
-                                class="fas fa-envelope"></i></button></span>
-                    <span class="d-block mb-2">Pauline Witt<button type="button"
-                            class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                            data-toggle="popover" data-placement="top" data-content="pauline.witt&#64;halepaghen.de"><i
-                                class="fas fa-envelope"></i></button></span>
-                    <span class="d-block mb-2">Lasse Sanders<button type="button"
-                            class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                            data-toggle="popover" data-placement="top" data-content="lasse.sanders&#64;halepaghen.de"><i
-                                class="fas fa-envelope"></i></button></span>
-                    <span class="d-block mb-2">Hira Cakmak<button type="button"
-                            class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                            data-toggle="popover" data-placement="top" data-content="hira.cakmak&#64;halepaghen.de"><i
-                                class="fas fa-envelope"></i></button></span>
-                    <span class="d-block mb-2">Luisa Reinecke<button type="button"
-                            class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                            data-toggle="popover" data-placement="top" data-content="luisa.reinecke&#64;halepaghen.de"><i
-                                class="fas fa-envelope"></i></button></span>
+                    <span class="d-block mb-2">Johanna Dolf
+                        {% include 'libertas/snippets/emailbutton.html' with email='johanna.dolf@halepaghen.de' %}</span>
+                    <span class="d-block mb-2">Lennart Rinneberg
+                        {% include 'libertas/snippets/emailbutton.html' with email='lennart.rinneberg@halepaghen.de' %}</span>
+                    <span class="d-block mb-2">Pauline Witt
+                        {% include 'libertas/snippets/emailbutton.html' with email='pauline.witt@halepaghen.de' %}</span>
+                    <span class="d-block mb-2">Lasse Sanders
+                        {% include 'libertas/snippets/emailbutton.html' with email='lasse.sanders@halepaghen.de' %}</span>
+                    <span class="d-block mb-2">Hira Cakmak
+                        {% include 'libertas/snippets/emailbutton.html' with email='hira.cakmak@halepaghen.de' %}</span>
+                    <span class="d-block mb-2">Luisa Reinecke
+                        {% include 'libertas/snippets/emailbutton.html' with email='luisa.reinecke@halepaghen.de' %}</span>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
 <div class="row">
@@ -122,27 +86,19 @@
 
                 <img src="{% static 'libertas/img/team/jonas_goeze.jpg' %}" class="img-fluid rounded-circle w-75 mb-3"
                     style="max-width: 150px;">
-                <p class="font-weight-bold mb-1">Jonas Goeze<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white ml-2" data-container="body"
-                        data-toggle="popover" data-placement="top" data-content="jonas.goeze&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></p>
+                <p class="font-weight-bold mb-1">Jonas Goeze
+                    {% include 'libertas/snippets/emailbutton.html' with email='jonas.goeze@halepaghen.de' %}</p>
                 <span class="text-muted">leitender Layouter</span>
 
                 <hr class="w-100">
 
                 <h4 class="mb-2">Weitere Layouter</h4>
-                <span class="d-block mb-2">Antonia Bartels<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                        data-toggle="popover" data-placement="top" data-content="antonia.bartels&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></span>
-                <span class="d-block mb-2">Moritz Simon<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                        data-toggle="popover" data-placement="top" data-content="moritz.simon&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></span>
-                <span class="d-block mb-2">Vivien Sobol<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                        data-toggle="popover" data-placement="top" data-content="vivien.sobol&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></span>
+                <span class="d-block mb-2">Antonia Bartels
+                    {% include 'libertas/snippets/emailbutton.html' with email='antonia.bartels@halepaghen.de' %}</span>
+                <span class="d-block mb-2">Moritz Simon
+                    {% include 'libertas/snippets/emailbutton.html' with email='moritz.simon@halepaghen.de' %}</span>
+                <span class="d-block mb-2">Vivien Sobol
+                    {% include 'libertas/snippets/emailbutton.html' with email='vivien.sobol@halepaghen.de' %}</span>
             </div>
 
 
@@ -156,38 +112,28 @@
 
                 <img src="{% static 'libertas/img/team/erika_dollinger.jpg' %}"
                     class="img-fluid rounded-circle w-75 mb-3" style="max-width: 150px;">
-                <p class="font-weight-bold mb-1">Erika Dollinger<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white ml-2" data-container="body"
-                        data-toggle="popover" data-placement="top" data-content="erika.dollinger&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></p>
+                <p class="font-weight-bold mb-1">Erika Dollinger
+                    {% include 'libertas/snippets/emailbutton.html' with email='erika.dollinger@halepaghen.de' %}</p>
                 <span class="text-muted">Social Media-Leiterin,<br>Redakteurin</span>
 
                 <hr class="w-100">
 
                 <h4 class="mb-2">Weitere Social-Media-Mitarbeiter</h4>
-                <span class="d-block mb-2">Maxim Toporov<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                        data-toggle="popover" data-placement="top" data-content="maxim.toporov&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></span>
-                <span class="d-block mb-2">Hüsna-Sema Tarkoçin<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                        data-toggle="popover" data-placement="top"
-                        data-content="huesna-sema.tarcocin&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></span>
-                <span class="d-block mb-2">Moritz Simon<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                        data-toggle="popover" data-placement="top" data-content="moritz.simon&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></span>
-                <span class="d-block mb-2">Luisa Reincke<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                        data-toggle="popover" data-placement="top" data-content="luisa.reincke&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></span>
+                <span class="d-block mb-2">Maxim Toporov
+                    {% include 'libertas/snippets/emailbutton.html' with email='maxim.toporov@halepaghen.de' %}</span>
+                <span class="d-block mb-2">Hüsna-Sema Tarkoçin
+                    {% include 'libertas/snippets/emailbutton.html' with email='huesna-sema.tarcocin@halepaghen.de' %}</span>
+                <span class="d-block mb-2">Moritz Simon
+                    {% include 'libertas/snippets/emailbutton.html' with email='moritz.simon@halepaghen.de' %}</span>
+                <span class="d-block mb-2">Luisa Reincke
+                    {% include 'libertas/snippets/emailbutton.html' with email='luisa.reincke@halepaghen.de' %}</span>
             </div>
 
 
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-6 pr-md-2 mb-3 d-flex">
         <div class="w-100 shadow-rd rounded border bg-white p-3 h-100">
@@ -196,32 +142,21 @@
 
                 <img src="{% static 'libertas/img/team/martin_hartge.jpg' %}" class="img-fluid rounded-circle w-75 mb-3"
                     style="max-width: 150px;">
-                <p class="font-weight-bold mb-1">Martin Konrad Hartge<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white ml-2" data-container="body"
-                        data-toggle="popover" data-placement="top" data-content="martin.hartge&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></p>
+                <p class="font-weight-bold mb-1">Martin Konrad Hartge
+                    {% include 'libertas/snippets/emailbutton.html' with email='martin.hartge@halepaghen.de' %}</p>
                 <span class="text-muted">leitender Fotograf</span>
 
                 <hr class="w-100">
 
                 <h4 class="mb-2">Weitere Fotografen</h4>
-                <span class="d-block mb-2">Alina Uarda Engel<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                        data-toggle="popover" data-placement="top" data-content="alina.uarda.engel&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></span>
-                <span class="d-block mb-2">Pauline Witt<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                        data-toggle="popover" data-placement="top" data-content="pauline.witt&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></span>
-                <span class="d-block mb-2">Paula Golinski<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                        data-toggle="popover" data-placement="top" data-content="paula.golinski&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></span>
-                <span class="d-block mb-2">Hüsna-Sema Tarkoçin<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                        data-toggle="popover" data-placement="top"
-                        data-content="huesna-sema.tarcocin&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></span>
+                <span class="d-block mb-2">Alina Uarda Engel
+                    {% include 'libertas/snippets/emailbutton.html' with email='alina.uarda.engel@halepaghen.de' %}</span>
+                <span class="d-block mb-2">Pauline Witt
+                    {% include 'libertas/snippets/emailbutton.html' with email='pauline.witt@halepaghen.de' %}</span>
+                <span class="d-block mb-2">Paula Golinski
+                    {% include 'libertas/snippets/emailbutton.html' with email='paula.golinski@halepaghen.de' %}</span>
+                <span class="d-block mb-2">Hüsna-Sema Tarkoçin
+                    {% include 'libertas/snippets/emailbutton.html' with email='huesna-sema.tarcocin@halepaghen.de' %}</span>
             </div>
 
 
@@ -235,30 +170,23 @@
 
                 <img src="{% static 'libertas/img/team/philip_ecks.jpg' %}" class="img-fluid rounded-circle w-75 mb-3"
                     style="max-width: 150px;">
-                <p class="font-weight-bold mb-1">Philip Lennart Ecks<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white ml-2" data-container="body"
-                        data-toggle="popover" data-placement="top"
-                        data-content="philip.lennart.ecks&#64;halepaghen.de"><i class="fas fa-envelope"></i></button>
+                <p class="font-weight-bold mb-1">Philip Lennart Ecks
+                    {% include 'libertas/snippets/emailbutton.html' with email='philip.lennart.ecks@halepaghen.de' %}
                 </p>
                 <span class="text-muted">Schatzmeister</span>
 
                 <hr class="w-100">
 
                 <h4 class="mb-2">Weitere Mitarbeiter</h4>
-                <span class="d-block mb-2">Stefan Heise<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                        data-toggle="popover" data-placement="top" data-content="stefan.heise&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></span>
-                <span class="d-block mb-2">Lennart Klein<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                        data-toggle="popover" data-placement="top" data-content="lennart.klein&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></span>
+                <span class="d-block mb-2">Stefan Heise
+                    {% include 'libertas/snippets/emailbutton.html' with email='stefan.heise@halepaghen.de' %}</span>
+                <span class="d-block mb-2">Lennart Klein
+                    {% include 'libertas/snippets/emailbutton.html' with email='lennart.klein@halepaghen.de' %}</span>
             </div>
-
-
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-6 pr-md-2 mb-3 d-flex">
         <div class="w-100 shadow-rd rounded border bg-white p-3 h-100">
@@ -267,14 +195,10 @@
 
                 <img src="{% static 'libertas/img/team/linus_koester.jpg' %}" class="img-fluid rounded-circle w-75 mb-3"
                     style="max-width: 150px;">
-                <p class="font-weight-bold mb-1">Linus Köster<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white ml-2" data-container="body"
-                        data-toggle="popover" data-placement="top" data-content="linus.koester&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></p>
+                <p class="font-weight-bold mb-1">Linus Köster
+                    {% include 'libertas/snippets/emailbutton.html' with email='linus.koester@halepaghen.de' %}</p>
                 <span class="text-muted">Developer</span>
             </div>
-
-
         </div>
     </div>
     <div class="col-md-6 pl-md-2 mb-3 d-flex">
@@ -285,10 +209,8 @@
 
                 <img src="{% static 'libertas/img/team/simon_bilonic.jpg' %}" class="img-fluid rounded-circle w-75 mb-3"
                     style="max-width: 150px;">
-                <p class="font-weight-bold mb-1">Simon Bilonic<button type="button"
-                        class="btn btn-dark rounded-circle btn-sm text-white ml-2" data-container="body"
-                        data-toggle="popover" data-placement="top" data-content="simon.bilonic&#64;halepaghen.de"><i
-                            class="fas fa-envelope"></i></button></p>
+                <p class="font-weight-bold mb-1">Simon Bilonic
+                    {% include 'libertas/snippets/emailbutton.html' with email='simon.bilonic@halepaghen.de' %}</p>
                 <span class="text-muted">Vertriebsleiter</span>
             </div>
 
@@ -301,22 +223,16 @@
     <h2 class="font-weight-bold h4"><i class="fas fa-mug-hot mr-2" style="color: #6f42c1;"></i>Sonstige Aufgaben</h2>
     <div class="row">
         <div class="col-md-4 text-center">
-            <span class="d-block mb-2">Simon Bilonic<button type="button"
-                    class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                    data-toggle="popover" data-placement="top" data-content="simon.bilonic&#64;halepaghen.de"><i
-                        class="fas fa-envelope"></i></button></span>
+            <span class="d-block mb-2">Simon Bilonic
+                {% include 'libertas/snippets/emailbutton.html' with email='simon.bilonic@halepaghen.de' %}</span>
         </div>
         <div class="col-md-4 text-center">
-            <span class="d-block mb-2">Ansgar Warner<button type="button"
-                    class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                    data-toggle="popover" data-placement="top" data-content="ansgar.warner&#64;halepaghen.de"><i
-                        class="fas fa-envelope"></i></button></span>
+            <span class="d-block mb-2">Ansgar Warner
+                {% include 'libertas/snippets/emailbutton.html' with email='ansgar.warner@halepaghen.de' %}</span>
         </div>
         <div class="col-md-4 text-center">
-            <span class="d-block mb-2">Serhat Kaan Kaya<button type="button"
-                    class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                    data-toggle="popover" data-placement="top" data-content="serhat.kaan.kaya&#64;halepaghen.de"><i
-                        class="fas fa-envelope"></i></button></span>
+            <span class="d-block mb-2">Serhat Kaan Kaya
+                {% include 'libertas/snippets/emailbutton.html' with email='serhat.kaan.kaya@halepaghen.de' %}</span>
         </div>
 
     </div>
@@ -326,62 +242,48 @@
     <h2 class="font-weight-bold h4"><i class="fas fa-pencil-alt mr-2" style="color: #6f42c1;"></i>Unterstufen-Seite</h2>
     <div class="row">
         <div class="col-md-4 text-center">
-            <span class="d-block mb-2">Nadine Nourredine<button type="button"
-                    class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                    data-toggle="popover" data-placement="top" data-content="nadine.nourredine&#64;halepaghen.de"><i
-                        class="fas fa-envelope"></i></button></span>
-            <span class="d-block mb-2">Leandro Gomes<button type="button"
-                    class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                    data-toggle="popover" data-placement="top" data-content="leandro.gomes&#64;halepaghen.de"><i
-                        class="fas fa-envelope"></i></button></span>
-            <span class="d-block mb-2">Jarne Fluhr<button type="button"
-                    class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                    data-toggle="popover" data-placement="top" data-content="jarne.fluhr&#64;halepaghen.de"><i
-                        class="fas fa-envelope"></i></button></span>
+            <span class="d-block mb-2">Nadine Nourredine
+                {% include 'libertas/snippets/emailbutton.html' with email='nadine.nourredine@halepaghen.de' %}</span>
+            <span class="d-block mb-2">Leandro Gomes
+                {% include 'libertas/snippets/emailbutton.html' with email='leandro.gomes@halepaghen.de' %}</span>
+            <span class="d-block mb-2">Jarne Fluhr
+                {% include 'libertas/snippets/emailbutton.html' with email='jarne.fluhr@halepaghen.de' %}</span>
         </div>
         <div class="col-md-4 text-center">
-            <span class="d-block mb-2">Jolanda Luna Kolb<button type="button"
-                    class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                    data-toggle="popover" data-placement="top" data-content="jolanda.luna.kolb&#64;halepaghen.de"><i
-                        class="fas fa-envelope"></i></button></span>
-            <span class="d-block mb-2">Vianne Dornig<button type="button"
-                    class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                    data-toggle="popover" data-placement="top" data-content="vianne.dornig&#64;halepaghen.de"><i
-                        class="fas fa-envelope"></i></button></span>
-            <span class="d-block mb-2">Marla Breuker<button type="button"
-                    class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                    data-toggle="popover" data-placement="top" data-content="marla.breuker&#64;halepaghen.de"><i
-                        class="fas fa-envelope"></i></button></span>
+            <span class="d-block mb-2">Jolanda Luna Kolb
+                {% include 'libertas/snippets/emailbutton.html' with email='jolanda.luna.kolb@halepaghen.de' %}</span>
+            <span class="d-block mb-2">Vianne Dornig
+                {% include 'libertas/snippets/emailbutton.html' with email='vianne.dornig@halepaghen.de' %}</span>
+            <span class="d-block mb-2">Marla Breuker
+                {% include 'libertas/snippets/emailbutton.html' with email='marla.breuker@halepaghen.de' %}</span>
         </div>
         <div class="col-md-4 text-center">
-            <span class="d-block mb-2">Kolja Tepel<button type="button"
-                    class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                    data-toggle="popover" data-placement="top" data-content="kolja.tepel&#64;halepaghen.de"><i
-                        class="fas fa-envelope"></i></button></span>
-            <span class="d-block mb-2">Jannis Weygand<button type="button"
-                    class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body"
-                    data-toggle="popover" data-placement="top" data-content="jannis.weygand&#64;halepaghen.de"><i
-                        class="fas fa-envelope"></i></button></span>
+            <span class="d-block mb-2">Kolja Tepel
+                {% include 'libertas/snippets/emailbutton.html' with email='kolja.tepel@halepaghen.de' %}</span>
+            <span class="d-block mb-2">Jannis Weygand
+                {% include 'libertas/snippets/emailbutton.html' with email='jannis.weygand@halepaghen.de' %}</span>
         </div>
 
     </div>
 </div>
+
 <div class="w-100 shadow-rd rounded border bg-white p-3 mb-3">
-    <span class="d-block"><strong>Betreuender Lehrer:</strong> Herr Winklmann<button type="button"
-            class="btn btn-dark rounded-circle btn-sm text-white mx-2" data-container="body" data-toggle="popover"
-            data-placement="top" data-content="herr.winklmann&#64;halepaghen.de"><i
-                class="fas fa-envelope"></i></button></span>
+    <span class="d-block"><strong>Betreuender Lehrer:</strong> Herr Winklmann
+        {% include 'libertas/snippets/emailbutton.html' with email='herr.winklmann@halepaghen.de' %}</span>
 </div>
+
 <div class="shadow-rd rounded bg-gradient-primary p-3 text-white mb-3">
     <h2 class="font-weight-bold h4"><i class="fas fa-user-plus mr-2"></i>Mitmachen!</h2>
     <span><b>Wir suchen immer Personen, die bei uns mitarbeiten wollen – ganz egal, ob als Redakteur, Layouter/Designer,
             Fotograf, Mobile Reporter, IT-Spezialist oder Verkäufer.</b><br>Solltest du Interesse haben, schreibe
         einfach eine
         kurze Nachricht mit deinem Namen, deinem Alter und dem genaueren Interessensgebiet an
-        philipp.bravos&#64;halepaghen.de oder kontaktiere uns über Social Media!</span>
+        philipp.bravos@halepaghen.de oder kontaktiere uns über Social Media!</span>
 </div>
+
 <div class="w-100 shadow-rd rounded border bg-white p-3 mb-3">
-    <h2 class="font-weight-bold h4"><i class="fas fa-handshake mr-2" style="color: #6f42c1;"></i>Unsere Sponsoren und Partner</h2>
+    <h2 class="font-weight-bold h4"><i class="fas fa-handshake mr-2" style="color: #6f42c1;"></i>Unsere Sponsoren und
+        Partner</h2>
     <p><b>Wir bedanken uns sehr herzlich bei all unseren Sponsoren:</b></p>
     <ul>
         <li>Carl Duisberg Centren (<a href="https://www.cdc.de/">Link</a>)</li>
