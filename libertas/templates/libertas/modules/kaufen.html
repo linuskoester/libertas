@@ -1,0 +1,17 @@
+<div class="mb-3 w-100 rounded bg-white p-3 w-100 border shadow-rd">
+    <h2 class="font-weight-bold h4"><i class="fas fa-shopping-cart mr-2" style="color: #17a2b8;"></i>Kaufen</h2>
+    <p>Eine Print-Ausgabe von TheHaps kannst du am Verkaufsstand in der Halepaghen-Schule kaufen.</p>
+    <p>Die digitale
+        Ausgabe von TheHaps kannst du erwerben, indem du vorher einen Zugangscode kaufst. Die
+        Zugangscodes verkaufen wir überall dort, wo wir auch Print-Ausgaben verkaufen.</p>
+    <div class="border mt-2 p-2 rounded">
+        <a class="btn btn-primary btn-block" href="{% url 'buy' %}"><i class="fas fa-shopping-cart mr-2"></i>Kaufen</a>
+        {% if user.is_authenticated %}
+        <a class="btn btn-secondary btn-block" href="{% url 'redeem' %}"><i class="fas fa-tag mr-2"></i>Zugangscode
+            einlösen</a>
+        {% else %}
+        <p class="mb-0 mx-1 mt-2 small text-muted"><a href="{% url 'signup' %}">Erstelle einen Account</a> oder <a
+                href="{% url 'signin' %}">melde dich an</a>, wenn du einen Zugangscode einlösen möchtest.</p>
+        {% endif %}
+    </div>
+</div>
