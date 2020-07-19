@@ -10,8 +10,7 @@
                 <!-- NUTZER NICHT ANGEMELDET -->
                 {% if not user.is_authenticated %}
                 {% if ausgabe.published %}
-                <a href="{% url 'buy' %}" class="btn btn-primary btn-block"><i class="fas fa-shopping-cart"></i>
-                    Kaufen</a>
+                <a href="{% url 'buy' %}" class="btn btn-primary btn-block"><i class="fas fa-shopping-cart mr-1"></i>Kaufen</a>
                 {% endif %}
                 {% if ausgabe.leseprobe %}
                 <button class="btn btn-secondary btn-block" data-toggle="modal"
@@ -29,12 +28,11 @@
                 <!-- NUTZER IM BESITZ DER AUSGABE -->
                 {% elif ausgabe in inventory %}
                 <a href="{% url 'viewer' ausgabe.number 'read' %}" class="btn btn-primary btn-block"><i
-                        class="fas fa-book-open"></i> Lesen</a>
+                        class="fas fa-book-open mr-1"></i>Lesen</a>
                 <!-- NUTZER NICHT IM BESITZ DER AUSGABE -->
                 {% else %}
                 {% if ausgabe.published %}
-                <a href="{% url 'buy' %}" class="btn btn-primary btn-block"><i class="fas fa-shopping-cart"></i>
-                    Kaufen</a>
+                <a href="{% url 'buy' %}" class="btn btn-primary btn-block"><i class="fas fa-shopping-cart mr-1"></i>Kaufen</a>
                 {% endif %}
                 {% if ausgabe.leseprobe %}
                 <a href="{% url 'viewer' ausgabe.number 'leseprobe' %}"
