@@ -3,7 +3,7 @@
 ## Was ist Libertas?
 Libertas ist der Projektname für die Web-App der Schülerzeitung "TheHaps" von der Halepaghen-Schule. Die App ermöglicht den digitalen Erwerb und das Lesen der Zeitung, direkt aus dem Browser.
 
-Jede*r darf sich an der Entwicklung der App beteiligen! Libertas wurde mit Django 3.0 entwickelt, außerdem ermöglicht eine vorkonfigurierter Docker Container Stack das einfache Aufsetzen einer lokalen Instanz.
+Jeder darf sich an der Entwicklung der App beteiligen! Libertas wurde mit Django 3.0 entwickelt, außerdem ermöglicht eine vorkonfigurierter Docker Container Stack das einfache Aufsetzen einer lokalen Instanz.
 
 ## Aufsetzen einer lokalen Instanz
 
@@ -26,10 +26,10 @@ docker-compose up
 
 Um den Container Stack zu stoppen:
 ```
-docker-compose down
+docker-compose stop
 ```
 
-Um den Container Stack zu stoppen **und die Datenbank zu löschen**:
+Um den Container Stack **und die Datenbank** zu löschen:
 ```
 docker-compose down -v
 ```
