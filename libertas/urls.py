@@ -18,9 +18,4 @@ urlpatterns = [
     path('ausgaben', views.ausgaben, name='ausgaben'),
     path('news', views.news, name='news'),
     path('artikel/<int:pk>', views.artikel, name='artikel'),
-    # path('error404', views.error404, name='error404'),
-    # path('error500', views.error500, name='error500'),
 ]
-
-handler404 = 'libertas.views.error404'
-handler500 = 'libertas.views.error500'
