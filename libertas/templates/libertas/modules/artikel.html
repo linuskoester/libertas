@@ -1,0 +1,27 @@
+{% if artikel_list %}
+<div class="mb-3 w-100 rounded bg-white px-3 pt-3 pb-2 w-100 border shadow-rd">
+    <h2 class="font-weight-bold h4"><i class="fas fa-bookmark mr-2" style="color: rgb(218, 72, 28);"></i>Online-Artikel
+    </h2>
+    <div class="container-fluid overflow-auto">
+
+        <div class="row row-cols-1 row-cols-md-3 flex-nowrap">
+            {% for artikel in artikel_list %}
+            <div class="p-0 mb-2 mr-3 col-10 col-sm-8 col-md-5 col-lg-4 col-xl-3">
+                <div class="card h-100">
+                    <div class="card-body p-3">
+                        <h3 class="card-title h5 font-weight-bold mb-1"><span class="badge text-white align-bottom"
+                                style="background: rgb(218, 72, 28);">{{ artikel.tag }}</span> {{ artikel.title }}</h3>
+                            <p class="text-muted small">{% if artikel.author %}{{ artikel.author }} &middot; {% endif %}{{ artikel.date }}</p>
+                            <p class="card-text mb-0">{{ artikel.description }}</p>
+                    </div>
+                    <div class="card-footer p-1 bg-white">
+                        <a class="btn btn-link btn-block stretched-link" href="{% url 'artikel' artikel.pk %}">Weiterlesen...</a>
+                    </div>
+                 </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+{% endif %}
