@@ -65,43 +65,43 @@
                     <li class="nav-item {% if menu == "ausgaben" %}active font-weight-bold{% endif %}">
                         <a class="nav-link" href="{% url 'ausgaben' %}">
                             <span class="nav-color d-block d-lg-inline w-100" style="background: #cf3342;">
-                                <i class="fas fa-newspaper d-lg-none d-xl-inline text-center" style="width: 20px;"></i>
-                                Ausgaben</span>
+                                <i class="fas fa-newspaper d-lg-none d-xl-inline text-center mr-1"
+                                    style="width: 20px;"></i>Ausgaben</span>
                         </a>
                     </li>
                     <li class="nav-item {% if menu == "buy" %}active font-weight-bold{% endif %}">
                         <a class="nav-link" href="{% url 'buy' %}">
                             <span class="nav-color d-block d-lg-inline w-100" style="background: #17a2b8;">
-                                <i class="fas fa-shopping-cart d-lg-none d-xl-inline text-center"
-                                    style="width: 20px;"></i> Kaufen</span>
+                                <i class="fas fa-shopping-cart d-lg-none d-xl-inline text-center mr-1"
+                                    style="width: 20px;"></i>Kaufen</span>
                         </a>
                     </li>
                     <li class="nav-item {% if menu == "team" %}active font-weight-bold{% endif %}">
                         <a class="nav-link" href="{% url 'team' %}">
                             <span class="nav-color d-block d-lg-inline w-100" style="background: #6f42c1;">
-                                <i class="fas fa-users d-lg-none d-xl-inline text-center" style="width: 20px;"></i>
-                                Team</span>
+                                <i class="fas fa-users d-lg-none d-xl-inline text-center mr-1"
+                                    style="width: 20px;"></i>Team</span>
                         </a>
                     </li>
                     <li class="nav-item {% if menu == "faq" %}active font-weight-bold{% endif %}">
                         <a class="nav-link" href="{% url 'faq' %}">
                             <span class="nav-color d-block d-lg-inline w-100" style="background: #269c41">
-                                <i class="fas fa-question-circle d-lg-none d-xl-inline text-center"
-                                    style="width: 20px;"></i> FAQ</span>
+                                <i class="fas fa-question-circle d-lg-none d-xl-inline text-center mr-1"
+                                    style="width: 20px;"></i>FAQ</span>
                         </a>
                     </li>
                     <li class="nav-item {% if menu == "podcast" %}active font-weight-bold{% endif %}">
                         <a class="nav-link" href="{% url 'podcast' %}">
                             <span class="nav-color d-block d-lg-inline w-100" style="background: #cc377d;">
-                                <i class="fas fa-microphone d-lg-none d-xl-inline text-center" style="width: 20px;"></i>
-                                Podcast</span>
+                                <i class="fas fa-microphone d-lg-none d-xl-inline text-center mr-1"
+                                    style="width: 20px;"></i>Podcast</span>
                         </a>
                     </li>
                     <li class="nav-item {% if menu == "news" %}active font-weight-bold{% endif %}">
                         <a class="nav-link" href="{% url 'news' %}">
                             <span class="nav-color d-block d-lg-inline w-100" style="background: rgb(10, 114, 184);">
-                                <i class="fas fa-comment-alt d-lg-none d-xl-inline text-center"
-                                    style="width: 20px;"></i> News</span>
+                                <i class="fas fa-comment-alt d-lg-none d-xl-inline text-center mr-1"
+                                    style="width: 20px;"></i>News</span>
                         </a>
                     </li>
                 </ul>
@@ -117,19 +117,20 @@
                         <div class="dropdown-menu dropdown-menu-right shadow-rd border"
                             aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item {% if menu == "user-redeem" %}active{% endif %}"
-                                href="{% url 'redeem' %}"><i class="fas fa-tag text-center" style="width: 22px;"></i>
-                                Code einlösen...</a>
+                                href="{% url 'redeem' %}"><i class="fas fa-tag text-center mr-1"
+                                    style="width: 22px;"></i>Code einlösen...</a>
                             <div class="dropdown-divider"></div>
                             {% if user.is_staff %}
                             <a class="dropdown-item" href="{% url 'admin:index' %}"><i
-                                    class="fas fa-users-cog text-center" style="width: 22px;"></i> Administration</a>
+                                    class="fas fa-users-cog text-center mr-1"
+                                    style="width: 22px;"></i>Administration</a>
                             <div class="dropdown-divider"></div>
                             {% endif %}
                             <a class="dropdown-item {% if "user-account-" in menu %}active{% endif %}"
-                                href="{% url 'account' %}"><i class="fas fa-user text-center" style="width: 22px;"></i>
-                                Dein Account</a>
+                                href="{% url 'account' %}"><i class="fas fa-user text-center mr-1"
+                                    style="width: 22px;"></i>Dein Account</a>
                             <a class="dropdown-item" href="{% url 'signout' %}"><i
-                                    class="fas fa-sign-out-alt text-center" style="width: 22px;"></i> Abmelden</a>
+                                    class="fas fa-sign-out-alt text-center mr-1" style="width: 22px;"></i>Abmelden</a>
                         </div>
                     </li>
                 </ul>
@@ -186,13 +187,13 @@
         <div class="mx-auto my-3 text-center d-block mx-0">
             <ul
                 class="list-unstyled text-light d-sm-inline-flex flex-column flex-sm-row m-0 flex-sm-wrap justify-content-center">
-                <li class="mx-2"><i class="fas fa-balance-scale"></i> <a href="{% url 'agb' %}"
+                <li class="mx-2"><i class="fas fa-balance-scale mr-1"></i><a href="{% url 'agb' %}"
                         class="text-light">Nutzungsbedingungen</a>
                 </li>
-                <li class="mx-2"><i class="fas fa-scroll"></i> <a href="{% url 'impressum' %}"
+                <li class="mx-2"><i class="fas fa-scroll mr-1"></i><a href="{% url 'impressum' %}"
                         class="text-light">Impressum</a>
                 </li>
-                <li class="mx-2"><i class="fas fa-user-secret"></i> <a href="{% url 'datenschutz' %}"
+                <li class="mx-2"><i class="fas fa-user-secret mr-1"></i><a href="{% url 'datenschutz' %}"
                         class="text-light">Datenschutz</a>
                 </li>
             </ul>
@@ -201,11 +202,11 @@
             </ul>
             <ul
                 class="mt-2 mt-md-0 list-unstyled text-light d-sm-inline-flex flex-column flex-sm-row m-0 flex-sm-wrap justify-content-center mx-0">
-                <li class="mx-2"><i class="fas fa-envelope"></i> <a href="{% url 'team' %}"
+                <li class="mx-2"><i class="fas fa-envelope mr-1"></i><a href="{% url 'team' %}"
                         class="text-light">Kontakt</a></li>
-                <li class="mx-2"><i class="fas fa-info-circle"></i> <a href="https://status.thehaps.de/"
+                <li class="mx-2"><i class="fas fa-info-circle mr-1"></i><a href="https://status.thehaps.de/"
                         class="text-light">Status</a></li>
-                <li class="mx-2"><i class="fab fa-github"></i> <a href="https://github.com/the-haps"
+                <li class="mx-2"><i class="fab fa-github mr-1"></i><a href="https://github.com/the-haps"
                         class="text-light">GitHub</a>
                 </li>
             </ul>
