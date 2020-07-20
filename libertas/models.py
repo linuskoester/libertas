@@ -124,6 +124,13 @@ class Artikel(models.Model):
         verbose_name = "Artikel"
         verbose_name_plural = "Artikel"
 
+    # Ist der Artikel veröffentlicht?
+    def published(self):
+        if self.date:
+            if date.today() >= self.date:
+                return True
+        return False
+
 
 class News(models.Model):
     title = models.CharField('Titel', max_length=250)
