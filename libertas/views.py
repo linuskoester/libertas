@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .forms import RedeemForm
 from .models import Artikel, Code, Configuration, User, ausgaben_user, ausgaben_visible, news_list, artikel_list
 from django.template.loader import render_to_string
-from django.http.response import HttpResponseNotFound, HttpResponseServerError
+from django.http.response import Http404, HttpResponseNotFound, HttpResponseServerError
 
 
 def log_user(user, flag, message):
@@ -104,6 +104,9 @@ def artikel(request, pk):
         return w
 
     artikel = get_object_or_404(Artikel, pk=pk)
+
+    if not artikel.published():
+        raise Http404()
 
     return render(request, 'libertas/pages/artikel.html', {'artikel': artikel})
 
