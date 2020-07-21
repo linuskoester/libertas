@@ -21,7 +21,6 @@ def checkbetaaccess(username, self):
         for u in urllib.request.urlopen(gist):
             tester.append(u.decode('utf-8').replace("\n", ""))
         if username not in tester:
-            print(username, tester)
             self.add_error('username',
                            "Für diese E-Mail-Adresse ist kein Beta-Zugang freigeschaltet.")
 
