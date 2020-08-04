@@ -1,6 +1,6 @@
 asgiref==3.2.10
 certifi==2020.6.20
-Django==3.0.8
+Django==3.0.9
 django-appconf==1.0.4
 django-compressor==2.4
 django-libsass==0.8
