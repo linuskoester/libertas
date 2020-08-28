@@ -6,7 +6,7 @@ django-compressor==2.4
 django-libsass==0.8
 django-mysql==3.8.1
 gunicorn==20.0.4
-libsass==0.20.0
+libsass==0.20.1
 mysqlclient==2.0.1
 pytz==2020.1
 rcssmin==1.0.6
