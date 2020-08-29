@@ -28,8 +28,13 @@ def signin(request):
     if request.method == 'POST':
         form = SignInForm(request.POST)
         if form.is_valid():
-            # Melde den Benutzer an
             username = request.POST['username']
+            # Anmeldung ohne @halepaghen.de
+            if "@" not in username:
+                username += "@halepaghen.de"
+                messages.warning(
+                    request, 'Bitte benutze ab sofort deine vollständige E-Mail-Adresse um dich anzumelden: <b>%s</b>' % username) # noqa
+            # Melde den Benutzer an
             password = request.POST['password']
             user = authenticate(request, username=username, password=password)
             login(request, user)
@@ -69,12 +74,13 @@ def signup(request):
         if form.is_valid():
             # Daten aus dem Formular, E-Mail ergänzen
             username = form.cleaned_data['username']
+            email = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            email = form.cleaned_data['username'] + '@halepaghen.de'
             # Wenn Benutzer noch nicht existiert
             if not User.objects.filter(username=username).exists():
                 # Erstelle Benutzer + Logeinträge
                 user = User.objects.create_user(username, email, password)
+                user.first_name = email.split("@", 1)[0]
                 log_user(user, ADDITION, 'Account erstellt.')
                 log_user(user, CHANGE,
                          'Registriert und Aktivierungs-Email gesendet.')

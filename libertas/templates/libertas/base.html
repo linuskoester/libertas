@@ -103,10 +103,10 @@
                 {% if user.is_authenticated %}
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-dark {% if "user-" in menu %}active font-weight-bold{% endif %}"
+                        <a class="nav-link dropdown-toggle text-dark text-truncate {% if "user-" in menu %}active font-weight-bold{% endif %}"
                             href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            {{ user.username }}
+                            aria-haspopup="true" aria-expanded="false" style="max-width: 270px;">
+                            {{ user.first_name }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow-rd border"
                             aria-labelledby="navbarDropdownMenuLink">
