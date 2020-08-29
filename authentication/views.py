@@ -30,7 +30,7 @@ def signin(request):
         if form.is_valid():
             username = request.POST['username']
             # Anmeldung ohne @halepaghen.de
-            if "@" not in username:
+            if User.objects.filter(username=username + "@halepaghen.de").exists():
                 username += "@halepaghen.de"
                 messages.warning(
                     request, 'Bitte benutze ab sofort deine vollständige E-Mail-Adresse um dich anzumelden: <b>%s</b>' % username) # noqa
