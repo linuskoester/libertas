@@ -7,10 +7,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.core.validators import RegexValidator
 
-# Ein Benutzername kann nur aus Klein-, Großbuchstaben und Punkten bestehen
-correct_username = RegexValidator(
-    r'^[a-zA-Z.-]+$',
-    'Deine E-Mail-Adresse kann nur aus Kleinbuchstaben und Punkten bestehen, und keine Umlaute enthalten.')
+# Überprüft eine E-Mail-Adresse
+check_email = RegexValidator(
+    r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)',
+    'Bitte gib eine vollständige und valide E-Mail-Adresse ein, zum Beispiel: vorname.nachname@halepaghen.de')
 
 
 def checkbetaaccess(username, self):
@@ -36,10 +36,10 @@ class SignInForm(forms.Form):
         widget=forms.TextInput(
             attrs={'class': 'email',
                    'style': 'text-transform:lowercase;',
-                   'placeholder': 'vorname.nachname',
+                   'placeholder': 'vorname.nachname@halepaghen.de',
                    'autofocus': True
                    }),
-        max_length=32
+        max_length=48
     )
     password = forms.CharField(
         label='Passwort',
@@ -53,10 +53,14 @@ class SignInForm(forms.Form):
                             password=cd.get('password'))
         # Fehlermeldung wenn Authentifizierung fehlgeschlagen
         if user is None:
-            self.add_error(
-                'username',
-                'Der Account existiert nicht oder das Passwort ist falsch!'
-            )
+            # Anmeldung ohne @halepaghen.de
+            user = authenticate(username=cd.get('username') + "@halepaghen.de",
+                                password=cd.get('password'))
+            if user is None:
+                self.add_error(
+                    'username',
+                    'Der Account existiert nicht oder das Passwort ist falsch!'
+                )
         # Fehlermeldung wenn Account deaktiviert
         elif not user.is_active:
             self.add_error(
@@ -77,17 +81,17 @@ class SignInForm(forms.Form):
 class SignUpForm(forms.Form):
     username = UsernameField(
         label='E-Mail-Adresse',
-        help_text="""Die digitale Version von TheHaps ist zurzeit ausschließlich für
-                     Schülerinnen und Schüler, sowie Lehrkräfte der Halepaghen-Schule
-                     verfügbar. Deswegen wird eine gültige IServ-E-Mail-Adresse benötigt.""",
+        help_text="""<b>Neu:</b> Jede gültige E-Mail-Adresse wird akzeptiert. Jede*r kann
+                     sich ab sofort einen Account erstellen und digitale Ausgaben nach dem
+                     Erwerb lesen.""",
         widget=forms.TextInput(
             attrs={'class': 'email',
                    'style': 'text-transform:lowercase;',
-                   'placeholder': 'vorname.nachname',
+                   'placeholder': 'vorname.nachname@halepaghen.de',
                    'autofocus': True
                    }),
-        max_length=32,
-        validators=[correct_username]
+        max_length=48,
+        validators=[check_email]
     )
     password = forms.CharField(
         label='Passwort',
@@ -121,7 +125,6 @@ class SignUpForm(forms.Form):
                                """Für diese E-Mail-Adresse existiert bereits ein Account.
                                 Versuche dich anzumelden.""")
         # Überprüfe auf Beta-Zugang, nur beim Beta-Server
-        # if bool(int(os.environ['LIBERTAS_BETA'])) and cd.get('username'):
         checkbetaaccess(cd.get('username'), self)
         return cd
 
@@ -132,10 +135,11 @@ class ResetForm(forms.Form):
         widget=forms.TextInput(
             attrs={'class': 'email',
                    'style': 'text-transform:lowercase;',
-                   'placeholder': 'vorname.nachname',
+                   'placeholder': 'vorname.nachname@halepaghen.de',
                    'autofocus': True
                    }),
-        max_length=32
+        max_length=48,
+        validators=[check_email]
     )
 
     def clean(self):

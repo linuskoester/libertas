@@ -38,16 +38,14 @@
 
             <p>Bei Problemen oder Fragen schreibe uns einfach eine E-Mail an <a
                     href="mailto:thehaps@halepaghen.de">thehaps@halepaghen.de</a> und wir helfen dir gerne!</p>
-            <p class="font-italic text-center text-muted small mb-0">Digitale Ausgaben sind zurzeit nur für
-                Schüler und Lehrkräfte der HPS verfügbar!</p>
             <hr>
             {% if user.is_authenticated %}
             <a href="{% url 'redeem' %}" class="btn btn-primary btn-block mt-3"><i
                     class="fas fa-tag mr-2"></i>Zugangscode
                 einlösen</a>
             {% else %}
-            <p class="mb-0"><a href="{% url 'signup' %}">Erstelle einen Account</a> oder <a
-                    href="{% url 'signin' %}">melde dich an</a>, wenn du einen Zugangscode einlösen möchtest.</p>
+            <p class="mb-0 mx-1 mt-2 small text-muted text-center"><a href="{% url 'signup' %}">Erstelle einen Account</a> oder <a
+                href="{% url 'signin' %}">melde dich an</a>, wenn du einen Zugangscode einlösen möchtest.</p>
 
             {% endif %}
         </div>
