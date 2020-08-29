@@ -34,15 +34,9 @@
     <link rel="icon" type="image/png" sizes="2000x2000" href="{% static 'libertas/favicon/large.png' %}">
     <link rel="apple-touch-icon" type="image/png" sizes="2000x2000" href="{% static 'libertas/favicon/large.png' %}">
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-        </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-        </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-        </script>
+    <script src="{% static 'libertas/js/jquery-3.5.1.slim.min.js' %}"></script>
+    <script src="{% static 'libertas/js/popper.min.js' %}"></script>
+    <script src="{% static 'libertas/js/bootstrap.min.js' %}"></script>
     <link href="{% static 'libertas/fontawesome/css/all.min.css' %}" rel="stylesheet">
 
     {% block header %}{% endblock %}
@@ -109,10 +103,10 @@
                 {% if user.is_authenticated %}
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-dark {% if "user-" in menu %}active font-weight-bold{% endif %}"
+                        <a class="nav-link dropdown-toggle text-dark text-truncate {% if "user-" in menu %}active font-weight-bold{% endif %}"
                             href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            {{ user.username }}
+                            aria-haspopup="true" aria-expanded="false" style="max-width: 270px;">
+                            {{ user.first_name }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow-rd border"
                             aria-labelledby="navbarDropdownMenuLink">
@@ -202,13 +196,13 @@
             </ul>
             <ul
                 class="mt-2 mt-md-0 list-unstyled text-light d-sm-inline-flex flex-column flex-sm-row m-0 flex-sm-wrap justify-content-center mx-0">
-                <li class="mx-2"><i class="fas fa-envelope mr-1"></i><a href="{% url 'team' %}"
-                        class="text-light">Kontakt</a></li>
                 <li class="mx-2"><i class="fas fa-info-circle mr-1"></i><a href="https://status.thehaps.de/"
                         class="text-light">Status</a></li>
                 <li class="mx-2"><i class="fab fa-github mr-1"></i><a href="https://github.com/the-haps"
                         class="text-light">GitHub</a>
                 </li>
+                <li class="mx-2"><i class="fab fa-instagram mr-1"></i><a href="https://www.instagram.com/thehaps.de/"
+                        class="text-light">Instagram</a></li>
             </ul>
             <p class="mt-3 text-gray small"><b><a class="text-gray" href="https://github.com/the-haps/libertas">Libertas
                         {{ libertas_version }}</a></b><br>
@@ -220,7 +214,6 @@
 
     </footer>
     {% endblock %}
-    <script src="https://2299g1946cbj.statuspage.io/embed/script.js"></script>
     <script async defer src="https://api.thehaps.de/latest.js"></script>
     <noscript><img src="https://api.thehaps.de/noscript.gif" alt="" /></noscript>
 </body>
