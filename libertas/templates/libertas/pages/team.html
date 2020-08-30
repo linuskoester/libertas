@@ -25,7 +25,7 @@
                 style="max-width: 150px;">
             <p class="font-weight-bold mb-1">Paula Golinski
                 {% include 'libertas/snippets/emailbutton.html' with email='paula.golinksi@halepaghen.de' %}</p>
-            <span class="text-muted">Chefredakteurin,<br> Fotografin</span>
+            <span class="text-muted">Chefredakteurin</span>
         </div>
     </div>
     <hr class="w-100">
@@ -181,29 +181,32 @@
     </div>
 </div>
 
-<div class="w-100 shadow-rd rounded border bg-white p-3 mb-3">
-    <h2 class="font-weight-bold h4"><i class="fas fa-mug-hot mr-2" style="color: #6f42c1;"></i>Sonstige Aufgaben
-    </h2>
-    <div class="row">
-        <div class="col-md-4 text-center">
-            <span class="d-block mb-2">Simon Bilonic
-                {% include 'libertas/snippets/emailbutton.html' with email='simon.bilonic@halepaghen.de' %}</span>
-        </div>
-        <div class="col-md-4 text-center">
-            <span class="d-block mb-2">Ansgar Warner
-                {% include 'libertas/snippets/emailbutton.html' with email='ansgar.warner@halepaghen.de' %}</span>
-        </div>
-        <div class="col-md-4 text-center">
-            <span class="d-block mb-2">Serhat Kaan Kaya
-                {% include 'libertas/snippets/emailbutton.html' with email='serhat.kaan.kaya@halepaghen.de' %}</span>
-        </div>
+<div class="row">
+    <div class="col-md-6 pr-md-2 mb-3 d-flex">
+        <div class="w-100 shadow-rd rounded border bg-white p-3 h-100">
+            <h2 class="font-weight-bold h4"><i class="fas fa-mug-hot mr-2" style="color: #6f42c1;"></i>Sonstige Aufgaben
+            </h2>
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <span class="d-block mb-2">Ansgar Warner
+                        {% include 'libertas/snippets/emailbutton.html' with email='ansgar.warner@halepaghen.de' %}</span>
+                </div>
+                <div class="col-md-6 text-center">
+                    <span class="d-block mb-2">Serhat Kaan Kaya
+                        {% include 'libertas/snippets/emailbutton.html' with email='serhat.kaan.kaya@halepaghen.de' %}</span>
+                </div>
 
+            </div>
+        </div>
     </div>
-</div>
-
-<div class="w-100 shadow-rd rounded border bg-white p-3 mb-3">
-    <span class="d-block"><strong>Betreuender Lehrer:</strong> Herr Winklmann
-        {% include 'libertas/snippets/emailbutton.html' with email='herr.winklmann@halepaghen.de' %}</span>
+    <div class="col-md-6 pl-md-2 mb-3">
+        <div class="w-100 shadow-rd rounded border bg-white p-3 h-100">
+            <h2 class="font-weight-bold h4"><i class="fas fa-user mr-2" style="color: #6f42c1;"></i>Betreuende Lehrkraft
+            </h2>
+            <span class="d-block text-center">Herr Winklmann
+                {% include 'libertas/snippets/emailbutton.html' with email='herr.winklmann@halepaghen.de' %}</span>
+        </div>
+    </div>
 </div>
 
 <div class="shadow-rd rounded bg-gradient-primary p-3 text-white mb-3">
