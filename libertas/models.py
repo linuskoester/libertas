@@ -13,7 +13,7 @@ def generate_id(length=16):
 
 
 def generate_code(length=12):
-    pool = string.ascii_uppercase + string.digits + string.digits
+    pool = "ABCDEFGHJKLMNPQRSTUVWXYZ2345678923456789"
     return ''.join(random.choice(pool) for i in range(length))
 
 
