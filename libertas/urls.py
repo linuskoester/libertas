@@ -18,4 +18,6 @@ urlpatterns = [
     path('ausgaben', views.ausgaben, name='ausgaben'),
     path('news', views.news, name='news'),
     path('artikel/<int:pk>', views.artikel, name='artikel'),
+    path('admin/generate_codes/<int:ausgabe>/<int:anzahl>',
+         views.generate_codes, name='generate_codes')
 ]

@@ -7,7 +7,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import RedeemForm
-from .models import Artikel, Code, Configuration, User, ausgaben_user, ausgaben_visible, news_list, artikel_list
+from .models import Artikel, Ausgabe, Code, Configuration, User, ausgaben_user, ausgaben_visible, news_list, artikel_list
 from django.template.loader import render_to_string
 from django.http.response import Http404, HttpResponseNotFound, HttpResponseServerError
 
@@ -226,3 +226,23 @@ def error500(request):
         return w
 
     return HttpResponseServerError(render_to_string('libertas/error/500.html'))
+
+
+def generate_codes(request, ausgabe, anzahl):
+    if request.user.is_superuser:
+        ausgabe = get_object_or_404(Ausgabe, number=ausgabe)
+        if ausgabe:
+            if anzahl > 16:
+                data = ["Du kannst maximal 16 Codes gleichzeitig generieren."]
+            elif anzahl < 1:
+                data = ["Du musst mindestens 1 Code generieren."]
+            else:
+                data = []
+                for i in range(anzahl):
+                    code = Code(ausgabe=ausgabe)
+                    code.save()
+                    data.append(code.code)
+
+            return render(request, 'libertas/admin/generate_codes.html', {'data': data})
+    else:
+        raise Http404()
