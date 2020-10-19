@@ -33,7 +33,7 @@ def signin(request):
             if User.objects.filter(username=username + "@halepaghen.de").exists():
                 username += "@halepaghen.de"
                 messages.warning(
-                    request, 'Bitte benutze ab sofort deine vollständige E-Mail-Adresse um dich anzumelden: <b>%s</b>' % username) # noqa
+                    request, 'Bitte benutze ab sofort deine vollständige E-Mail-Adresse um dich anzumelden: <b>%s</b>' % username)  # noqa
             # Melde den Benutzer an
             password = request.POST['password']
             user = authenticate(request, username=username, password=password)
@@ -108,11 +108,9 @@ def signup(request):
             user.email_user(subject, message)
             # Zeige Bestätigungsnachricht
             messages.success(request,
-                             """Wir haben dir eine E-Mail mit einem Bestätigungslink gesendet.
-                                Gehe jetzt auf IServ und klicke auf den Link, um deinen Account
-                                zu aktivieren!<br>
-                                <a class="btn btn-outline-success mt-2" href="https://halepaghen.de/">
-                                Weiter zu IServ</a>""")
+                             """Wir haben dir eine E-Mail mit einem Bestätigungslink gesendet.<br>
+                                Schaue in deinem Postfach (auch im Spam-Ordner) nach, und klicke auf
+                                den Link in der Aktivierungs-Email um deinen Account zu bestätigen.""")
             return redirect('index')
     else:
         # Wenn Formular noch nicht ausgefüllt, lade Formular in den Kontext
@@ -193,10 +191,8 @@ def reset(request):
             messages.success(request,
                              """Sofern ein Account mit dieser E-Mail-Adresse existiert,
                                 haben wir dir eine E-Mail mit einem Bestätigungslink gesendet.<br>
-                                Gehe jetzt auf IServ und klicke auf den Link, um dein
-                                Passwort zurückzusetzen.<br>
-                                <a class="btn btn-outline-success mt-2" href="https://halepaghen.de/">
-                                Weiter zu IServ</a>""")
+                                Schaue in deinem Postfach (auch im Spam-Ordner) nach, und klicke auf
+                                den Link in der Email um dein Passwort zurückzusetzen.</a>""")
             return redirect('index')
     else:
         # Wenn Formular noch nicht ausgefüllt, lade Formular in den Kontext
