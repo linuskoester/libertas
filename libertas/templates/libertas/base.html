@@ -56,6 +56,13 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <div class="dropdown-divider"></div>
                 <ul class="navbar-nav nav-center">
+                    <li class="nav-item {% if menu == "news" %}active font-weight-bold{% endif %}">
+                        <a class="nav-link" href="{% url 'news' %}">
+                            <span class="nav-color d-block d-lg-inline w-100" style="background: rgb(10, 114, 184);">
+                                <i class="fas fa-comment-alt d-lg-none d-xl-inline text-center mr-1"
+                                    style="width: 20px;"></i>News</span>
+                        </a>
+                    </li>
                     <li class="nav-item {% if menu == "ausgaben" %}active font-weight-bold{% endif %}">
                         <a class="nav-link" href="{% url 'ausgaben' %}">
                             <span class="nav-color d-block d-lg-inline w-100" style="background: #cf3342;">
@@ -70,6 +77,13 @@
                                     style="width: 20px;"></i>Kaufen</span>
                         </a>
                     </li>
+                    <li class="nav-item {% if menu == "podcast" %}active font-weight-bold{% endif %}">
+                        <a class="nav-link" href="{% url 'podcast' %}">
+                            <span class="nav-color d-block d-lg-inline w-100" style="background: #cc377d;">
+                                <i class="fas fa-microphone d-lg-none d-xl-inline text-center mr-1"
+                                    style="width: 20px;"></i>Podcast</span>
+                        </a>
+                    </li>
                     <li class="nav-item {% if menu == "team" %}active font-weight-bold{% endif %}">
                         <a class="nav-link" href="{% url 'team' %}">
                             <span class="nav-color d-block d-lg-inline w-100" style="background: #6f42c1;">
@@ -82,20 +96,6 @@
                             <span class="nav-color d-block d-lg-inline w-100" style="background: #269c41">
                                 <i class="fas fa-question-circle d-lg-none d-xl-inline text-center mr-1"
                                     style="width: 20px;"></i>FAQ</span>
-                        </a>
-                    </li>
-                    <li class="nav-item {% if menu == "podcast" %}active font-weight-bold{% endif %}">
-                        <a class="nav-link" href="{% url 'podcast' %}">
-                            <span class="nav-color d-block d-lg-inline w-100" style="background: #cc377d;">
-                                <i class="fas fa-microphone d-lg-none d-xl-inline text-center mr-1"
-                                    style="width: 20px;"></i>Podcast</span>
-                        </a>
-                    </li>
-                    <li class="nav-item {% if menu == "news" %}active font-weight-bold{% endif %}">
-                        <a class="nav-link" href="{% url 'news' %}">
-                            <span class="nav-color d-block d-lg-inline w-100" style="background: rgb(10, 114, 184);">
-                                <i class="fas fa-comment-alt d-lg-none d-xl-inline text-center mr-1"
-                                    style="width: 20px;"></i>News</span>
                         </a>
                     </li>
                 </ul>
@@ -176,8 +176,7 @@
             <a href="https://www.carl-duisberg-highschool.de/"><img src="/static/libertas/img/werbung/cdc.jpg"
                     style="max-height: 100px;" class="d-block rounded ml-lg-1 img-fluid mt-0 shadow-rd"></a> -->
             <a href="https://www.hopkas-spreewaldstall.de/"><img src="/static/libertas/img/werbung/spreewald.png"
-                    style="max-height: 100px;"
-                    class="d-block rounded img-fluid mt-0 shadow-rd"></a>
+                    style="max-height: 100px;" class="d-block rounded img-fluid mt-0 shadow-rd"></a>
         </div>
         {% endblock %}
     </div>
