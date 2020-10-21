@@ -9,6 +9,7 @@
         opacity: 0;
         transition: opacity .2s;
     }
+
     h2:hover .permalink {
         opacity: 0.8;
         transition: opacity .2s;
@@ -21,9 +22,12 @@
 
 {% for news in news_list %}
 <div class="my-3 w-100 shadow-rd rounded border bg-white p-3">
-    <h2 class="font-weight-bold h4" id="1"><span class="badge mr-2 text-white align-bottom"
-        style="background-color: rgb(10, 114, 184);">{{ news.tag }}</span>{{ news.title }} <a href="{% url 'news' %}#{{ news.pk }}" class="text-muted font-weight-normal permalink" data-toggle="tooltip" title="Permalink">#</a></h2>
-    <p class="text-muted font-italic">{% if news.author %}{{ news.author }} &middot; {% endif %}veröffentlicht am {{ news.date }}</p>
+    <h2 class="font-weight-bold h4" id="{{ news.pk }}"><span class="badge mr-2 text-white align-bottom"
+            style="background-color: rgb(10, 114, 184);">{{ news.tag }}</span>{{ news.title }} <a
+            href="{% url 'news' %}#{{ news.pk }}" class="text-muted font-weight-normal permalink" data-toggle="tooltip"
+            title="Permalink">#</a></h2>
+    <p class="text-muted font-italic">{% if news.author %}{{ news.author }} &middot; {% endif %}veröffentlicht am
+        {{ news.date }}</p>
     <p class="mb-0">{{ news.content | safe | escape }}</p>
 </div>
 {% endfor %}
