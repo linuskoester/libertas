@@ -11,7 +11,7 @@ mysqlclient==2.0.1
 pytz==2020.4
 rcssmin==1.0.6
 rjsmin==1.1.0
-sentry-sdk==0.19.4
+sentry-sdk==0.19.5
 six==1.15.0
 sqlparse==0.4.1
 urllib3==1.26.2
