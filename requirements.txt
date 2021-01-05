@@ -1,13 +1,13 @@
 asgiref==3.2.10
 certifi==2020.12.5
-Django==3.1.4
+Django==3.1.5
 django-appconf==1.0.4
 django-compressor==2.4
 django-libsass==0.8
 django-mysql==3.10.0
 gunicorn==20.0.4
 libsass==0.20.1
-mysqlclient==2.0.2
+mysqlclient==2.0.3
 pytz==2020.5
 rcssmin==1.0.6
 rjsmin==1.1.0
