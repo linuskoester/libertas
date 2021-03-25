@@ -1,9 +1,9 @@
 # Libertas
 
 ## Was ist Libertas?
-Libertas ist der Projektname für die Web-App der Schülerzeitung "TheHaps" von der Halepaghen-Schule. Die App ermöglicht den digitalen Erwerb und das Lesen der Zeitung, direkt aus dem Browser.
+Libertas ist der Projektname für die veraltete Web-App der Schülerzeitung "TheHaps" von der Halepaghen-Schule. Die App ermöglicht den digitalen Erwerb und das Lesen der Zeitung, direkt aus dem Browser.
 
-Jeder darf sich an der Entwicklung der App beteiligen! Libertas wurde mit Django 3.0 entwickelt, außerdem ermöglicht eine vorkonfigurierter Docker Container Stack das einfache Aufsetzen einer lokalen Instanz.
+**Das Projekt ist veraltet und wird leider aktuell nicht mehr weiterentwickelt.**
 
 ## Aufsetzen einer lokalen Instanz
 
